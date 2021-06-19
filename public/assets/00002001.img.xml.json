@@ -1,0 +1,1986 @@
+{
+	"00002001.img": {
+		"info": {
+			"name": "info"
+		},
+		"walk1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"name": "walk1"
+		},
+		"walk2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"name": "walk2"
+		},
+		"stand1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "stand1"
+		},
+		"stand2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "stand2"
+		},
+		"alert": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "alert"
+		},
+		"swingO1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingO1"
+		},
+		"swingO2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingO2"
+		},
+		"swingO3": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingO3"
+		},
+		"swingOF": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"name": "swingOF"
+		},
+		"swingT1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingT1"
+		},
+		"swingT2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingT2"
+		},
+		"swingT3": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingT3"
+		},
+		"swingTF": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"name": "swingTF"
+		},
+		"swingP1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingP1"
+		},
+		"swingP2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "swingP2"
+		},
+		"swingPF": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"name": "swingPF"
+		},
+		"stabO1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"name": "stabO1"
+		},
+		"stabO2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"name": "stabO2"
+		},
+		"stabOF": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "stabOF"
+		},
+		"stabT1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "stabT1"
+		},
+		"stabT2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "stabT2"
+		},
+		"stabTF": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"name": "stabTF"
+		},
+		"shoot1": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "shoot1"
+		},
+		"shoot2": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"4": {
+				"name": "4"
+			},
+			"name": "shoot2"
+		},
+		"shootF": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "shootF"
+		},
+		"proneStab": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"name": "proneStab"
+		},
+		"prone": {
+			"0": {
+				"name": "0"
+			},
+			"name": "prone"
+		},
+		"heal": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"name": "heal"
+		},
+		"fly": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"name": "fly"
+		},
+		"jump": {
+			"0": {
+				"name": "0"
+			},
+			"name": "jump"
+		},
+		"sit": {
+			"0": {
+				"name": "0"
+			},
+			"name": "sit"
+		},
+		"ladder": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"name": "ladder"
+		},
+		"rope": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"name": "rope"
+		},
+		"dead": {
+			"0": {
+				"name": "0"
+			},
+			"name": "dead"
+		},
+		"blink": {
+			"0": {
+				"name": "0"
+			},
+			"name": "blink"
+		},
+		"ghostwalk": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"2": {
+					"name": "2"
+				},
+				"3": {
+					"name": "3"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"2": {
+					"name": "2"
+				},
+				"3": {
+					"name": "3"
+				},
+				"name": "2"
+			},
+			"name": "ghostwalk"
+		},
+		"ghoststand": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"2": {
+					"name": "2"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"2": {
+					"name": "2"
+				},
+				"name": "2"
+			},
+			"name": "ghoststand"
+		},
+		"ghostjump": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"name": "2"
+			},
+			"name": "ghostjump"
+		},
+		"ghostproneStab": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "2"
+			},
+			"name": "ghostproneStab"
+		},
+		"ghostladder": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "2"
+			},
+			"name": "ghostladder"
+		},
+		"ghostrope": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "2"
+			},
+			"name": "ghostrope"
+		},
+		"ghostfly": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"1": {
+					"name": "1"
+				},
+				"name": "2"
+			},
+			"name": "ghostfly"
+		},
+		"ghostsit": {
+			"1": {
+				"0": {
+					"name": "0"
+				},
+				"name": "1"
+			},
+			"2": {
+				"0": {
+					"name": "0"
+				},
+				"name": "2"
+			},
+			"name": "ghostsit"
+		},
+		"hide": {
+			"0": {
+				"name": "0"
+			},
+			"name": "hide"
+		},
+		"cooking": {
+			"0": {
+				"name": "0"
+			},
+			"1": {
+				"name": "1"
+			},
+			"2": {
+				"name": "2"
+			},
+			"3": {
+				"name": "3"
+			},
+			"4": {
+				"name": "4"
+			},
+			"5": {
+				"name": "5"
+			},
+			"6": {
+				"name": "6"
+			},
+			"7": {
+				"name": "7"
+			},
+			"8": {
+				"name": "8"
+			},
+			"9": {
+				"name": "9"
+			},
+			"name": "cooking"
+		},
+		"cooking_s": {
+			"0": {
+				"name": "0"
+			},
+			"name": "cooking_s"
+		},
+		"cooking_f": {
+			"0": {
+				"name": "0"
+			},
+			"name": "cooking_f"
+		},
+		"name": "00002001.img"
+	}
+}	"0",
+"1",
+"2"
+]
+},
+"swingTF": {
+"name": "swingTF",
+"0": {
+"name": "0",
+"delay": 200,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"3": {
+"name": "3",
+"delay": 200,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2",
+"3"
+]
+},
+"swingP1": {
+"name": "swingP1",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 350,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"swingP2": {
+"name": "swingP2",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 350,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"swingPF": {
+"name": "swingPF",
+"0": {
+"name": "0",
+"delay": 100,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 200,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 200,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"3": {
+"name": "3",
+"delay": 200,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2",
+"3"
+]
+},
+"stabO1": {
+"name": "stabO1",
+"0": {
+"name": "0",
+"delay": 350,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 450,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1"
+]
+},
+"stabO2": {
+"name": "stabO2",
+"0": {
+"name": "0",
+"delay": 350,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 450,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1"
+]
+},
+"stabOF": {
+"name": "stabOF",
+"0": {
+"name": "0",
+"delay": 250,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"stabT1": {
+"name": "stabT1",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 100,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 350,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"stabT2": {
+"name": "stabT2",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 100,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 350,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"stabTF": {
+"name": "stabTF",
+"0": {
+"name": "0",
+"body": "../../swingPF/0/body",
+"arm": "../../swingPF/0/arm",
+"hand": "../../swingPF/0/hand",
+"delay": 100,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"hand",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"body": "../../swingPF/1/body",
+"arm": "../../swingPF/1/arm",
+"hand": "../../swingPF/1/hand",
+"delay": 200,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"hand",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 200,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"3": {
+"name": "3",
+"body": "../../stabT1/2/body",
+"arm": "../../stabT1/2/arm",
+"hand": "../../stabT1/2/hand",
+"delay": 200,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"hand",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2",
+"3"
+]
+},
+"shoot1": {
+"name": "shoot1",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"body": "../1/body",
+"arm": "../1/arm",
+"delay": 350,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"shoot2": {
+"name": "shoot2",
+"0": {
+"name": "0",
+"delay": 160,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 160,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 250,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"3": {
+"name": "3",
+"delay": 100,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"4": {
+"name": "4",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2",
+"3",
+"4"
+]
+},
+"shootF": {
+"name": "shootF",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"body": "../1/body",
+"arm": "../1/arm",
+"delay": 250,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"proneStab": {
+"name": "proneStab",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 400,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1"
+]
+},
+"prone": {
+"name": "prone",
+"0": {
+"name": "0",
+"body": "../../proneStab/0/body",
+"arm": "../../proneStab/0/arm",
+"delay": 1000,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"heal": {
+"name": "heal",
+"0": {
+"name": "0",
+"body": "../../alert/1/body",
+"arm": "../../alert/1/arm",
+"lHand": "../../alert/1/lHand",
+"rHand": "../../alert/1/rHand",
+"delay": 300,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"lHand",
+	"rHand",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 150,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"body": "../../swingO2/0/body",
+"arm": "../../swingO2/0/arm",
+"delay": 350,
+"_keys": [
+	"name",
+	"body",
+	"arm",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2"
+]
+},
+"fly": {
+"name": "fly",
+"0": {
+"name": "0",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 300,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1"
+]
+},
+"jump": {
+"name": "jump",
+"0": {
+"name": "0",
+"delay": 200,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"sit": {
+"name": "sit",
+"0": {
+"name": "0",
+"_keys": [
+	"name"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"ladder": {
+"name": "ladder",
+"0": {
+"name": "0",
+"delay": 250,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 250,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1"
+]
+},
+"rope": {
+"name": "rope",
+"0": {
+"name": "0",
+"delay": 250,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 250,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1"
+]
+},
+"dead": {
+"name": "dead",
+"0": {
+"name": "0",
+"_keys": [
+	"name"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"blink": {
+"name": "blink",
+"0": {
+"name": "0",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"ghostwalk": {
+"name": "ghostwalk",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"2": {
+	"name": "2",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"3": {
+	"name": "3",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1",
+	"2",
+	"3"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"2": {
+	"name": "2",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"3": {
+	"name": "3",
+	"delay": 180,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1",
+	"2",
+	"3"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"ghoststand": {
+"name": "ghoststand",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"delay": 500,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 500,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"2": {
+	"name": "2",
+	"delay": 500,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1",
+	"2"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"delay": 500,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 500,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"2": {
+	"name": "2",
+	"delay": 500,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1",
+	"2"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"ghostjump": {
+"name": "ghostjump",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"delay": 200,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"delay": 200,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"ghostproneStab": {
+"name": "ghostproneStab",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"ghostladder": {
+"name": "ghostladder",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"ghostrope": {
+"name": "ghostrope",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 250,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"ghostfly": {
+"name": "ghostfly",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"1": {
+	"name": "1",
+	"delay": 300,
+	"_keys": [
+		"name",
+		"delay"
+	]
+},
+"_keys": [
+	"name",
+	"0",
+	"1"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"ghostsit": {
+"name": "ghostsit",
+"1": {
+"name": "1",
+"0": {
+	"name": "0",
+	"_keys": [
+		"name"
+	]
+},
+"_keys": [
+	"name",
+	"0"
+]
+},
+"2": {
+"name": "2",
+"0": {
+	"name": "0",
+	"_keys": [
+		"name"
+	]
+},
+"_keys": [
+	"name",
+	"0"
+]
+},
+"_keys": [
+"name",
+"1",
+"2"
+]
+},
+"hide": {
+"name": "hide",
+"0": {
+"name": "0",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"cooking": {
+"name": "cooking",
+"0": {
+"name": "0",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"1": {
+"name": "1",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"2": {
+"name": "2",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"3": {
+"name": "3",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"4": {
+"name": "4",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"5": {
+"name": "5",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"6": {
+"name": "6",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"7": {
+"name": "7",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"8": {
+"name": "8",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"9": {
+"name": "9",
+"delay": 120,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0",
+"1",
+"2",
+"3",
+"4",
+"5",
+"6",
+"7",
+"8",
+"9"
+]
+},
+"cooking_s": {
+"name": "cooking_s",
+"0": {
+"name": "0",
+"delay": 1000,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"cooking_f": {
+"name": "cooking_f",
+"0": {
+"name": "0",
+"delay": 1000,
+"_keys": [
+	"name",
+	"delay"
+]
+},
+"_keys": [
+"name",
+"0"
+]
+},
+"_keys": [
+"name",
+"info",
+"walk1",
+"walk2",
+"stand1",
+"stand2",
+"alert",
+"swingO1",
+"swingO2",
+"swingO3",
+"swingOF",
+"swingT1",
+"swingT2",
+"swingT3",
+"swingTF",
+"swingP1",
+"swingP2",
+"swingPF",
+"stabO1",
+"stabO2",
+"stabOF",
+"stabT1",
+"stabT2",
+"stabTF",
+"shoot1",
+"shoot2",
+"shootF",
+"proneStab",
+"prone",
+"heal",
+"fly",
+"jump",
+"sit",
+"ladder",
+"rope",
+"dead",
+"blink",
+"ghostwalk",
+"ghoststand",
+"ghostjump",
+"ghostproneStab",
+"ghostladder",
+"ghostrope",
+"ghostfly",
+"ghostsit",
+"hide",
+"cooking",
+"cooking_s",
+"cooking_f"
+]
+}

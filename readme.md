@@ -1,136 +1,40 @@
-![phaser3-parceljs-template](https://user-images.githubusercontent.com/2236153/71606463-37a0da80-2b2e-11ea-9b5f-5d26ccc84f91.png)
+# 跑在 web 上的 maplestory
 
-# Phaser 3 + TypeScript + Parcel Template
-> For people who want to spend time making Phaser 3 games in TypeScript instead of configuring build tools.
+我在尝试将 maplestory 的 wz 文件，迁移到 Phaser 框架中。制作一下 web 版的冒险岛。这个项目是其中的一些测试，和关键任务。
 
-![License](https://img.shields.io/badge/license-MIT-green)
+## 工具
 
-This is a TypeScript specific fork of [phaser3-parcel-template](https://github.com/ourcade/phaser3-parcel-template).
+冒险岛版本：v180
+工具：Harepacker
 
-## Prerequisites
+## 工作项及时间线
 
-You'll need [Node.js](https://nodejs.org/en/), [npm](https://www.npmjs.com/), and [Parcel](https://parceljs.org/) installed.
+### 1. 从 xml 到 Image：
 
-It is highly recommended to use [Node Version Manager](https://github.com/nvm-sh/nvm) (nvm) to install Node.js and npm.
+通过工具从 wz 文件导出素材及其配置文件
 
-For Windows users there is [Node Version Manager for Windows](https://github.com/coreybutler/nvm-windows).
+1. 将导出的 xml 导入为 phaser 的素材对象，并显示出来。
 
-Install Node.js and `npm` with `nvm`:
 
-```bash
-nvm install node
 
-nvm use node
-```
+### 2. 根据配置文件，凭凑出一个骨架 head、body。frame 的表现
 
-Replace 'node' with 'latest' for `nvm-windows`.
+### 3. 制作最简单的 animation，骨架移动
 
-Then install Parcel:
+### 4. 将装备粘贴在骨架中，形成animation
 
-```bash
-npm install -g parcel-bundler
-```
+### 5. 封装成库
 
-## Getting Started
+### 6. 怪物的 annimation 及封装
 
-Clone this repository to your local machine:
+### 7. Map 的应用
 
-```bash
-git clone https://github.com/ourcade/phaser3-typescript-parcel-template.git
-```
+### 8. UI 的应用
 
-This will create a folder named `phaser3-typescript-parcel-template`. You can specify a different folder name like this:
+### 9. 整体整合封装
 
-```bash
-git clone https://github.com/ourcade/phaser3-typescript-parcel-template.git my-folder-name
-```
 
-Go into your new project folder and install dependencies:
 
-```bash
-cd phaser3-typescript-parcel-template # or 'my-folder-name'
-npm install
-```
 
-Start development server:
 
-```
-npm run start
-```
-
-To create a production build:
-
-```
-npm run build
-```
-
-Production files will be placed in the `dist` folder. Then upload those files to a web server. 🎉
-
-## Project Structure
-
-```
-    .
-    ├── dist
-    ├── node_modules
-    ├── public
-    ├── src
-    │   ├── scenes
-    │   │   ├── HelloWorldScene.ts
-    │   ├── index.html
-    │   ├── main.ts
-    ├── package.json
-```
-
-The contents of this template is the basic [Phaser 3 getting started example](http://phaser.io/tutorials/getting-started-phaser3/part5).
-
-This template assumes you will want to organize your code into multiple files and use TypeScript.
-
-TypeScript files are intended for the `src` folder. `main.ts` is the entry point referenced by `index.html`.
-
-Other than that there is no opinion on how you should structure your project. There is a `scenes` folder in `src` where the `HelloWorldScene.ts` lives but you can do whatever you want.
-
-## Static Assets
-
-Any static assets like images or audio files should be placed in the `public` folder. It'll then be served at http://localhost:8000/images/my-image.png
-
-Example `public` structure:
-
-```
-    public
-    ├── images
-    │   ├── my-image.png
-    ├── music
-    │   ├── ...
-    ├── sfx
-    │   ├── ...
-```
-
-They can then be loaded by Phaser with `this.image.load('my-image', 'images/my-image.png')`.
-
-## TypeScript ESLint
-
-This template uses a basic `typescript-eslint` set up for code linting.
-
-It does not aim to be opinionated.
-
-## Dev Server Port
-
-You can change the dev server's port number by modifying the `start` script in `package.json`. We use Parcel's `-p` option to specify the port number.
-
-The script looks like this:
-
-```
-parcel src/index.html -p 8000
-```
-
-Change 8000 to whatever you want.
-
-## Other Notes
-
-[parcel-plugin-clean-easy](https://github.com/lifuzhao100/parcel-plugin-clean-easy) is used to ensure only the latest files are in the `dist` folder. You can modify this behavior by changing `parcelCleanPaths` in `package.json`.
-
-[parcel-plugin-static-files](https://github.com/elwin013/parcel-plugin-static-files-copy#readme) is used to copy static files from `public` into the output directory and serve it. You can add additional paths by modifying `staticFiles` in `package.json`.
-
-## License
-
-[MIT License](https://github.com/ourcade/phaser3-typescript-parcel-template/blob/master/LICENSE)
+---

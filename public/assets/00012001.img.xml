@@ -1,0 +1,1409 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<imgdir name="00012001.img">
+<imgdir name="info">
+<string name="islot" value="Hd"/>
+<string name="vslot" value="Hd"/>
+<int name="cash" value="0"/>
+</imgdir>
+<imgdir name="front">
+<canvas name="head" width="35" height="35" basedata="iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAI5SURBVFhHzZYBkcIwEEWxcBawgAUsYAELWMACFrCAhfPE7U/yy2bzU9JSZm5n3gTu0v0vaQrsltTv/YrhuYBtKwrY+xkuz8ftnLmevBRYX9Ycw4CA4+ZkitD9ckiwF5ouKmuMQQcWHjF4Bgp5qft5j4x+WQiGNDmGExU2BHfpDPYp43b6QV5bFoRBCmTGd6LL9ViE9hDhLskSAhnZeCW8Xf9CZmR3pARYclBHuF+KzMzuSBGgGn4CRbgzSkiKbHJoPe5zhzsTZYTEF0QML4JHfFBmexHgZbJIe6sqEdVkE/wtwnlxZ0bKyCZbEWUocsxUMrLBlozKyIu/QFfmEGX4yVjA+9hsFlv5hPq/UcsUoSgzTTAwJrxULyCFYxH1Qmrq6/l3L1LLuGfe46XA1DTsIolPSFpcNaf+KoDM1cuYSBKqmpSJE/Y+iqWGCHer8/MV7OGlK5lS1UUJH8Ig+/skouZw3owQoRhkUv7h9UOr3WLAxgxBEy+jJMq8OSiCW06ZrGFlIhjSWVAXM4QiCch7AaCuDfgeUqbUNKlpUlbSoHazg7oeMsg1oWzgqn30QpP8JPGJ0j8HXtgCuovII+YhN8e7sgAMWSg8urMfgEFqBEhAFHn2GrmydOAozSJa0dfOdXbFlQ5ZyTsRG3Nqp2TTNcxJgHci1blJB5WHdZR0W+pbFUXeSviyphiqhlKKsuJ7ygtQAiwSYVlDDKlBDOoRBQB72Gv026TY8C2c666x4TvVhEU+C9/t/gD4+Dkkq97w8QAAAABJRU5ErkJggg==">
+<vector name="origin" x="18" y="17"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="earOverHead" x="15" y="10"/>
+<vector name="earBelowHead" x="-17" y="9"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="head"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="96858849e271f1f8411d123712ca05ed4844f97e9833347dbac0ea8b99d8dc31"/>
+</canvas>
+<canvas name="humanEar" width="39" height="11" basedata="iVBORw0KGgoAAAANSUhEUgAAACcAAAALCAYAAAD8zZR4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAC+SURBVDhPxZNhDcUgDISxMAuzMAuzgAUszAIWsIAFLDxPvN6t3Ub23t9yyaW5QsK3MsKnHgGyOkOtJJRu1kx1AYM1+qoeGwqALmtGfy4cJIAdLnEZALHGALia+BWussnBZVt6TesbTsB6y/ddO4tgqD8nJ2AARJ6hYWotxxNOAhcV0LKLhrPNMiT2csQa9dygLR/dUFEexMpHIW1eKaVA7nA4CzD0Ltb/TvK5wfQAZHYSgQxKMxemS0H+QIXwBZ8+t9FuOLs+AAAAAElFTkSuQmCC">
+<vector name="origin" x="19" y="-1"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="earOverHead" x="15" y="10"/>
+<vector name="earBelowHead" x="-17" y="9"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="hairShade"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="d599a5aeddf618deb70fcfbdce17f85b1b4b68ba39c7b6e0cfab599862126ef8"/>
+</canvas>
+<canvas name="ear" width="47" height="12" basedata="iVBORw0KGgoAAAANSUhEUgAAAC8AAAAMCAYAAADyH+Q0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAC0SURBVEhLzZKBDYMwDASzArN0lq7ACszCCqzQFboTxF+/+0qRoK0Uc9IrxEnExVCctcmVaN00ZX0uU+QxjyheAAiql8bXATYs0y3i9SxCWJ04t/XXtjc4YKMnDRWvU4Q1n3+Axfk+IF5LgX9BfQwfrWHTDtH9zAuww+5w2HUSmzLltes2mtNR14netDv65c3hzO+i4JDctiuUt/FbcYJDGfLa7V/ESYp8I/3X+7vLV05Kl7IB1L/o9X/hc08AAAAASUVORK5CYII=">
+<vector name="origin" x="23" y="-1"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="earOverHead" x="15" y="10"/>
+<vector name="earBelowHead" x="-17" y="9"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="accessoryOverHair"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="284166a0c194e3d59a92ec87ab8723e74760fd6e5ddeb87a02705cda17d7cb1c"/>
+</canvas>
+<canvas name="lefEar" width="53" height="10" basedata="iVBORw0KGgoAAAANSUhEUgAAADUAAAAKCAYAAAAUyhYIAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAEDSURBVEhLxVOBDYMwDOsLvLAXeGEv7IW90Bf2Ai/wAi/sp842pUpL0YQ0MktWx3BaOymhhzmOXBI5jUNaXnc+u2N6DIFnx9sgLx1+RzavAgRjGBHB+L873nNksOLDkv4gOQ4HERcJWIDNKvI9u+YNntl6aUm/kG7eVVcCtWH4zC4ZSu8J+FAoecFnIGY/Pb8o4araSsDfHK3lP0LxysMP1xKm9UW23lGaDq/eMj1LwC1U1roA56+BOmHoi/52YdYMqrfYhbOF2HBVOYCT2hormhDWE6SHYVpYsZg7pJdXQ7cCk9LZdiI5JCSnwvRQNnCdlLl2eKzo1dyfgpMCSohzzQzhAw68dHiN8f5jAAAAAElFTkSuQmCC">
+<vector name="origin" x="26" y="-2"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="earOverHead" x="15" y="10"/>
+<vector name="earBelowHead" x="-17" y="9"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="accessoryOverHair"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="cafed9a5b43faac909553fbb3b8308c43d45f06b25eb7d6f8f7f0c6c88351845"/>
+</canvas>
+<canvas name="highlefEar" width="49" height="10" basedata="iVBORw0KGgoAAAANSUhEUgAAADEAAAAKCAYAAAAdIbZyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAD1SURBVEhLxZOLDYMwEEOzArOwQlfoCl2BFboCK7ACK3Qn6nfkTuHTFqltsGRBEofYdyGVGLqWxwT7tpnG+4VxdfTXJnE2HjTc4xbZrAkUBPNGfYT56ngMHUHCR0n8SbIJYxMItHlBzVlVaoMz117WxK+kEWYTgCoURFMV8mAh8MWVMmY/dMJ9RhCqzYsHQeQ8IwRXmBCleffjHsP87Nv2Lf4JBGN/s2cO4utVoLPnAIV5JwEkWZp/gWiXp9YH8tL/QSe8iEa9uxct85yF75BF0RUq8Cn1r2BdVyf2zMNDAXZgm6t2orhGGn5l/hTQCSHMHyteSk/XUy9Xdkx3UQAAAABJRU5ErkJggg==">
+<vector name="origin" x="24" y="-2"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="earOverHead" x="15" y="10"/>
+<vector name="earBelowHead" x="-17" y="9"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="accessoryOverHair"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="49fabe41285e11b8374803f7dc301c530644fa7dfb4bed6af0b54130080aaf55"/>
+</canvas>
+</imgdir>
+<imgdir name="back">
+<canvas name="head" width="41" height="35" basedata="iVBORw0KGgoAAAANSUhEUgAAACkAAAAjCAYAAAAJ+yOQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAIsSURBVFhHxZeBsYIwDIZdwRVcwRVYwRVcwRVcgRVYwRXcyZc/NCUNqRQIz9x9BxWafpdQ1FNQfL7wsyhEXv398x4edFQ874y9lzg8eCEReQ9PhZEkcQ/JgWTRkeVEyAri+E1OGB5XRnIieURQ225GqqRFTiOiw6MLEeWkIrJXTjOJ5qpuCko2FxP2CApZ9H7ZJMotjq6eBe0W0f62XvTzwm6dbRBI+gtuggqRq0lg3XH55aDJHQmJ4CQaWUVBS/a3c7MoTR7FbLu9RfaiJdc8m0nq4FYntkjyxLlcfJsZ80yClpY7gk7yKCIk3cSB6FdQluxWSPIryEkciRVkyTWV9JLuIv10m8bzVq+SPGSjGElPECxJ8sXDqliM/SoCJTkT5Ynj0SRsZWleQxWBSPbXeUV5Mh9JdkpM53ocAcl6ckJNMovweZHwAEnCkxPkFQRJ/ToqRFxRPQ7Ak2PS1yILJiZJlYDHW5/LFugXli9YtpoxO10l2VE5eTw05rorSECIoRbbKkoUyTBJj5uxHdCSFcEs1yCJKCZj7La99ijgc8ZUkeVqLb64cjVBiZwA53khDy1r5AqRGlowSbUISshNTCHmoSqIhV0hBytoWB1jhWZiqJqMVfUgSjtVCxVIBVN7kX9cZn/QAp2SE/CZ/lt6nmQccvXKCoYGJ+UqeW1NFRqArqRUDqB6hORC0qOCF2AhK1EDcnSUuUjyX5Fll5B7MelXUZWVa7hpe5xOfzJB2cfKDlEQAAAAAElFTkSuQmCC">
+<vector name="origin" x="20" y="17"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="backHead"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="dd5999d4177ef8137fefd0d4b57ac034b9f2f6a90e3d049b58f861f79cfe3958"/>
+</canvas>
+<canvas name="ear" width="49" height="11" basedata="iVBORw0KGgoAAAANSUhEUgAAADEAAAALCAYAAADWfWXXAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAACuSURBVEhLzZGBDYAgDARZwRVcwVlcwRWchRVcwRXcCfmmJVVAMSTCJx9MS+l9NF7uwT0pxSc27tjWyLtdqNmLwJPi9K3ASdDa2zp1FQI8d0ZfjhhTl7oRQohzASBq6sT45l5T6QDC58tZtgAv5npTCYudh9cAUBQCg9xrIuwXDpwlISC6iKHgZWwSBHs1R2kA0eVP4OT6r9L7meEzBw2pB37XDb6KofqBChXsNuYEdWTrWUh6eREAAAAASUVORK5CYII=">
+<vector name="origin" x="24" y="-1"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="backAccessoryOverHead"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="0f3d9c964ab4dd2c24e9883e968a3ae35fef32f62e9a0e8601eca8280e905803"/>
+</canvas>
+<canvas name="lefEar" width="59" height="11" basedata="iVBORw0KGgoAAAANSUhEUgAAADsAAAALCAYAAADBX/UeAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAADbSURBVEhL1ZWBDYMgEEVZwVlcwRW6Qldwha7ACq7gCt3J3j96BE4FUhXsT16awnHci001hVkC7pTT5vKNprFn7NAdbnpmbN/xTPikryHF4QOzfS7vaYzAmiu5R/AA5tcQgTXaykrvSgr/ICukpJOSQtCkeeyDfr6EltSghsr9zGWiVCMNvueaRmRTTxdgfyUMuABSmo0G7libiGgIZgrhdfeHGomG4Q0Ua0GNK68bLbhLRlLHF+PgljzWuLJi+DUD8oI/zxY18Re65tXj361ruUvmufyCRA7cbcwH9BGP9hQ4QlYAAAAASUVORK5CYII=">
+<vector name="origin" x="29" y="-1"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="backAccessoryOverHead"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="21322adaf45a3dff13d9e83afb66ff09b44941e1c311ee3d851fca9fd205e0a9"/>
+</canvas>
+<canvas name="highlefEar" width="55" height="11" basedata="iVBORw0KGgoAAAANSUhEUgAAADcAAAALCAYAAADbYxWQAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAADZSURBVEhLzZWBDYMwDARZIbOwAit0ha7ACl0hK7ACK3Sn1O/EwXWDQktF8tILYd7BRyQyHFRI116EeU7NJAsEP7mu4PzowjKPeT4uHhQ3oFncGxxmWh9TNpWqkBxY/T08l/nNqMVIH7JwNcgilBjPsGDKNpW/uQCX4MQUy7MWgcQAU03NJXB7uyem6AbIRYBom4bWuydg2phJGzWKfszJRQtkHaPXygLtmaJFMC0OyJewcKjF2HXC35pdAEp/8iqUlW7atr3RsYCzTSDp1vq0/r7gF/rh3cPwAlByTkm7bQWZAAAAAElFTkSuQmCC">
+<vector name="origin" x="27" y="-1"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="backAccessoryOverHead"/>
+<string name="group" value="skin"/>
+<string name="_hash" value="417651994de2c790b57250fad310a278ab92366a541978351d66f4a72c27c1f9"/>
+</canvas>
+</imgdir>
+<imgdir name="walk1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="walk2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stand1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stand2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="alert">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingO1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingO2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingO3">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingOF">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../back/head"/>
+<uol name="ear" value="../../back/ear"/>
+<uol name="lefEar" value="../../back/lefEar"/>
+<uol name="highlefEar" value="../../back/highlefEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingT1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingT2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingT3">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingTF">
+<imgdir name="0">
+<uol name="head" value="../../back/head"/>
+<uol name="ear" value="../../back/ear"/>
+<uol name="lefEar" value="../../back/lefEar"/>
+<uol name="highlefEar" value="../../back/highlefEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingP1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingP2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="swingPF">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stabO1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stabO2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stabOF">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stabT1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stabT2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="stabTF">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="shoot1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="shoot2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="shootF">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="proneStab">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="prone">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="heal">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="fly">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="jump">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="sit">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+<uol name="ear" value="../../front/ear"/>
+<uol name="lefEar" value="../../front/lefEar"/>
+<uol name="highlefEar" value="../../front/highlefEar"/>
+<uol name="humanEar" value="../../front/humanEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="ladder">
+<imgdir name="0">
+<uol name="head" value="../../back/head"/>
+<uol name="ear" value="../../back/ear"/>
+<uol name="lefEar" value="../../back/lefEar"/>
+<uol name="highlefEar" value="../../back/highlefEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../back/head"/>
+<uol name="ear" value="../../back/ear"/>
+<uol name="lefEar" value="../../back/lefEar"/>
+<uol name="highlefEar" value="../../back/highlefEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="rope">
+<imgdir name="0">
+<uol name="head" value="../../back/head"/>
+<uol name="ear" value="../../back/ear"/>
+<uol name="lefEar" value="../../back/lefEar"/>
+<uol name="highlefEar" value="../../back/highlefEar"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../back/head"/>
+<uol name="ear" value="../../back/ear"/>
+<uol name="lefEar" value="../../back/lefEar"/>
+<uol name="highlefEar" value="../../back/highlefEar"/>
+</imgdir>
+</imgdir>
+<imgdir name="create2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create2_s">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create2_f">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create3">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="8">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="9">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="10">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="11">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create3_s">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create3_f">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create4">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="8">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="9">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="10">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="11">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="12">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="13">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create4_s">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="create4_f">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="blink">
+<imgdir name="0">
+<canvas name="head" width="1" height="1" basedata="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAANSURBVBhXY2BgYBAEAAAWABJnFC3KAAAAAElFTkSuQmCC">
+<vector name="origin" x="19" y="17"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="earOverHead" x="15" y="10"/>
+<vector name="earBelowHead" x="-17" y="9"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="head"/>
+<string name="group" value="skin"/>
+</canvas>
+</imgdir>
+</imgdir>
+<imgdir name="hide">
+<imgdir name="0">
+<canvas name="head" width="1" height="1" basedata="iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAHYcAAB2HAY/l8WUAAAANSURBVBhXY2BgYBAEAAAWABJnFC3KAAAAAElFTkSuQmCC">
+<vector name="origin" x="19" y="17"/>
+<imgdir name="map">
+<vector name="neck" x="0" y="15"/>
+<vector name="earOverHead" x="15" y="10"/>
+<vector name="earBelowHead" x="-17" y="9"/>
+<vector name="brow" x="-4" y="-5"/>
+</imgdir>
+<string name="z" value="head"/>
+<string name="group" value="skin"/>
+</canvas>
+</imgdir>
+</imgdir>
+<imgdir name="setitem3">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="8">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="9">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="10">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="11">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="12">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="13">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="14">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="15">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="16">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="17">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="18">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="19">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="20">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="21">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="22">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="23">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="24">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="25">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="26">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="setitem4">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="8">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="9">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="10">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="11">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="12">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="13">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="14">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="15">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="16">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="17">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="18">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="19">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="20">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="21">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="22">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="23">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="24">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="25">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="26">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="setitem1">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="8">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="9">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="10">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="11">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="12">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="13">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="14">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="15">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="16">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="17">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="18">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="19">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="20">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="21">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="22">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="23">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="24">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="25">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="26">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="27">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="28">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="29">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="30">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="31">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="setitem2">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="8">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="9">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="10">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="11">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="12">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="13">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="14">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="15">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="16">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="17">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="18">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="19">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="20">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="21">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="22">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="23">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="24">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="25">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="26">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="27">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="28">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="29">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="30">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="31">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="cooking">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="1">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="2">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="3">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="4">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="5">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="6">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="7">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="8">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+<imgdir name="9">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="cooking_s">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+<imgdir name="cooking_f">
+<imgdir name="0">
+<uol name="head" value="../../front/head"/>
+</imgdir>
+</imgdir>
+</imgdir>
