@@ -105,6 +105,7 @@ function reparseTreeAsNodes(json) {
       return node;
     }
     
+    // console.log("curnode: ", curnode);
     var keys = curnode['_keys'];
     for (var i = 0; i < keys.length; i++) {
       var nodeName = keys[i];

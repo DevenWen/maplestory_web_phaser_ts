@@ -10,29 +10,33 @@ export default class DataLoader {
   private wz_datas: Phaser.Cache.BaseCache
   private textures: Phaser.Textures.TextureManager
 
-  constructor(game : Phaser.Game, textures : Phaser.Textures.TextureManager) {
+  constructor(game : Phaser.Game) {
     this.game = game
     this.wz_datas = game.cache.json
-    this.textures = textures
+    this.textures = game.textures
   }
 
   getDataNode(key, callback) {
     // TODO 在并发环境下，此处并没有做到安全加载。
     var imgpos = key.indexOf('.img')
     if (imgpos == -1) {
+      console.warn("key = ", key)
       throw 'No img found in ' + key
     }
 
     var path = key.substr(0, imgpos + 4)
     var subelements = key.substr(imgpos + 5)
 
+    var result = null
     if (this.wz_datas.has(path)) {
       console.log("get from cache:", path)
       var info = this.wz_datas.get(path)
-      callback(getElementFromJSON(info, subelements))
+      result = getElementFromJSON(info, subelements)
+      callback(result)
     } else {
       console.log("get from server:", path)
       var cache = this.wz_datas
+      // FIXME: 不应该采用异步
       axios.get(`http://127.0.0.1:8082/${path}.xml`)
       .then(function (response) {
         console.log(`load ${path}, get:`, response)
