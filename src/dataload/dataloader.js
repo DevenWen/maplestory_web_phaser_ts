@@ -402,4 +402,4 @@ function getItemDataLocation(id) {
   return url;
 };
 
-export {getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node}
+export {resolveUOL, getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node, UOL}
