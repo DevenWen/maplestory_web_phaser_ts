@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "parcel src/index.html -p 8000",
 		"build": "parcel build src/index.html --out-dir dist",
-		"tests": "mocha --require ts-node/register test/**/*.ts",
+		"tests": "mocha --require ts-node/register test/**/*.test.ts",
 		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
 	},
 	"author": "supertommy",

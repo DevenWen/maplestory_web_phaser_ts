@@ -1,5 +1,5 @@
 
-export enum Id {
+export enum StanceId {
 		NONE,
 		ALERT,
 		DEAD,
@@ -39,53 +39,53 @@ export enum Id {
 		LENGTH
 }
 
-export default class Stance {
+export class Stance {
 
-	static by_state(state: number): Id {
+	static by_state(state: number): StanceId {
 		// FIXME 表示动作的状态机
 		let index = (state / 2) - 1
 		if (index < 0 || index > 10)
-			return Id.WALK1
+			return StanceId.WALK1
 
 		let array = [
-				Id.WALK1,
-				Id.STAND1,
-				Id.JUMP,
-				Id.ALERT,
-				Id.PRONE,
-				Id.FLY,
-				Id.LADDER,
-				Id.ROPE,
-				Id.DEAD,
-				Id.SIT
+			StanceId.WALK1,
+			StanceId.STAND1,
+			StanceId.JUMP,
+			StanceId.ALERT,
+			StanceId.PRONE,
+			StanceId.FLY,
+			StanceId.LADDER,
+			StanceId.ROPE,
+			StanceId.DEAD,
+			StanceId.SIT
 		]
 		return array[index]
 	}
 
-	static by_id(id: number): Id {
+	static by_id(id: number): StanceId {
 		// TODO
-		if (id <= Id.NONE || id > Id.LENGTH) {
-			return Id.NONE
+		if (id <= StanceId.NONE || id > StanceId.LENGTH) {
+			return StanceId.NONE
 		}
 		return id
 	}
 
-	static by_string(name: string): Id {
+	static by_string(name: string): StanceId {
 		// TODO
 		console.warn("TODO")
-		return Id.NONE
+		return StanceId.NONE
 	}
 
-	static ib_climbing(value: Id): boolean {
+	static ib_climbing(value: StanceId): boolean {
 		// TODO
 		console.warn("TODO")
 		return false
 	}
 
-	static baseof(value: Id): Id {
+	static baseof(value: StanceId): StanceId {
 		// TODO
 		console.warn("TODO")
-		return Id.NONE
+		return StanceId.NONE
 	}
 
 }

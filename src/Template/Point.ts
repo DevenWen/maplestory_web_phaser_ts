@@ -1,9 +1,9 @@
 
 export default class Point {
-	public a: number = 0;
-	public b: number = 0;
+	public a: integer = 0;
+	public b: integer = 0;
 
-	constructor(a: number, b: number) 
+	constructor(a: integer, b: integer) 
 	{
 		this.a = a
 		this.b = b
@@ -13,5 +13,9 @@ export default class Point {
 	{
 		this.a += p.a
 		this.b += p.b
+	}
+
+	static null(): Point {
+		return new Point(0, 0)
 	}
 }
