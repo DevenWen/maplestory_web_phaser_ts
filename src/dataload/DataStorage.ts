@@ -17,7 +17,6 @@ export default class DataLoader {
   }
 
   getDataNode(key, callback) {
-    // TODO 在并发环境下，此处并没有做到安全加载。
     var imgpos = key.indexOf('.img')
     if (imgpos == -1) {
       console.warn("key = ", key)
@@ -29,20 +28,31 @@ export default class DataLoader {
 
     var result = null
     if (this.wz_datas.has(path)) {
-      console.log("get from cache:", path)
       var info = this.wz_datas.get(path)
-      result = getElementFromJSON(info, subelements)
-      callback(result)
+      if (!info.loaded) {
+        info.callback.push([callback, subelements])
+      } else {
+        result = getElementFromJSON(info.data, subelements)
+        callback(result)
+      }
     } else {
-      console.log("get from server:", path)
+      this.wz_datas.add(path, {
+        callback: [[callback, subelements]],
+        loaded: false
+      })
       var cache = this.wz_datas
-      // FIXME: 不应该采用异步
       axios.get(`http://127.0.0.1:8082/${path}.xml`)
       .then(function (response) {
-        console.log(`load ${path}, get:`, response)
-        var info = reparseTreeAsNodes(response.data) 
-        cache.add(path, info)
-        callback(getElementFromJSON(info, subelements))
+        console.debug(`load ${path}, get:`, response)
+        var info = cache.get(path)
+        info.data = reparseTreeAsNodes(response.data) 
+        info.loaded = true
+        for (let i = 0; i < info.callback.length; i++)
+        {
+          var callback = info.callback[i][0]
+          var subelement = info.callback[i][1]
+          callback(getElementFromJSON(info.data, subelement))
+        }
       })
     }
   }

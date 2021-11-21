@@ -15,7 +15,7 @@ const config: Phaser.Types.Core.GameConfig = {
 			gravity: { y: 200 }
 		}
 	},
-	scene: [ECSWorldScene],
+	scene: [LoaderScene],
 	render: {
 		antialias: false,
 		pixelArt: true,
