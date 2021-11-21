@@ -5,7 +5,7 @@
 	"scripts": {
 		"start": "parcel src/index.html -p 8000",
 		"build": "parcel build src/index.html --out-dir dist",
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"tests": "mocha --require ts-node/register test/**/*.ts",
 		"lint": "eslint ./src --ext .js,.jsx,.ts,.tsx"
 	},
 	"author": "supertommy",
@@ -16,12 +16,18 @@
 	},
 	"homepage": "https://github.com/ourcade/phaser3-parcel-template",
 	"devDependencies": {
+		"@types/chai": "4.2.11",
+		"@types/mocha": "7.0.2",
+		"@types/node": "14.0.11",
 		"@typescript-eslint/eslint-plugin": "^2.29.0",
 		"@typescript-eslint/parser": "^2.29.0",
-		"eslint": "^6.8.0",
+		"chai": "4.2.0",
+		"eslint": "^8.2.0",
 		"minimist": ">=1.2.2",
+		"mocha": "7.2.0",
 		"parcel-plugin-clean-easy": "^1.0.2",
 		"parcel-plugin-static-files-copy": "^2.4.3",
+		"ts-node": "8.10.2",
 		"typescript": "^3.8.3"
 	},
 	"dependencies": {
