@@ -1,6 +1,5 @@
-import { NONE } from "phaser";
 
-enum Id {
+export enum Id {
 		NONE,
 		ALERT,
 		DEAD,
@@ -43,8 +42,24 @@ enum Id {
 export default class Stance {
 
 	static by_state(state: number): Id {
-		// TODO
-		return Id.NONE
+		// FIXME 表示动作的状态机
+		let index = (state / 2) - 1
+		if (index < 0 || index > 10)
+			return Id.WALK1
+
+		let array = [
+				Id.WALK1,
+				Id.STAND1,
+				Id.JUMP,
+				Id.ALERT,
+				Id.PRONE,
+				Id.FLY,
+				Id.LADDER,
+				Id.ROPE,
+				Id.DEAD,
+				Id.SIT
+		]
+		return array[index]
 	}
 
 	static by_id(id: number): Id {
@@ -52,22 +67,24 @@ export default class Stance {
 		if (id <= Id.NONE || id > Id.LENGTH) {
 			return Id.NONE
 		}
-		let keys = Object.keys(Id).filter(x => Id[x] == id);
-		return Id.NONE
+		return id
 	}
 
 	static by_string(name: string): Id {
 		// TODO
+		console.warn("TODO")
 		return Id.NONE
 	}
 
 	static ib_climbing(value: Id): boolean {
 		// TODO
+		console.warn("TODO")
 		return false
 	}
 
 	static baseof(value: Id): Id {
 		// TODO
+		console.warn("TODO")
 		return Id.NONE
 	}
 
