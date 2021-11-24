@@ -4,6 +4,7 @@ import HelloWorldScene from './scenes/HelloWorldScene'
 import LoaderScene from './scenes/LoaderScene'
 import StepOneScene from './scenes/StepOneScene'
 import ECSWorldScene from './scenes/ECSWorldScene'
+import TestScene from './scenes/TestScene'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -15,7 +16,7 @@ const config: Phaser.Types.Core.GameConfig = {
 			gravity: { y: 200 }
 		}
 	},
-	scene: [LoaderScene],
+	scene: [TestScene],
 	render: {
 		antialias: false,
 		pixelArt: true,
