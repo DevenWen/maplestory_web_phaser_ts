@@ -42,7 +42,7 @@ public class CreatPlayer : MonoBehaviour
 	private GameObject weaponEffect; //武器特效
 	private GameObject weapon; //武器本体
 	//层级字典
-	private Dictionary<string, int> zmapDict;
+	private Dictionary<string, int> zmapDict;  // FIXME 层级字典是什么
 	//部件层级 Z轴
 	private int body_zmap;
     private int arm_zmap;
@@ -72,8 +72,9 @@ public class CreatPlayer : MonoBehaviour
 
 
 	/// <summary>
-	/// [动作播放]
+	/// [动作播放] 
 	/// </summary>
+	// FIXME 动作播放的序列，是否可以定制？通过一个链表的模式，逐个消费。
 	private int delay; //当前帧显示时长
 	private string action; //当前动作
 	private int animCountFrame; //当动作总帧数
@@ -95,6 +96,7 @@ public class CreatPlayer : MonoBehaviour
 	/// <summary>
 	/// [表情播放]
 	/// </summary>
+	// FIXME
 	private int delayFace; //当前帧显示时长
 	private bool playFace = false; //是否播放表情
 	private string faceAction = "default"; //当前表情
@@ -111,6 +113,7 @@ public class CreatPlayer : MonoBehaviour
 	/// <summary>
 	/// [攻击动画名, key = 武器xml中的attack值, value = 动画名称数组, 如果是弓或弩会有第二组没有箭矢的动画]
 	/// </summary>
+	// FIXME 直接采用，不同的武器采用不通的字段。
 	private readonly Dictionary<sbyte, string[][]> attackTypes = new Dictionary<sbyte, string[][]> {
         //[S1A1M1D] Stance::Id::STABO1, Stance::Id::STABO2, Stance::Id::SWINGO1, Stance::Id::SWINGO2, Stance::Id::SWINGO3
         {1, new string[][]{ new string[] { "stabO1", "stabO2", "swingO1", "swingO2", "swingO3" } } },
@@ -154,6 +157,7 @@ public class CreatPlayer : MonoBehaviour
 
     private void Start()
     {
+		// TODO 池化资源
 		body = PoolManager.Pools["MyPool"].Spawn(playParts).gameObject;
 		arm = PoolManager.Pools["MyPool"].Spawn(playParts).gameObject;
 		armOverHair = PoolManager.Pools["MyPool"].Spawn(playParts).gameObject;
@@ -372,7 +376,9 @@ public class CreatPlayer : MonoBehaviour
 				body_sprite.sprite = bodyCharImg.Sprite;
 				float bodyOriginX = int.Parse(bodyCharImg.OriginX) * 0.01f;
 				float bodyOriginY = int.Parse(bodyCharImg.OriginY) * 0.01f;
+				// FIXME 强行将 position 设置为中心，也是一个办法
 				body.transform.localPosition = new Vector2(body_sprite.sprite.bounds.size.x / 2f - bodyOriginX, (0f - body_sprite.sprite.bounds.size.y) / 2f + bodyOriginY);
+				// zmap 是什么东西？
 				body_zmap = zmapDict[bodyCharImg.Z];
 				body.transform.localPosition += new Vector3(0f, 0f, body_zmap * 0.002f);
 				body.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -509,6 +515,9 @@ public class CreatPlayer : MonoBehaviour
 				float num6 = int.Parse(bodyCharImg.MapDicts["neck"]["y"]) * 0.01f;
 				head.transform.localPosition += new Vector3(num5, 0f - num6);
 				head_zmap = zmapDict[headCharImg.Z];
+				// FIXME 采用三维的绘图机制，z 轴，在绘制的时候，可以自然分层。Phaser 估计没有这个功能，只有层层叠起来
+				// Phaser 中有 Lay 的概念，所以并不需要使用这种三位的处理方案
+				// 但应该如何理解 Lay ？
 				head.transform.localPosition += new Vector3(0f, 0f, head_zmap * 0.002f);
 				head.transform.localScale = new Vector3(1f, 1f, 1f);
 			}
@@ -938,10 +947,12 @@ public class CreatPlayer : MonoBehaviour
 		if (lastAnim == nextAnim) {
 			return;
 		}
-		Despawn();
+		Despawn(); // 清理当前帧
+		// FIXME currentFrame 是一个私有变量，这让代码变得有点耦合。
 		GetPaperDoll(nextAnim, currentFrame);
 		playingActionAnimate = StartCoroutine(AniPlayDone((float)(Mathf.Abs(this.delay) * 0.001), () =>
 		{
+			// FIXME 播放动画，不断地轮询
 			if (IsPauseMotionAnimate) //动画暂停,维持当前状态
 			{
 				delay = 2000;
@@ -1031,6 +1042,7 @@ public class CreatPlayer : MonoBehaviour
 		if (playingActionAnimate != null) {
 			StopCoroutine(playingActionAnimate);
 		}
+		// FIXME 通过管理帧数据进行动画播放
 		Action = nextAnim;
 		currentFrame = 0;
 		lastAnim = currentAnim; 
@@ -1051,6 +1063,8 @@ public class CreatPlayer : MonoBehaviour
 	{
 		IsPauseMotionAnimate = false;
 	}
+
+	// FIXME 表情管理属于一个独立的辅助程序
 
 	/// <summary>
 	/// 眨眼
@@ -1090,6 +1104,9 @@ public class CreatPlayer : MonoBehaviour
 			表情播放计时器 += Time.deltaTime;
 		}
 	}
+
+	// 此处可以尝试使用状态机进行处理 -------- begin
+
 	//是否进入警戒状态
 	public void OnAlert() {
 		if (alertStatus && alertTime > 0)
@@ -1108,7 +1125,7 @@ public class CreatPlayer : MonoBehaviour
 		if (player.Weapon != null)
 		{
 			Action = item.GetStand(player.Weapon);
-			
+			// FIXME 每一种武器都有不同的站立动画
 		}
 		else
 		{
@@ -1120,6 +1137,7 @@ public class CreatPlayer : MonoBehaviour
 	public void MoveState() {
 		if (player.Weapon != null)
 		{
+			// FIXME 每一个武器都有不同的移动动画
 			Action = item.GetWalk(player.Weapon);
 		}
 		else
@@ -1154,6 +1172,8 @@ public class CreatPlayer : MonoBehaviour
 		Action = "prone";
 		ChangeAnim(Action);
 	}
+
+	// 此处可以尝试使用状态机进行处理 -------- end
 
 	//进入飞行或者游泳状态
 	public void Onfly() { 

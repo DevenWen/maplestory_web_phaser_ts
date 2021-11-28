@@ -1,14 +1,19 @@
 import { describe } from "mocha";
 import { expect } from "chai";
-import { Stance, StanceId } from "../../src/Character/Look/Stance"
+import { padLeft } from "../../src/dataload/dataloader"
+
 
 describe("Stance test", () => {
 	it('by_state', () => {
-		expect(Stance.by_state(0)).equal(StanceId.WALK1)
+		// expect(Stance.by_state(0)).equal(StanceId.WALK1)
 	})
 
 	it('by_id', () => {
-		expect(Stance.by_id(0)).equal(StanceId.NONE)
-		expect(Stance.by_id(1)).equal(StanceId.ALERT)
+		// expect(Stance.by_id(0)).equal(StanceId.NONE)
+		// expect(Stance.by_id(1)).equal(StanceId.ALERT)
+	})
+
+	it('pad', () => {
+		console.log(padLeft(2000, 8, "0"))
 	})
 })

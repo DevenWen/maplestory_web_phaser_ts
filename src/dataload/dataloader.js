@@ -1,3 +1,5 @@
+//  TODO 需要考虑资源回收问题，创建的数据需要根据重要程度选择销毁
+
 var Node = function Node(name, parent) {
 	this['name'] = name;
   this['..'] = parent;
@@ -11,6 +13,9 @@ Node.prototype.forEach = function(callback) {
   }
 };
 
+Node.prototype.node = function() {
+  return this
+}
 var UOL = function UOL(name, parent, path) {
   this['name'] = name;
   this['..'] = parent;
@@ -27,6 +32,10 @@ UOL.prototype.getPath = Node.prototype.getPath = function() {
 
   return path;
 };
+
+UOL.prototype.node = function() {
+  return resolveUOL(this)
+}
 
 function isReservedDataObject(name) {
   return ['name', 'ITEMID', '..', '_image', 'path', '_keys'].indexOf(name) != -1;
@@ -91,6 +100,7 @@ function parseNodeType(node, prevNode, name) {
 function reparseTreeAsNodes(json) {
   function parseNode(curnode, parentNode) {
     if (typeof curnode !== 'object') return curnode;
+    if (curnode === null) return curnode;
     if (curnode['type'] === 'uol') {
       return new UOL(curnode['name'], parentNode, curnode['path']);
     }
@@ -105,8 +115,7 @@ function reparseTreeAsNodes(json) {
       return node;
     }
     
-    // console.log("curnode: ", curnode);
-    var keys = curnode['_keys'];
+    var keys = curnode['_keys'] || [];
     for (var i = 0; i < keys.length; i++) {
       var nodeName = keys[i];
       var innerNode = curnode[nodeName];
@@ -121,6 +130,14 @@ function reparseTreeAsNodes(json) {
   return parseNode(json, null);
 }
 
+function getElementFromJSONAuto(json, path) {
+  let node = getElementFromJSON(json, path)
+  if (node != null) {
+    return node.node()
+  }
+  return node
+}
+
 function getElementFromJSON(json, path) {
   if (!json.parsed_data) {
     json.parsed_data = {};
@@ -129,7 +146,7 @@ function getElementFromJSON(json, path) {
   }
 
   var node = json;
-  if (path !== "null") {
+  if (path !== "null" && path !== "") {
     var pathelements = path.split('/');
 
     while (pathelements.length > 0) {
@@ -146,55 +163,6 @@ function getElementFromJSON(json, path) {
   json.parsed_data[path] = node;
   return node;
 }
-
-
-// function getDataNode(key, callback, sync) {
-//   var imgpos = key.indexOf('.img');
-//   if (imgpos == -1) {
-//     throw 'No img found in ' + key;
-//   }
-
-//   var path = key.substr(0, imgpos + 4);
-//   var subelements = key.substr(imgpos + 5);
-
-//   // todo objectStorage 改用缓存进行
-//   if (path in objectStorage) {
-//     var info = objectStorage[path];
-//     if (!info.loaded) {
-//       info.callbacks.push([ callback, subelements ]);
-//     } else {
-//       callback(getElementFromJSON(info.data, subelements));
-//     }
-//   } else {
-//     objectStorage[path] = {
-//       callbacks : [ [ callback, subelements ] ],
-//       loaded : false
-//     };
-
-//     var xhttp = new XMLHttpRequest();
-//     var url = 'http://127.0.0.1:8082/' + path + '.xml.json';
-//     console.log(url);
-//     xhttp.open("GET", url, sync !== true);
-//     xhttp.onreadystatechange = function() {
-//       if (xhttp.readyState == 4) {
-//         var info = objectStorage[path];
-//         info.data = reparseTreeAsNodes(JSON.parse(xhttp.response));
-//         info.loaded = true;
-
-//         for (var i = 0; i < info.callbacks.length; i++) {
-//           var callback = info.callbacks[i][0];
-//           var subelement = info.callbacks[i][1];
-
-//           callback(getElementFromJSON(info.data, subelement));
-//         }
-//       }
-//     }
-//     xhttp.send();
-//     if (sync) {
-//       return JSON.parse(xhttp.response);
-//     }
-//   }
-// };
 
 function getItemDataNode(itemid, subelement, callback, sync) {
   var path = getItemDataLocation(itemid);
@@ -402,4 +370,4 @@ function getItemDataLocation(id) {
   return url;
 };
 
-export {resolveUOL, getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node, UOL}
+export {padLeft, getElementFromJSONAuto, resolveUOL, getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node, UOL}

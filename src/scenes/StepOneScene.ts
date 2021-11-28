@@ -5,7 +5,7 @@ import DataLoader from '~/dataload/DataStorage'
 export default class StepOneScene extends Phaser.Scene
 {
 
-    private dataloader: DataLoader
+    // private dataloader: DataLoader
 
     constructor()
     {
@@ -35,7 +35,7 @@ export default class StepOneScene extends Phaser.Scene
         // this.load.image("penguin", "assets/penguin.png")
         // this.load.xml("2001", "assets/00002001.img.xml")
         // this.load.xml("12001", "assets/00012001.img.xml")
-        this.dataloader.getDataNode("Base.wz/zmap.img.xml", () => {})
+        // this.dataloader.getDataNode("Base.wz/zmap.img.xml", () => {})
     }
 
     create()

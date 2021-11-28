@@ -72,7 +72,7 @@ export default class LoaderScene extends Phaser.Scene
 
     
 
-    update(ts: number) {
+update(ts: number) {
         this.player.update(ts)
     }
 }
