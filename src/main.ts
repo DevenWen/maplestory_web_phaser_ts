@@ -13,13 +13,18 @@ const config: Phaser.Types.Core.GameConfig = {
 	fps: {
 		target: 1,
 		forceSetTimeOut: true
-
 	},
 	physics: {
-		default: 'arcade',
+		default: 'matter',
 		arcade: {
 			gravity: { y: 200 },
 			fps: 1
+		},
+		matter: {
+				debug: true,
+				gravity: {
+						y: 1
+				},
 		}
 	},
 	scene: [TestScene],
