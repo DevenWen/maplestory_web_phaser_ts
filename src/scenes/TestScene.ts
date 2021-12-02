@@ -50,12 +50,11 @@ export default class TestScene extends Phaser.Scene
         this.player = new Player(this)
 
         // 加入一个物理引擎
-        // this.player.container.setSize(32, 32)
-        // var phy = this.matter.add.gameObject(this.player.container)
-        
-        // this.platforms = this.matter.add.image(400, 400, 'platform', "platform", {isStatic: true})
-        // this.platforms.setScale(2, 0.5);
-        // this.platforms.setFriction(0);
+        this.player.container.setSize(32, 64)
+        var phy = this.matter.add.gameObject(this.player.container)
+        var platforms = this.matter.add.image(400, 400, 'platform', "platform", {isStatic: true})
+        platforms.setScale(2, 0.5);
+        platforms.setFriction(0);
 
         var debugText = this.add.text(0, 0, 'x: 0, y: 0', {fontFamily: 'Arial', fontSize: 64, color: '#00ff00' })
         var debug = this.add.graphics()

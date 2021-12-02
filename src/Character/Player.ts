@@ -86,7 +86,7 @@ export class Player
 	addPart(texture, pos) {
 		console.log(`add texture ${texture} pos`, pos)
 		this.container.add(
-			this.scene.add.sprite(pos.x, pos.y, texture).setOrigin(0)
+			this.scene.add.sprite(pos.x, pos.y + 32, texture).setOrigin(0)
 			// this.scene.add.blitter(pos.x, pos.y, texture)
 		)
 	}
