@@ -7,7 +7,7 @@
 
 1. Scene 模块中，里面设计了一个 UI Scene 的设计。这个 UI Scene 可以用于注册和相应 Game Scene 的事件，例如获得经验，扣血等。
 2. Scene 的生命周期，假如我将 MapleStory 的 Map 定义一个 Scene，那么 Scene 的生命周期应该可以被 create、change、**destroy**，Game 是可以[动态加载](https://phaser.io/examples/v3/view/scenes/add-scene-after-gam) scene 的。
-3. 所以我们需要可以做到，根据一个 sceneId 构建一个 Scene 对象，初始化的时候，可以加在并渲染一个地图。这是一个封装的工作，可能由此至终只有三个场景
+3. 所以我们需要可以做到，根据一个 sceneId 构建一个 Scene 对象，初始化的时候，可以加在并渲染一个地图。这是一个封装的工作
 
 ## 2021-11-28
 
