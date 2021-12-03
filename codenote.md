@@ -5,9 +5,14 @@
 ## 2021-12-2
 阅读了一下 Phaser3 的 [Example](https://phaser.io/examples/v3)，联想了一下关于 Mapestory 的资源，顾有以下笔记
 
+### Scene
 1. Scene 模块中，里面设计了一个 UI Scene 的设计。这个 UI Scene 可以用于注册和相应 Game Scene 的事件，例如获得经验，扣血等。
 2. Scene 的生命周期，假如我将 MapleStory 的 Map 定义一个 Scene，那么 Scene 的生命周期应该可以被 create、change、**destroy**，Game 是可以[动态加载](https://phaser.io/examples/v3/view/scenes/add-scene-after-gam) scene 的。
-3. 所以我们需要可以做到，根据一个 sceneId 构建一个 Scene 对象，初始化的时候，可以加在并渲染一个地图。这是一个封装的工作
+3. 所以我们需要可以做到，根据一个 sceneId 构建一个 Scene 对象，初始化的时候，可以加在并渲染一个地图。这是一个封装的工作。
+
+### GameObject
+1. Blitter 设计是用于加快渲染速度的，加入担心渲染速度会产生性能问题，可以考虑使用这组件；
+2. Container 
 
 ## 2021-11-28
 
