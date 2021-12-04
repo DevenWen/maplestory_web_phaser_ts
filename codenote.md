@@ -2,6 +2,13 @@
 
 - [ ] 理解素材的拼接算法
 
+## 2021-12-4
+周末起来，进行了眼睛和头发的渲染，整体来说还算顺利。但是整个拼接逻辑依然没有很清楚。主要是直接采用了[这个仓库的算法](https://github.com/Elem8100/MapleStory-GM-Client/blob/ab96724341093b620b6c803cc1437c32d4441f59/Src/MapleCharacter.pas#L1352)。
+
+<div align="center">
+	<img src="./doc/img/eys_and_hair.jpg" alt="Editor" width="500">
+</div>
+
 ## 2021-12-2
 阅读了一下 Phaser3 的 [Example](https://phaser.io/examples/v3)，联想了一下关于 Mapestory 的资源，顾有以下笔记
 
