@@ -21,9 +21,13 @@ export class Player
 	head = 12000
 	body = 2000
 	face = 20000
+	hair = 30000
 
 	// TODO 此处后期需要模块化眼睛的
 	faceAction = "default"
+	
+	// 头发
+	
 
 	// TODO 动作帧
 	characterModtion = "walk1"
@@ -88,7 +92,7 @@ export class Player
 	}
 
 	addPart(texture, pos) {
-		console.log(`add texture ${texture} pos`, pos)
+		console.debug(`add texture ${texture} pos`, pos)
 		this.container.add(
 			this.scene.add.sprite(pos.x, pos.y + 32, texture).setOrigin(0)
 			// this.scene.add.blitter(pos.x, pos.y, texture)
@@ -119,10 +123,41 @@ export class Player
 			// 判断动作是否是背身，背身不用绘制
 			// 绘制脸型
 			this.loadFace(bodyNode, headNode)
+			this.loadHair1(bodyNode, headNode)
 
 
 		})
 		
+	}
+
+	loadHair1(bodyNode, headNode)
+	{
+		var hairStr = padLeft(this.hair, 8, '0')
+		var motion = this.motion
+		var motionIndex = this.motionIndex
+		// 注意区分背面，正面的差异
+		DataLoader.getWzSprite(`Hair/${hairStr}.img/${motion}/${motionIndex}/hair`, (hairNode, textureKey) => {
+			// TODO 不一定是 hair，还有多种 hair
+			// console.log(hairNode)
+			// brow 类型的偏移
+			var bodyNeck = Vector.create(bodyNode['map']['neck'])
+			var headNeck = Vector.create(headNode['map']['neck'])
+
+			var origin = Vector.create(hairNode['origin'])
+			var headBrow = Vector.create(headNode['map']['brow'])
+			var brow = Vector.create(hairNode['map']['brow'])
+			var pos = {
+				x: origin.x + headNeck.x - bodyNeck.x - headBrow.x + brow.x,
+				y: origin.y + headNeck.y - bodyNeck.y - headBrow.y + brow.y
+			}
+			pos.x = - pos.x
+			pos.y = - pos.y
+			this.addPart(textureKey, pos)
+
+
+		})
+
+
 	}
 
 	loadFace(bodyNode, headNode)
@@ -139,7 +174,6 @@ export class Player
 			var faceOrigin = Vector.create(imageNode['origin'])
 			var headBrow = Vector.create(headNode['map']['brow'])
 			var faceBrow = Vector.create(imageNode['map']['brow'])
-			console.log(headBrow, faceBrow)
 			var pos = {
 				x: faceOrigin.x + headNeck.x - bodyNeck.x - headBrow.x + faceBrow.x,
 				y: faceOrigin.y + headNeck.y - bodyNeck.y - headBrow.y + faceBrow.y
