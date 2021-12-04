@@ -20,8 +20,12 @@ export class Player
 	skin = 0
 	head = 12000
 	body = 2000
-	face = 0
+	face = 20000
 
+	// TODO 此处后期需要模块化眼睛的
+	faceAction = "default"
+
+	// TODO 动作帧
 	characterModtion = "walk1"
 	motion: string = "stand1"
 	motionIndex: integer = 0
@@ -97,10 +101,10 @@ export class Player
 		var motion = this.motion
 		var motionIndex = this.motionIndex
 
-		DataLoader.getWzSprite(`${headStr}.img/${motion}/${motionIndex}/head`, (imageNode, textureKey) => {
+		DataLoader.getWzSprite(`${headStr}.img/${motion}/${motionIndex}/head`, (headNode, textureKey) => {
 		
-			var headOrigin = Vector.create(imageNode['origin'])
-			var headNeck = Vector.create(imageNode['map']['neck'])
+			var headOrigin = Vector.create(headNode['origin'])
+			var headNeck = Vector.create(headNode['map']['neck'])
 			var bodyNeck = Vector.create(bodyNode['map']['neck'])
 			var pos = {
 				x: - headOrigin.x - headNeck.x + bodyNeck.x, 
@@ -112,9 +116,38 @@ export class Player
 			// 绘制头型
 			this.addPart(textureKey, pos)
 
+			// 判断动作是否是背身，背身不用绘制
+			// 绘制脸型
+			this.loadFace(bodyNode, headNode)
+
 
 		})
 		
+	}
+
+	loadFace(bodyNode, headNode)
+	{
+		const faceStr = padLeft(this.face, 8, '0')
+		var faceAction = this.faceAction
+		// TODO face 动画没处理
+		DataLoader.getWzSprite(`Face/${faceStr}.img/${faceAction}/face`, (imageNode, textureKey) => {
+			var bodyOrigin = Vector.create(bodyNode['origin'])
+			var bodyNeck = Vector.create(bodyNode['map']['neck'])
+			var headNeck = Vector.create(headNode['map']['neck'])
+
+			var headOrigin = Vector.create(headNode['origin'])
+			var faceOrigin = Vector.create(imageNode['origin'])
+			var headBrow = Vector.create(headNode['map']['brow'])
+			var faceBrow = Vector.create(imageNode['map']['brow'])
+			console.log(headBrow, faceBrow)
+			var pos = {
+				x: faceOrigin.x + headNeck.x - bodyNeck.x - headBrow.x + faceBrow.x,
+				y: faceOrigin.y + headNeck.y - bodyNeck.y - headBrow.y + faceBrow.y
+			}
+			pos.x = - pos.x
+			pos.y = - pos.y
+			this.addPart(textureKey, pos)
+		})
 	}
 
 	loadBody()
@@ -149,6 +182,7 @@ export class Player
 			var armOrigin = Vector.create(armNode['origin'])
 			var armNavel = Vector.create(armNode['map']['navel'])
 			var bodyNavel = Vector.create(bodyNode['map']['navel'])
+			// 此处不会有 bodyOrigin，因为 body Origin 就是默认的
 			var pos = {
 				x: bodyNavel.x - armNavel.x - armOrigin.x,
 				y: bodyNavel.y - armNavel.y - armOrigin.y
@@ -178,26 +212,14 @@ export class Player
 			// console.log("load body, find headNode", headNode)
 			var headNeck = Vector.create(headNode["map"]["neck"])
 			var bodyNeck = Vector.create(bodyNode["map"]["neck"])
-			console.log("load body: headNeck=", headNeck)
-			console.log("load body: bodyNeck=", bodyNeck)
 			var pos = {
 				x: (headOrigin.x + headNeck.x) - (bodyOrigin.x + bodyNeck.x), 
 				y: (headOrigin.y + headNeck.y) - (bodyOrigin.y + bodyNeck.y)
 			}
-			console.log("body pos: ", pos)
-
 			this.addPart(textureKey, pos)
-
 		})
 
 
-
-	}
-
-	loadFace(imageNode, headNode, headOrigin)
-	{
-		// TODO 
-		
 
 	}
 
