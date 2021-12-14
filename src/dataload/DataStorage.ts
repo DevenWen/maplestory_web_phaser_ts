@@ -38,7 +38,7 @@ export default class DataLoader {
       if (!imgNode) return 
 
       if (imgNode["loaded"]) {
-        callback(imgNode, imgNode["textureKey"])
+        callback(imgNode, imgNode["textureKey"], imgNode["z"])
         return
       }
       var uri = imgNode["_image"]["uri"]

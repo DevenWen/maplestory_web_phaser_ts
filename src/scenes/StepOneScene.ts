@@ -36,40 +36,44 @@ export default class StepOneScene extends Phaser.Scene
         // this.load.xml("2001", "assets/00002001.img.xml")
         // this.load.xml("12001", "assets/00012001.img.xml")
         // this.dataloader.getDataNode("Base.wz/zmap.img.xml", () => {})
+        this.load.image("platform", "assets/platform.png")
+        this.load.image("penguin", "assets/penguin.png")
     }
 
     create()
     {
-        var data = this.cache.xml.get("2001")
+        // var data = this.cache.xml.get("2001")
+        var p = this.add.image(100, 100, "platform")
+        p.setDepth(1)
+        var q = this.add.image(100, 100, "penguin")
         
 
         // var dataUri = "iVBORw0KGgoAAAANSUhEUgAAAAwAAAARCAYAAADpPU2iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACqSURBVDhPjZJREcQgDEQRh4WzUAu1cBZqAQtYqAUsYCGXDcmRfqSwMzsMZV+atCQWOa9FJROVjxhbdSxqhej+DteDvQblcICXrihwvULQAHtT3wLq81dNsNVtCBrQRmum2d7uPPAKmCEMbdYvp+cPaUhbkfAYnOoZAS78B05/Ex6awc5BWKrj6uQAkL/NQWsF1QWI3iAhhmS16jEAuRBucqYetONlAW9WSj+CuyTqN3dW+QAAAABJRU5ErkJggg=="
         // dataUri = 'data:image/png;base64,' + dataUri
         // this.textures.addBase64('body', dataUri)
 
-        var dataNode = this.getbodyDataNode()
-        var bodyNode = dataNode["body"]
-        var armNode = dataNode["arm"]
-        var headNode = dataNode["head"]
-        var arm = this.addImage("arm", armNode)
-        var body = this.addImage("body", bodyNode)
-        var head = this.addImage("head", headNode)
+        // var dataNode = this.getbodyDataNode()
+        // var bodyNode = dataNode["body"]
+        // var armNode = dataNode["arm"]
+        // var headNode = dataNode["head"]
+        // var arm = this.addImage("arm", armNode)
+        // var body = this.addImage("body", bodyNode)
+        // var head = this.addImage("head", headNode)
 
-        this.add.image(300, 300, "head")
-        this.add.image(300, 400, "body")
-        this.add.image(300, 500, "arm")
+        // this.add.image(300, 300, "head")
+        // this.add.image(300, 400, "body")
+        // this.add.image(300, 500, "arm")
 
 
-        this.add.image(100-16, 100-31, "body").setOrigin(0)
-        this.add.image(100-1, 100-29, "arm").setOrigin(0)
+        // this.add.image(100, 100, "body").setOrigin(0)
         
         // var sprite = new Phaser.GameObjects.Sprite(this, 300, 400, "body")
 
         // var renderTexture = new Phaser.GameObjects.RenderTexture(this, 0, 0, bodyNode["_image"]["width"], bodyNode["_image"]["height"])
 
-        var group = this.add.group()
-        group.create(0, 0, "body")
-        group.create(0, 0, "arm")
+        // var group = this.add.group()
+        // group.create(0, 0, "body")
+        // group.create(0, 0, "arm")
         // group.create(-23, -64, "head")
 
         // group.setXY(0, 0)

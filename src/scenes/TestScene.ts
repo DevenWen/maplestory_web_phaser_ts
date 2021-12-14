@@ -12,6 +12,9 @@ export default class TestScene extends Phaser.Scene
 
     sprite?: Phaser.GameObjects.Sprite
 
+    nextFrame?
+    nextFrameIndex = 0
+
 
     constructor()
     {
@@ -24,12 +27,16 @@ export default class TestScene extends Phaser.Scene
         // 读取 xml 文件
         // 渲染成 image
         // 并打印
-        this.load.image("ground", "assets/platform.png")
+        this.load.image("platform", "assets/platform.png")
         this.load.json("00002000.img", "assets/00002000.img.xml.json")
         this.load.json("00012000.img", "assets/00012000.img.xml.json")
         this.load.json("Face/00020000.img", "assets/Face/00020000.img.xml.json")
         this.load.json("Hair/00030000.img", "assets/Hair/00030000.img.xml.json")
         this.load.json("Cap/01002357.img", "assets/Cap/01002357.img.xml.json")
+        this.load.json("Shoes/01070003.img", "assets/Shoes/01070003.img.xml.json")
+        this.load.json("Longcoat/01050010.img", "assets/Longcoat/01050010.img.xml.json")
+        this.load.json("Weapon/01332076.img", "assets/Weapon/01332076.img.xml.json")
+        this.load.json("zmap", "assets/zmap.img.xml.json")
 
         this.textures.addListener('addtexture', (key) => {
             console.log("loaded texture", key)
@@ -52,6 +59,9 @@ export default class TestScene extends Phaser.Scene
         this.loadImage("Face/00020000.img")
         this.loadImage("Hair/00030000.img")
         this.loadImage("Cap/01002357.img")
+        this.loadImage("Shoes/01070003.img")
+        this.loadImage("Longcoat/01050010.img")
+        this.loadImage("Weapon/01332076.img")
 
         this.player = new Player(this)
 
@@ -75,15 +85,27 @@ export default class TestScene extends Phaser.Scene
 
     update(ts: number)
     {
-        if (this.updateOne) {
-            this.player?.update(ts)
-            // this.updateOne = false
+       
+
+        if (!this.nextFrame) {
+            this.nextFrame = ts + 160
+            return
+        }
+        if (this.nextFrame > ts) {
+            return 
         }
 
-        // if (this.sprite)
-        //     this.sprite.destroy()
+        this.nextFrame = ts + 160
+        if (this.nextFrameIndex >= 3) {
+            this.nextFrameIndex = 0
+        } else {
+            this.nextFrameIndex ++
+        }
 
-        // this.sprite = this.add.sprite(400, 400, "demo").setOrigin(0)
+        if (this.player) {
+            this.player.motionIndex = this.nextFrameIndex
+            this.player.update(ts)
+        }
     }
 
 
