@@ -29,6 +29,7 @@ export default class TestScene extends Phaser.Scene
         this.load.json("00012000.img", "assets/00012000.img.xml.json")
         this.load.json("Face/00020000.img", "assets/Face/00020000.img.xml.json")
         this.load.json("Hair/00030000.img", "assets/Hair/00030000.img.xml.json")
+        this.load.json("Cap/01002357.img", "assets/Cap/01002357.img.xml.json")
 
         this.textures.addListener('addtexture', (key) => {
             console.log("loaded texture", key)
@@ -50,6 +51,7 @@ export default class TestScene extends Phaser.Scene
         this.loadImage("00012000.img")
         this.loadImage("Face/00020000.img")
         this.loadImage("Hair/00030000.img")
+        this.loadImage("Cap/01002357.img")
 
         this.player = new Player(this)
 

@@ -1,8 +1,5 @@
-import { addComponent } from "bitecs";
 import { padLeft } from "~/dataload/dataloader"
 import DataLoader from "~/dataload/DataStorage"
-import game from '~/main'
-import TestScene from "~/scenes/TestScene";
 
 class Vector {
 	x;y;
@@ -14,6 +11,16 @@ class Vector {
 	}
 }
 
+enum PlayerPart {
+	BODY = 0,
+	ARM = 1,
+	HEAD = 2,
+	HAIR1 = 3,
+	HAIR2 = 4,
+	CAP = 5,
+	FACE = 6
+}
+
 export class Player
 {
 	// 玩家类型
@@ -22,6 +29,7 @@ export class Player
 	body = 2000
 	face = 20000
 	hair = 30000
+	cap = 1002357
 
 	// TODO 此处后期需要模块化眼睛的
 	faceAction = "default"
@@ -38,6 +46,9 @@ export class Player
 
 	// attackTypes
 
+
+	// 对各个部位进行索引
+	parts = []
 
 	// gameObject group 用于绘制
 	container: Phaser.GameObjects.Container
@@ -91,12 +102,20 @@ export class Player
 
 	}
 
-	addPart(texture, pos) {
+	addPart(texture, pos, part: PlayerPart) {
 		console.debug(`add texture ${texture} pos`, pos)
-		this.container.add(
-			this.scene.add.sprite(pos.x, pos.y + 32, texture).setOrigin(0)
-			// this.scene.add.blitter(pos.x, pos.y, texture)
-		)
+		var sprite = this.scene.add.sprite(pos.x, pos.y + 32, texture).setOrigin(0)
+		this.container.add(sprite)
+		this.parts[part] = sprite
+	}
+
+	destroyPart(part: PlayerPart) 
+	{
+		if (this.parts[part])
+		{
+			var sprite = this.parts[part]
+			this.container.remove(sprite)
+		}
 	}
 
 	loadHead(bodyNode)
@@ -118,16 +137,70 @@ export class Player
 			// FIXME 这种通过大量创建 Sprite，然后销毁的方式会引起比较大的性能消耗，是否可以考虑生成纸娃娃的所有动作数据，然后直接被使用。
 			// 这样的好处是生成一次动画，可以被重复使用。Think about it
 			// 绘制头型
-			this.addPart(textureKey, pos)
+			this.addPart(textureKey, pos, PlayerPart.HEAD)
 
 			// 判断动作是否是背身，背身不用绘制
 			// 绘制脸型
 			this.loadFace(bodyNode, headNode)
 			this.loadHair1(bodyNode, headNode)
-
+			this.loadHair2(bodyNode, headNode)
+			this.loadCap(bodyNode, headNode)
 
 		})
 		
+	}
+
+	loadCap(bodyNode, headNode)
+	{
+		// TODO 渲染帽子，同时需要隐藏头发
+		if (-1 == this.cap)
+		{
+			return;
+		}
+		var capStr = padLeft(this.cap, 8, '0');
+		var motion = this.motion
+		var motionIndex = this.motionIndex
+		DataLoader.getWzNode(`Cap/${capStr}.img`, capRoot => {
+			let overType = capRoot["info"]["vslot"]
+			// TODO 整体的顺序可以参考 zmap
+			switch(overType)
+			{
+				case "CpH5":
+					// TODO 在头发最下面，不遮挡头发,层次调整最下面
+					break
+				case "CpH1H5":
+					// TODO 
+					break
+				default:
+					// TODO 删除头发1
+					// TODO 删除头发2
+					this.destroyPart(PlayerPart.HAIR1)
+					this.destroyPart(PlayerPart.HAIR2)
+					break
+			}
+		})
+
+		DataLoader.getWzSprite(`Cap/${capStr}.img/${motion}/${motionIndex}/default`, (capRoot, textureKey) => {
+			var bodyNeck = Vector.create(bodyNode['map']['neck'])
+			var headNeck = Vector.create(headNode['map']['neck'])
+
+			var origin = Vector.create(capRoot['origin'])
+			var headBrow = Vector.create(headNode['map']['brow'])
+			var brow = Vector.create(capRoot['map']['brow'])
+			var pos = {
+				x: origin.x + headNeck.x - bodyNeck.x - headBrow.x + brow.x,
+				y: origin.y + headNeck.y - bodyNeck.y - headBrow.y + brow.y
+			}
+			pos.x = - pos.x
+			pos.y = - pos.y
+			this.addPart(textureKey, pos, PlayerPart.CAP)
+		})
+	}
+
+	loadHair2(bodyNode, headNode)
+	{
+		// TODO 
+
 	}
 
 	loadHair1(bodyNode, headNode)
@@ -135,7 +208,7 @@ export class Player
 		var hairStr = padLeft(this.hair, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		// 注意区分背面，正面的差异
+		// TODO 注意区分背面，正面的差异
 		DataLoader.getWzSprite(`Hair/${hairStr}.img/${motion}/${motionIndex}/hair`, (hairNode, textureKey) => {
 			// TODO 不一定是 hair，还有多种 hair
 			// console.log(hairNode)
@@ -152,7 +225,7 @@ export class Player
 			}
 			pos.x = - pos.x
 			pos.y = - pos.y
-			this.addPart(textureKey, pos)
+			this.addPart(textureKey, pos, PlayerPart.HAIR1)
 
 
 		})
@@ -180,7 +253,7 @@ export class Player
 			}
 			pos.x = - pos.x
 			pos.y = - pos.y
-			this.addPart(textureKey, pos)
+			this.addPart(textureKey, pos, PlayerPart.FACE)
 		})
 	}
 
@@ -195,7 +268,7 @@ export class Player
 				x: - bodyOrigin.x,
 				y: - bodyOrigin.y
 			}
-			this.addPart(textureKey, pos)
+			this.addPart(textureKey, pos, PlayerPart.BODY)
 
 			// 绘制手臂
 			this.loadArm(bodyNode)
@@ -221,41 +294,14 @@ export class Player
 				x: bodyNavel.x - armNavel.x - armOrigin.x,
 				y: bodyNavel.y - armNavel.y - armOrigin.y
 			}
-			this.addPart(textureKey, pos)
+			this.addPart(textureKey, pos, PlayerPart.ARM)
+
+			// TODO 加上 CoatArm 
 		})
 
 	}
 
 
-
-	/**
-	 * 
-	 * @param headRoot 
-	 * @param headOrigin 
-	 * @param bodyRoot 
-	 */
-	playbodyAnimate(headRoot, headOrigin, bodyRoot)
-	{
-		var bodyStr = padLeft(this.body, 8, '0')
-		var motion = this.motion
-		var motionIndex = this.motionIndex
-		DataLoader.getWzSprite(`${bodyStr}.img/${motion}/${motionIndex}/body`, (bodyNode, textureKey) => {
-			// console.log("load body string ", imageNode)
-			var bodyOrigin = Vector.create(bodyNode["origin"])
-			var headNode = headRoot[motion][`${motionIndex}`]["head"].node()
-			// console.log("load body, find headNode", headNode)
-			var headNeck = Vector.create(headNode["map"]["neck"])
-			var bodyNeck = Vector.create(bodyNode["map"]["neck"])
-			var pos = {
-				x: (headOrigin.x + headNeck.x) - (bodyOrigin.x + bodyNeck.x), 
-				y: (headOrigin.y + headNeck.y) - (bodyOrigin.y + bodyNeck.y)
-			}
-			this.addPart(textureKey, pos)
-		})
-
-
-
-	}
 
 
 
