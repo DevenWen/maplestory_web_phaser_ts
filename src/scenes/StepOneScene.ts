@@ -39,13 +39,37 @@ export default class StepOneScene extends Phaser.Scene
         this.load.image("platform", "assets/platform.png")
         this.load.image("penguin", "assets/penguin.png")
     }
+    
+    container!: Phaser.GameObjects.Container
+
+    update(ts: number)
+    {
+        this.container.removeAll()
+        var p = this.add.sprite(100, 100, "platform")
+        var q = this.add.sprite(100, 100, "penguin")
+        p.setDepth(10)
+        q.setDepth(11)
+        this.container.addAt(p)
+        this.container.addAt(q)
+        // this.container.moveTo(p, 10)
+        // this.container.moveTo(q, 2)
+        // this.container.bringToTop(p)
+        this.container.list.sort((s1, s2) => s1.depth - s2.depth)
+    }
 
     create()
     {
+        this.container = this.add.container()
+        
         // var data = this.cache.xml.get("2001")
-        var p = this.add.image(100, 100, "platform")
-        p.setDepth(1)
-        var q = this.add.image(100, 100, "penguin")
+        // var p = this.add.sprite(100, 100, "platform")
+        // var q = this.add.sprite(100, 100, "penguin")
+        // this.container.addAt(p, 10)
+        // this.container.addAt(q, 1)
+        // this.container.moveUp(p)
+        // this.container.moveUp(q)
+        // this.container.moveTo()
+        
         
 
         // var dataUri = "iVBORw0KGgoAAAANSUhEUgAAAAwAAAARCAYAAADpPU2iAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACqSURBVDhPjZJREcQgDEQRh4WzUAu1cBZqAQtYqAUsYCGXDcmRfqSwMzsMZV+atCQWOa9FJROVjxhbdSxqhej+DteDvQblcICXrihwvULQAHtT3wLq81dNsNVtCBrQRmum2d7uPPAKmCEMbdYvp+cPaUhbkfAYnOoZAS78B05/Ex6awc5BWKrj6uQAkL/NQWsF1QWI3iAhhmS16jEAuRBucqYetONlAW9WSj+CuyTqN3dW+QAAAABJRU5ErkJggg=="

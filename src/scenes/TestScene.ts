@@ -8,7 +8,7 @@ export default class TestScene extends Phaser.Scene
 
     player?: Player
     
-    updateOne: boolean = true
+    updated: boolean = false
 
     sprite?: Phaser.GameObjects.Sprite
 
@@ -102,9 +102,10 @@ export default class TestScene extends Phaser.Scene
             this.nextFrameIndex ++
         }
 
-        if (this.player) {
+        if (this.player && !this.updated) {
             this.player.motionIndex = this.nextFrameIndex
             this.player.update(ts)
+            // this.updated = true
         }
     }
 

@@ -38,8 +38,8 @@ export class Player
 	body = 2000
 	face = 20000
 	hair = 30000
-	// cap = 1002357
-	cap = -1
+	cap = 1002357
+	// cap = -1
 	shoes = 1070003
 	longcoat = 1050010
 	weapon = 1332076
@@ -101,27 +101,25 @@ export class Player
 		// 清理这个角色的 group 对象
 		this.container.removeAll(true)
 		this.loadAll()
+		this.container.list.sort((s1, s2) => s2.depth - s1.depth)
 	}
 
 	loadAll()
 	{
-		// 无武器状态
 		this.loadBody()
 	}
 
-	addPart(texture, pos, part: PlayerPart, z: string, depth?: number) {
-		depth = 200 - this.zmap.indexOf(z)
-
-		var sprite = this.scene.add.sprite(pos.x, pos.y + 32, texture).setOrigin(0)
-		if (depth)
-			// FIXME depth 并没有生效
-			sprite.setDepth(depth)
+	addPart(texture, pos, part: PlayerPart, z: string) {
+		var depth = this.zmap.indexOf(z)
+		var sprite = this.scene.add.sprite(pos.x, pos.y+32, texture).setOrigin(0)
+		sprite.setDepth(depth)
 		this.container.addAt(sprite, part)
 	}
 
 	destroyPart(part: PlayerPart) 
 	{
-		this.container.removeAt(part)
+		if (this.container.getAt(part))
+			this.container.removeAt(part)
 	}
 
 	loadHead(bodyNode)
@@ -317,7 +315,7 @@ export class Player
 			}
 			pos.x = - pos.x
 			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.WEAPON, z, 10)
+			this.addPart(textureKey, pos, PlayerPart.WEAPON, z)
 		})
 
 		
@@ -409,7 +407,7 @@ export class Player
 				x: bodyNavel.x - armNavel.x - armOrigin.x,
 				y: bodyNavel.y - armNavel.y - armOrigin.y
 			}
-			this.addPart(textureKey, pos, PlayerPart.ARM, z, 1)
+			this.addPart(textureKey, pos, PlayerPart.ARM, z)
 
 			// TODO 加上 CoatArm
 
