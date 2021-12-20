@@ -1,22 +1,15 @@
-import { GameObjects } from "phaser";
+import MatterJS from 'matter'
+import { Game, GameObjects } from "phaser";
 import { padLeft } from "~/dataload/dataloader"
-import DataLoader from "~/dataload/DataStorage"
+import {Vector, DataLoader} from "~/dataload/DataStorage"
 
-class Vector {
-	x;y;
-
-	static create(wz_vector) {
-		var r = new Vector()
-		r.x = wz_vector["X"]; r.y = wz_vector["Y"]
-		return r
-	}
-}
 
 enum Action {
 	// TODO 列举所有的 Action
 }
 
 enum PlayerPart {
+	NONE = -1,
 	BODY = 0,
 	ARM = 1,
 	HEAD = 2,
@@ -29,6 +22,8 @@ enum PlayerPart {
 	MAILARM = 9,
 	WEAPON = 10
 }
+
+function autoAddPart()
 
 export class Player
 {
@@ -56,14 +51,13 @@ export class Player
 	// attackTypes
 	flip = false
 
-
 	// 对各个部位进行索引
-	parts = []
+	parts: Map<String, Phaser.GameObjects.Sprite> = new Map()
 
 	// gameObject group 用于绘制
 	container: Phaser.GameObjects.Container
 	scene: Phaser.Scene
-
+	mapCache = {}
 	zmap = []
 
 
@@ -95,11 +89,26 @@ export class Player
 		this.reloadAll()
 	}
 
+	initMapCache() 
+	{
+		this.mapCache = {}
+		var vector = Vector.init()
+		this.mapCache["head/brow"] = vector
+		this.mapCache["head/neck"] = vector
+		this.mapCache["body/neck"] = vector
+		this.mapCache["body/hand"] = vector
+		this.mapCache["body/navel"] = vector
+		this.mapCache["arm/navel"] = vector
+		this.mapCache["arm/hand"] = vector
+		this.mapCache["lhandmove"] = vector
+	}
+
 	reloadAll()
 	{
 		this.isPlayerOneTime = false
 		// 清理这个角色的 group 对象
 		this.container.removeAll(true)
+		this.initMapCache()
 		this.loadAll()
 		this.container.list.sort((s1, s2) => s2.depth - s1.depth)
 	}
@@ -107,53 +116,43 @@ export class Player
 	loadAll()
 	{
 		this.loadBody()
+		this.loadHead()
+		this.loadFace()
+		this.loadHair()
+		this.loadCap()
+		this.loadLongcoat()
+		this.loadShoes()
+		this.loadWeapon()
 	}
 
-	addPart(texture, pos, part: PlayerPart, z: string) {
+	addPart(texture, pos, z: string) {
 		var depth = this.zmap.indexOf(z)
 		var sprite = this.scene.add.sprite(pos.x, pos.y+32, texture).setOrigin(0)
 		sprite.setDepth(depth)
-		this.container.addAt(sprite, part)
+		this.container.add(sprite)
+		this.parts.set(z, sprite)
 	}
 
-	destroyPart(part: PlayerPart) 
+	destroyPart(z: string) 
 	{
-		if (this.container.getAt(part))
-			this.container.removeAt(part)
+		if (this.parts.has(z)) {
+			let sprite = this.parts.get(z) as Phaser.GameObjects.GameObject
+			this.container.remove(sprite, true)
+		}
 	}
 
-	loadHead(bodyNode)
+	loadHead()
 	{
 		const headStr = padLeft(this.head, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-
-		DataLoader.getWzSprite(`${headStr}.img/${motion}/${motionIndex}/head`, (headNode, textureKey, z) => {
-		
-			var headOrigin = Vector.create(headNode['origin'])
-			var headNeck = Vector.create(headNode['map']['neck'])
-			var bodyNeck = Vector.create(bodyNode['map']['neck'])
-			var pos = {
-				x: - headOrigin.x - headNeck.x + bodyNeck.x, 
-				y: -(headOrigin.y + headNeck.y - bodyNeck.y)
-			}
-
-			// FIXME 这种通过大量创建 Sprite，然后销毁的方式会引起比较大的性能消耗，是否可以考虑生成纸娃娃的所有动作数据，然后直接被使用。
-			// 这样的好处是生成一次动画，可以被重复使用。Think about it
-			// 绘制头型
-			this.addPart(textureKey, pos, PlayerPart.HEAD, z)
-
-			// 判断动作是否是背身，背身不用绘制
-			// 绘制脸型
-			this.loadFace(bodyNode, headNode)
-			this.loadHair1(bodyNode, headNode)
-			this.loadHair2(bodyNode, headNode)
-			this.loadCap(bodyNode, headNode)
+		DataLoader.listWzSprite(`${headStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
-		
 	}
 
-	loadCap(bodyNode, headNode)
+	loadCap()
 	{
 		// TODO 渲染帽子，同时需要隐藏头发
 		if (-1 == this.cap)
@@ -177,86 +176,36 @@ export class Player
 				default:
 					// 删除头发1
 					// 删除头发2
-					this.destroyPart(PlayerPart.HAIR1)
-					this.destroyPart(PlayerPart.HAIR2)
+					this.destroyPart("hair")
+					this.destroyPart("hairOverHead")
 					break
 			}
 		})
-
-		DataLoader.getWzSprite(`Cap/${capStr}.img/${motion}/${motionIndex}/default`, (capRoot, textureKey, z) => {
-			var bodyNeck = Vector.create(bodyNode['map']['neck'])
-			var headNeck = Vector.create(headNode['map']['neck'])
-
-			var origin = Vector.create(capRoot['origin'])
-			var headBrow = Vector.create(headNode['map']['brow'])
-			var brow = Vector.create(capRoot['map']['brow'])
-			var pos = {
-				x: origin.x + headNeck.x - bodyNeck.x - headBrow.x + brow.x,
-				y: origin.y + headNeck.y - bodyNeck.y - headBrow.y + brow.y
-			}
-			pos.x = - pos.x
-			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.CAP, z)
+		DataLoader.listWzSprite(`Cap/${capStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
 	}
 
-	loadHair2(bodyNode, headNode)
-	{
-		// TODO 
-
-	}
-
-	loadHair1(bodyNode, headNode)
+	loadHair()
 	{
 		var hairStr = padLeft(this.hair, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		// TODO 注意区分背面，正面的差异
-		DataLoader.getWzSprite(`Hair/${hairStr}.img/${motion}/${motionIndex}/hair`, (hairNode, textureKey, z) => {
-			// TODO 不一定是 hair，还有多种 hair
-			// console.log(hairNode)
-			// brow 类型的偏移
-			var bodyNeck = Vector.create(bodyNode['map']['neck'])
-			var headNeck = Vector.create(headNode['map']['neck'])
-
-			var origin = Vector.create(hairNode['origin'])
-			var headBrow = Vector.create(headNode['map']['brow'])
-			var brow = Vector.create(hairNode['map']['brow'])
-			var pos = {
-				x: origin.x + headNeck.x - bodyNeck.x - headBrow.x + brow.x,
-				y: origin.y + headNeck.y - bodyNeck.y - headBrow.y + brow.y
-			}
-			pos.x = - pos.x
-			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.HAIR1, z)
-
-
+		DataLoader.listWzSprite(`Hair/${hairStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
-
-
 	}
 
-	loadFace(bodyNode, headNode)
+	loadFace()
 	{
 		const faceStr = padLeft(this.face, 8, '0')
 		var faceAction = this.faceAction
-		// TODO face 动画没处理
-		DataLoader.getWzSprite(`Face/${faceStr}.img/${faceAction}/face`, (imageNode, textureKey, z) => {
-			var bodyOrigin = Vector.create(bodyNode['origin'])
-			var bodyNeck = Vector.create(bodyNode['map']['neck'])
-			var headNeck = Vector.create(headNode['map']['neck'])
 
-			var headOrigin = Vector.create(headNode['origin'])
-			var faceOrigin = Vector.create(imageNode['origin'])
-			var headBrow = Vector.create(headNode['map']['brow'])
-			var faceBrow = Vector.create(imageNode['map']['brow'])
-			var pos = {
-				x: faceOrigin.x + headNeck.x - bodyNeck.x - headBrow.x + faceBrow.x,
-				y: faceOrigin.y + headNeck.y - bodyNeck.y - headBrow.y + faceBrow.y
-			}
-			pos.x = - pos.x
-			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.FACE, z)
+		DataLoader.listWzSprite(`Face/${faceStr}.img/${faceAction}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
 	}
 
@@ -265,36 +214,13 @@ export class Player
 		var bodyStr = padLeft(this.body, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.getWzSprite(`${bodyStr}.img/${motion}/${motionIndex}/body`, (bodyNode, textureKey, z) => {
-			var bodyOrigin = Vector.create(bodyNode['origin'])
-			var pos = {
-				x: - bodyOrigin.x,
-				y: - bodyOrigin.y
-			}
-			this.addPart(textureKey, pos, PlayerPart.BODY, z)
-
-			// 绘制手臂
-			this.loadArm(bodyNode)
-
-			// 绘制鞋子
-			this.loadShoes(bodyNode)
-
-			// 绘制裤子
-			this.loadPants(bodyNode)
-			// 绘制上衣
-			this.loadCoat(bodyNode)
-			// 绘制长 Coat
-			this.loadLongcoat(bodyNode)
-
-			
-
-			// 绘制头部
-			this.loadHead(bodyNode)
+		DataLoader.listWzSprite(`${bodyStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
-
 	}
 
-	loadWeapon(bodyNode, armNode)
+	loadWeapon()
 	{
 		if (-1 == this.weapon) 
 		{
@@ -303,25 +229,13 @@ export class Player
 		var imgStr = padLeft(this.weapon, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.getWzSprite(`Weapon/${imgStr}.img/${motion}/${motionIndex}/weapon`, (node, textureKey, z) => {
-			var origin = Vector.create(node['origin'])
-			var bodyNavel = Vector.create(bodyNode['map']['navel'])
-			var hand = Vector.create(node['map']['hand'])
-			var armHand = Vector.create(armNode['map']['hand'])
-			var armNavel = Vector.create(armNode['map']['navel'])
-			var pos = {
-				x: origin.x + hand.x + armNavel.x - armHand.x - bodyNavel.x,
-				y: origin.y + hand.y + armNavel.y - armHand.y - bodyNavel.y
-			}
-			pos.x = - pos.x
-			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.WEAPON, z)
+		DataLoader.listWzSprite(`Weapon/${imgStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
-
-		
 	}
 
-	loadLongcoat(bodyNode)
+	loadLongcoat()
 	{
 		if (-1 == this.longcoat)
 		{
@@ -330,97 +244,34 @@ export class Player
 		var imgStr = padLeft(this.longcoat, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.getWzSprite(`Longcoat/${imgStr}.img/${motion}/${motionIndex}/mail`, (node, textureKey, z) => {
-			var origin = Vector.create(node['origin'])
-			var bodyNavel = Vector.create(bodyNode['map']['navel'])
-			var navel = Vector.create(node['map']['navel'])
-			var pos = {
-				x: origin.x + navel.x - bodyNavel.x,
-				y: origin.y + navel.y - bodyNavel.y
-			}
-			pos.x = - pos.x
-			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.LONGCOAT, z)
-		})
-
-		DataLoader.getWzSprite(`Longcoat/${imgStr}.img/${motion}/${motionIndex}/mailArm`, (node, textureKey, z) => {
-			var origin = Vector.create(node['origin'])
-			var bodyNavel = Vector.create(bodyNode['map']['navel'])
-			var navel = Vector.create(node['map']['navel'])
-			var pos = {
-				x: origin.x + navel.x - bodyNavel.x,
-				y: origin.y + navel.y - bodyNavel.y
-			}
-			pos.x = - pos.x
-			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.MAILARM, z)
+		DataLoader.listWzSprite(`Longcoat/${imgStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
 	}
 
-	loadCoat(bodyNode)
+	loadCoat()
 	{
 		// TODO
 	}
 
-	loadPants(bodyNode)
+	loadPants()
 	{
 		// TODO
 	}
 
-	loadShoes(bodyNode)
+	loadShoes()
 	{
 		if (this.shoes == -1)
 		{
 			return;
 		}
-
 		var shoesStr = padLeft(this.shoes, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.getWzSprite(`Shoes/${shoesStr}.img/${motion}/${motionIndex}/shoes`, (node, textureKey, z) => {
-			var origin = Vector.create(node['origin'])
-			var bodyNavel = Vector.create(bodyNode['map']['navel'])
-			var navel = Vector.create(node['map']['navel'])
-			var pos = {
-				x: origin.x + navel.x - bodyNavel.x,
-				y: origin.y + navel.y - bodyNavel.y
-			}
-			pos.x = - pos.x
-			pos.y = - pos.y
-			this.addPart(textureKey, pos, PlayerPart.SHOES, z)
-
+		DataLoader.listWzSprite(`Shoes/${shoesStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
 		})
-
 	}
-
-	loadArm(bodyNode)
-	{
-		var bodyStr = padLeft(this.body, 8, '0')
-		var motion = this.motion
-		var motionIndex = this.motionIndex
-		DataLoader.getWzSprite(`${bodyStr}.img/${motion}/${motionIndex}/arm`, (armNode, textureKey, z) => {
-			var armOrigin = Vector.create(armNode['origin'])
-			var armNavel = Vector.create(armNode['map']['navel'])
-			var bodyNavel = Vector.create(bodyNode['map']['navel'])
-			// 此处不会有 bodyOrigin，因为 body Origin 就是默认的
-			var pos = {
-				x: bodyNavel.x - armNavel.x - armOrigin.x,
-				y: bodyNavel.y - armNavel.y - armOrigin.y
-			}
-			this.addPart(textureKey, pos, PlayerPart.ARM, z)
-
-			// TODO 加上 CoatArm
-
-			// 绘制武器
-			this.loadWeapon(bodyNode, armNode)
-		})
-
-	}
-
-
-
-
-
-	
-
 }
