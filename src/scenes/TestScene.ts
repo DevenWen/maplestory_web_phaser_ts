@@ -95,7 +95,7 @@ export default class TestScene extends Phaser.Scene
             return 
         }
 
-        this.nextFrame = ts + 160
+        this.nextFrame = ts + 180
         if (this.nextFrameIndex >= 3) {
             this.nextFrameIndex = 0
         } else {
