@@ -9,11 +9,17 @@
 - [ ] 地图解析与封装
 - [ ] UI解析
 - [ ] 寻找 wz 文件转 json 文件的办法，现在的资源都比较有限，需要规模地完成转化，并通过后端服务器进行资源服务。
+- [ ] 网络同步方案
+	- [ ] 了解 Elixir Phoenix 
 
 ## 2021-12-21
 * 重构角色素材粘贴相关的工作，代码量减少，下一步是设计角色动作解析器。关于这个，我是这样理解的：
 1. 允许输入一个序列的 action/frame/delay ，角色将会通过此序列进行播放动作。
 2. 这种序列分循环序列、单个序列、一次性序列
+
+## 2021-12-20
+* 这两天在关于网络同步的方案，发现 Elixir 的 Phoenix 也适用此同步方案，github 上有类似的 [demo 项目](https://github.com/sergioaugrod/uai_shot)。要完成这部分的工作，需要调研一下 Phoenix 框架。
+* 另外 Youtube 上也有类似的介绍，这是 2016 年的 Elixir 大会上的[分享](https://www.youtube.com/watch?v=I5L9_cXwBcU)，里面也提到了目前同步方案可能带来的超量广播问题，这个可以通过控制服务端的同步频率来解决。
 
 ## 2021-12-18
 * 今天早上主要解决 zmap 的拼接顺序问题，发现在使用了 Phaser 的 container 后，Sprite 的 depth 是不能使用的。论坛上有[相关的讨论](https://phaser.discourse.group/t/container-sorting/4479)，最终在里面找到了答案。改用在 update 后进行一次 depth 的 sort 对 container 内的 sprite 做一次排序，就可以完成素材层次上的粘贴了。
