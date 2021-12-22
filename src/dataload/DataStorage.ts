@@ -29,7 +29,9 @@ export class Vector {
   }
 }
 
-export class DataLoader {
+
+
+export class DataLoader extends Phaser.Events.EventEmitter {
   /**
    * 获取路径上的节点，并执行回调
    * @param key 
@@ -46,9 +48,24 @@ export class DataLoader {
     var path = key.substr(0, imgpos + 4);
     var subelements = key.substr(imgpos + 5);
 
-    // FIXME 保证 cache 中含有这个 cache，此处有可能是失败的
+    // 保证 cache 中含有这个 cache，此处有可能是失败的
     var img_db = game.cache.obj.get(path)
-    callback(getElementFromJSONAuto(img_db, subelements))
+    // 假如没有缓存，则发起一次远程资源请求；
+    if (img_db == "loading") {
+      return
+    }
+    if (img_db) {
+      callback(getElementFromJSONAuto(img_db, subelements))
+    } else {
+      game.cache.obj.add(path, "loading")
+      // FIXME 后期需要改用动态配置的形式
+      axios.get("remote/" + path + ".xml.json")
+        .then(data => {
+                console.log("load finish", path, data.status)
+                var db = reparseTreeAsNodes(data.data)
+                game.cache.obj.add(path, db)
+        })
+    }
   }
 
 
@@ -74,9 +91,6 @@ export class DataLoader {
       callback(imgNode, textureKey, imgNode["z"])
     })
   }
-
-  
-
 
   static listWzSprite(key, callback) {
     this.getWzNode(key, (imgNode) => {

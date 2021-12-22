@@ -23,7 +23,6 @@ enum PlayerPart {
 	WEAPON = 10
 }
 
-function autoAddPart()
 
 export class Player
 {
@@ -33,11 +32,11 @@ export class Player
 	body = 2000
 	face = 20000
 	hair = 30000
-	cap = 1002357
+	cap = 1000000
 	// cap = -1
 	shoes = 1070003
 	longcoat = 1050010
-	weapon = 1332076
+	weapon = 1302000
 
 	// TODO 此处后期需要模块化眼睛的
 	faceAction = "default"
@@ -146,7 +145,7 @@ export class Player
 		const headStr = padLeft(this.head, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.listWzSprite(`${headStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/${headStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
@@ -162,7 +161,7 @@ export class Player
 		var capStr = padLeft(this.cap, 8, '0');
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.getWzNode(`Cap/${capStr}.img`, capRoot => {
+		DataLoader.getWzNode(`Character/Cap/${capStr}.img`, capRoot => {
 			let overType = capRoot["info"]["vslot"]
 			// TODO 整体的顺序可以参考 zmap
 			switch(overType)
@@ -181,7 +180,7 @@ export class Player
 					break
 			}
 		})
-		DataLoader.listWzSprite(`Cap/${capStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/Cap/${capStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
@@ -192,7 +191,7 @@ export class Player
 		var hairStr = padLeft(this.hair, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.listWzSprite(`Hair/${hairStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/Hair/${hairStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
@@ -203,7 +202,7 @@ export class Player
 		const faceStr = padLeft(this.face, 8, '0')
 		var faceAction = this.faceAction
 
-		DataLoader.listWzSprite(`Face/${faceStr}.img/${faceAction}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/Face/${faceStr}.img/${faceAction}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
@@ -214,7 +213,7 @@ export class Player
 		var bodyStr = padLeft(this.body, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.listWzSprite(`${bodyStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/${bodyStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
@@ -229,7 +228,7 @@ export class Player
 		var imgStr = padLeft(this.weapon, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.listWzSprite(`Weapon/${imgStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/Weapon/${imgStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
@@ -244,7 +243,7 @@ export class Player
 		var imgStr = padLeft(this.longcoat, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.listWzSprite(`Longcoat/${imgStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/Longcoat/${imgStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
@@ -269,7 +268,7 @@ export class Player
 		var shoesStr = padLeft(this.shoes, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
-		DataLoader.listWzSprite(`Shoes/${shoesStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
+		DataLoader.listWzSprite(`Character/Shoes/${shoesStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
