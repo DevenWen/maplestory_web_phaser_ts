@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 放弃使用国服 180+ 的版本，因为里面的资源实在太大了，感觉很多资源都是无效的
 - 将资源的访问统一的到其他静态资源服务器上，客户端变得更加轻量级
 ### Added 
-- 079 客户端版本的资源转换方案，同学们可以自己下载 079 的客户端，然后通过简单的[脚本]("./xmlchanger.js")，将 xml 文件，适配本项目需要的 json 文件
+- 079 客户端版本的资源转换方案，同学们可以自己下载 079 的客户端，然后通过简单的[脚本](./xmlchanger.js)，将 xml 文件，适配本项目需要的 json 文件
 ### Removed 
 - 删除一些旧的测试代码
 
