@@ -1,4 +1,4 @@
-## TODO list
+# Todo list
 
 - [ ] 理解角色素材的拼接算法进度 80%
 	- [x] zmap 的素材层次
@@ -11,6 +11,16 @@
 - [ ] 寻找 wz 文件转 json 文件的办法，现在的资源都比较有限，需要规模地完成转化，并通过后端服务器进行资源服务。
 - [ ] 网络同步方案
 	- [ ] 了解 Elixir Phoenix 
+
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.0.1] - 2021-12-22 
+### Added
+- 初始化 Changelog
 
 ## 2021-12-21
 * 重构角色素材粘贴相关的工作，代码量减少，下一步是设计角色动作解析器。关于这个，我是这样理解的：
