@@ -24,12 +24,12 @@ enum PlayerPart {
 }
 
 
-export class Player
+export class Player extends Phaser.GameObjects.Container implements Phaser.GameObjects.Components.Flip
 {
 	// 玩家类型
 	skin = 0
 	head = 12000
-	body = 2000
+	body_ = 2000
 	face = 20000
 	hair = 30000
 	cap = 1000000
@@ -44,41 +44,61 @@ export class Player
 	// TODO 动作帧
 	motion: string = "walk1"
 	motionIndex: integer = 0
-
 	isPlayerOneTime: boolean = false
 
 	// attackTypes
-	flip = false
 
 	// 对各个部位进行索引
 	parts: Map<String, Phaser.GameObjects.Sprite> = new Map()
 
 	// gameObject group 用于绘制
-	container: Phaser.GameObjects.Container
+	// container: Phaser.GameObjects.Container
 	scene: Phaser.Scene
 	mapCache = {}
 	zmap = []
 
-
-	init()
-	{
-
-	}
-
 	constructor(scene: Phaser.Scene) {
-		this.container = scene.add.container(400,300) // TODO Player localtion, 后面会修改
+		super(scene)
+		this.setSize(32, 64)
 		this.scene = scene
 		this.zmap = scene.cache.json.get("zmap")["_keys"]
 	}
 
-	setPos(x, y)
-	{
-		this.container.setX(x)
-		this.container.setY(y)
+	flipX: boolean = true;
+	flipY: boolean = false; // no use
+	
+	toggleFlipX(): this {
+		this.flipX = !this.flipX
+		return this
+	}
+	toggleFlipY(): this {
+		return this
+	}
+	setFlipX(value: boolean): this {
+		this.flipX = value
+		return this	
+	}
+	setFlipY(value: boolean): this {
+		return this
+	}
+	setFlip(x: boolean, y: boolean): this {
+		this.flipX = x
+		return this
+	}
+	resetFlip(): this {
+		this.flipX = false
+		return this
 	}
 
-	update(ts)
+	nextTs = 0
+
+	update(ts: number)
 	{
+		if (this.nextTs > ts) {
+			return
+		}
+		// 控制刷新率
+		this.nextTs = ts + 60
 		// TODO
 		this.changeMotion(this.motion, true)
 	}
@@ -106,10 +126,10 @@ export class Player
 	{
 		this.isPlayerOneTime = false
 		// 清理这个角色的 group 对象
-		this.container.removeAll(true)
+		this.removeAll(true)
 		this.initMapCache()
 		this.loadAll()
-		this.container.list.sort((s1, s2) => s2.depth - s1.depth)
+		this.list.sort((s1, s2) => s2.depth - s1.depth)
 	}
 
 	loadAll()
@@ -126,9 +146,17 @@ export class Player
 
 	addPart(texture, pos, z: string) {
 		var depth = this.zmap.indexOf(z)
-		var sprite = this.scene.add.sprite(pos.x, pos.y+32, texture).setOrigin(0)
-		sprite.setDepth(depth)
-		this.container.add(sprite)
+		const flip_ = this.flipX ? -1 : 1
+		// 这是用来调整的3个像素点
+		const adjx = this.flipX ? -3 : 0
+
+		var sprite = this.scene.add.sprite(pos.x * flip_ + adjx, pos.y+32, texture)
+			.setFlipX(this.flipX)
+			.setOrigin(this.flipX ? 1 : 0, 0)
+			.setDepth(depth)
+
+		this.add(sprite)
+
 		this.parts.set(z, sprite)
 	}
 
@@ -136,7 +164,7 @@ export class Player
 	{
 		if (this.parts.has(z)) {
 			let sprite = this.parts.get(z) as Phaser.GameObjects.GameObject
-			this.container.remove(sprite, true)
+			this.remove(sprite, true)
 		}
 	}
 
@@ -210,7 +238,7 @@ export class Player
 
 	loadBody()
 	{
-		var bodyStr = padLeft(this.body, 8, '0')
+		var bodyStr = padLeft(this.body_, 8, '0')
 		var motion = this.motion
 		var motionIndex = this.motionIndex
 		DataLoader.listWzSprite(`Character/${bodyStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {

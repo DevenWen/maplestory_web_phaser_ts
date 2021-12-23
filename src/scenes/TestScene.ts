@@ -38,10 +38,10 @@ export default class TestScene extends Phaser.Scene
     {
 
         this.player = new Player(this)
+        this.player.setPosition(100, 100)
 
         // 加入一个物理引擎
-        this.player.container.setSize(32, 64)
-        var phy = this.matter.add.gameObject(this.player.container)
+        var phy = this.matter.add.gameObject(this.player)
         var platforms = this.matter.add.image(400, 400, 'platform', "platform", {isStatic: true})
         platforms.setScale(2, 0.5);
         platforms.setFriction(0);
@@ -57,6 +57,7 @@ export default class TestScene extends Phaser.Scene
 
             debugText.text = `x: ${pointer.x}, y: ${pointer.y}`
         }, this)
+        this.add.existing(this.player)
     }
 
     update(ts: number)
