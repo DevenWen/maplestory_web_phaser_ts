@@ -59,7 +59,7 @@ export class DataLoader extends Phaser.Events.EventEmitter {
     } else {
       game.cache.obj.add(path, "loading")
       // FIXME 后期需要改用动态配置的形式
-      axios.get("remote/" + path + ".xml.json")
+      axios.get("http://localhost/assert/wz/" + path + ".xml.json")
         .then(data => {
                 console.log("load finish", path, data.status)
                 var db = reparseTreeAsNodes(data.data)

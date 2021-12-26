@@ -28,10 +28,9 @@ export default class TestScene extends Phaser.Scene
         // 读取 xml 文件
         // 渲染成 image
         // 并打印
-        this.load.setBaseURL('http://localhost:8000/remote')
+        this.load.setBaseURL('http://localhost/assert/wz')
         this.load.image("platform", "platform.png")
         this.load.json("zmap", "zmap.img.xml.json")
-
     }
 
     create()
