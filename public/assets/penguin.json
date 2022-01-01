@@ -1,0 +1,124 @@
+{"frames": [
+
+{
+	"filename": "penguin_die01.png",
+	"frame": {"x":0,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_die02.png",
+	"frame": {"x":72,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_die03.png",
+	"frame": {"x":144,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_die04.png",
+	"frame": {"x":216,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_hurt.png",
+	"frame": {"x":288,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_jump01.png",
+	"frame": {"x":360,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_jump02.png",
+	"frame": {"x":432,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_jump03.png",
+	"frame": {"x":504,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_slide01.png",
+	"frame": {"x":576,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_slide02.png",
+	"frame": {"x":648,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_walk01.png",
+	"frame": {"x":720,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_walk02.png",
+	"frame": {"x":792,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_walk03.png",
+	"frame": {"x":864,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+},
+{
+	"filename": "penguin_walk04.png",
+	"frame": {"x":936,"y":0,"w":72,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":64},
+	"sourceSize": {"w":72,"h":64}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "penguin.png",
+	"format": "RGBA8888",
+	"size": {"w":1008,"h":64},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9788515beeb4eed5bab43edda4ae7cc4:eb706b9113f3e27b3460cb5b6c192b99:6811a9a90bad8562d7be890a479a72ac$"
+}
+}
