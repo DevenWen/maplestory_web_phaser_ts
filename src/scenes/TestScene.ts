@@ -1,20 +1,18 @@
-import axios from 'axios'
 import Phaser, { Game } from 'phaser'
-import { Player } from '~/Character/Player'
-import { getElementFromJSON, getElementFromJSONAuto, reparseTreeAsNodes, resolveUOL } from '~/dataload/dataloader'
-import game from '~/main'
+import { PlayerCharater } from '~/character/PlayerCharater'
+import { AnimationComponent } from '~/components/AnimationComponent'
+import ComponentService from '~/components/ComponentService'
 
 export default class TestScene extends Phaser.Scene
 {
 
-    player?: Player
+    player?: PlayerCharater
     
     updated: boolean = false
 
     sprite?: Phaser.GameObjects.Sprite
 
-    nextFrame?
-    nextFrameIndex = 0
+    private components!: ComponentService
 
 
     constructor()
@@ -25,22 +23,30 @@ export default class TestScene extends Phaser.Scene
 
     preload()
     {
-        // 读取 xml 文件
-        // 渲染成 image
-        // 并打印
+
+        this.components = new ComponentService()
+        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
+            this.components.destroy()
+        })
+
         this.load.setBaseURL('http://localhost/assert/wz')
         this.load.image("platform", "platform.png")
         this.load.json("zmap", "zmap.img.xml.json")
+        this.load.json('body', "Character/00002000.img.xml.json")
     }
 
     create()
     {
-
-        this.player = new Player(this)
+        this.player = new PlayerCharater(this)
         this.player.setPosition(100, 100)
+        this.components.addComponent(this.player, new AnimationComponent(this.cache.json.get('body')))
 
-        // 加入一个物理引擎
-        var phy = this.matter.add.gameObject(this.player)
+        var other = new PlayerCharater(this)
+        other.setPosition(200, 100)
+        this.components.addComponent(other, new AnimationComponent(this.cache.json.get('body')))
+
+
+        // 设计一个物理的平台
         var platforms = this.matter.add.image(400, 400, 'platform', "platform", {isStatic: true})
         platforms.setScale(2, 0.5);
         platforms.setFriction(0);
@@ -56,35 +62,11 @@ export default class TestScene extends Phaser.Scene
 
             debugText.text = `x: ${pointer.x}, y: ${pointer.y}`
         }, this)
-        this.add.existing(this.player)
     }
 
-    update(ts: number)
+    update(ts: number, delta: number)
     {
-       
-
-        if (!this.nextFrame) {
-            this.nextFrame = ts + 160
-            return
-        }
-        if (this.nextFrame > ts) {
-            return 
-        }
-
-        this.nextFrame = ts + 180
-        if (this.nextFrameIndex >= 3) {
-            this.nextFrameIndex = 0
-        } else {
-            this.nextFrameIndex ++
-        }
-
-        if (this.player && !this.updated) {
-            this.player.motionIndex = this.nextFrameIndex
-            this.player.update(ts)
-            // this.updated = true
-        }
+        this.components.update(ts, delta)
     }
-
-
 
 }

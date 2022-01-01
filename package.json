@@ -37,6 +37,7 @@
 		"crypto-js": "^4.0.0",
 		"fast-xml-parser": "^3.19.0",
 		"phaser": "^3.50.1",
+		"short-uuid": "^4.2.0",
 		"xml-js": "^1.6.11"
 	},
 	"parcelCleanPaths": [

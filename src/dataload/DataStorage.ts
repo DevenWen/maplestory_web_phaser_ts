@@ -2,7 +2,7 @@ import axios from 'axios'
 import Phaser from 'phaser'
 import {getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node, getElementFromJSONAuto, UOL} from '../dataload/dataloader'
 import game from '~/main'
-import { Player } from '~/Character/Player'
+import { Player } from '~/character/PlayerCharater'
 export class Vector {
   x: number = 0
   y: number = 0
