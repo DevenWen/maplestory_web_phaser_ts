@@ -3,7 +3,9 @@
 - [ ] 理解角色素材的拼接算法进度 80%
 	- [x] zmap 的素材层次
 	- [x] 素材渲染解耦
-	- [ ] 角色动作解析器（输入一个动作序列，角色能够进行动作自由播放）
+	- [x] 角色动作解析器（输入一个动作序列，角色能够进行动作自由播放）
+		- [ ] 优化眼睛的动作变化
+		- [ ] 进一步优化动作解析的性能
 	- [ ] 角色状态及封装，使用状态机或者 ECS
 - [ ] 敌人解析与封装
 - [ ] 地图解析与封装
@@ -18,6 +20,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.0] - 2022-01-02
+### Added
+- 编写了人物的动作解析库和动作播放器，并完成了 api 开发。
+### Removed
+- 删除一些废弃的代码
+
 ## [0.0.3] - 2021-12-24
 ### Changed
 - 重构 Player 类，是用继承的方式实现 GameObject
@@ -25,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 实现角色 flip 转向效果
 ## Removed
 - 删除一些旧的测试代码
+
 ## [0.0.2] - 2021-12-23
 ### Changed 
 - 放弃使用国服 180+ 的版本，因为里面的资源实在太大了，感觉很多资源都是无效的
