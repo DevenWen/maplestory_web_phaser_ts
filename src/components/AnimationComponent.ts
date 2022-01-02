@@ -4,6 +4,7 @@ import { PlayerCharater } from "~/character/PlayerCharater";
 import { IComponent } from "./ComponentService";
 import { Animation } from "~/animation/Animation";
 import { IAnimation } from "~/animation/IAnimation";
+import game from '~/main'
 
 
 export class AnimationComponent implements IComponent
@@ -12,91 +13,39 @@ export class AnimationComponent implements IComponent
     private actionSprite!: AnimatedSprite
     private faceSprite!: AnimatedSprite
 
-    constructor (bodyjson) 
-    {
-        // 初始化动画
-        console.log("construct animation component: ", bodyjson)
-    }
-
     init(sprite: PlayerCharater)
     {
         // this.sprite = sprite
         // 初始化动画数据
         // 设置动画回调 （修改数据参数）
         // 包括脸部
-        
-        var walk_animation = new Animation(
-            {
-                key: "walk1",
-                repeat: -1,
-                frames: [
-                    {
-                        bodyAction: "walk1",
-                        frame: 0,
-                        isFirst: true,
-                        isLast: false,
-                        isKeyFrame: false,
-                        duration: 180,
-                        nextFrame: null,
-                        prevFrame: null,
-                        progress: 0,
-                        config: {}
-                    },
-                    {
-                        bodyAction: "walk1",
-                        frame: 1,
-                        isFirst: true,
-                        isLast: false,
-                        isKeyFrame: false,
-                        duration: 180,
-                        nextFrame: null,
-                        prevFrame: null,
-                        progress: 0,
-                        config: {}
-                    },
-                    {
-                        bodyAction: "walk1",
-                        frame: 2,
-                        isFirst: true,
-                        isLast: false,
-                        isKeyFrame: false,
-                        duration: 180,
-                        nextFrame: null,
-                        prevFrame: null,
-                        progress: 0,
-                        config: {}
-                    },
-                    {
-                        bodyAction: "walk1",
-                        frame: 3,
-                        isFirst: true,
-                        isLast: false,
-                        isKeyFrame: false,
-                        duration: 180,
-                        nextFrame: null,
-                        prevFrame: null,
-                        progress: 0,
-                        config: {}
-                    }
-                ]
+        const bodyAnimation = game.cache.obj.get('bodyAnimation')
+        const faceAnimation = game.cache.obj.get('faceAnimation')
+
+        this.actionSprite = new AnimatedSprite(bodyAnimation, (frame) => {
+            // 注意一些引用的写法
+            if (!frame.config) {
+                return
             }
-        )
-
-        let animationMockMap = new Map<String, IAnimation>();
-        animationMockMap.set('walk1', walk_animation)
-
-        this.actionSprite = new AnimatedSprite(animationMockMap, (frame) => {
-            sprite.motion = frame.bodyAction
-            sprite.motionIndex = frame.frame
+            if (frame.config.action) {
+                // 应用了其他动作
+                sprite.motion = frame.config.action
+                sprite.motionIndex = frame.config.frame
+            } else {
+                sprite.motion = frame.key
+                sprite.motionIndex = frame.frame
+            }
             sprite.updateAnimation()
         })
-        this.faceSprite = new AnimatedSprite(new Map<String, IAnimation>(), (frame) => {
-            console.log("set face frame for sprite", frame, sprite)
+        this.faceSprite = new AnimatedSprite(faceAnimation, (frame) => {
+            sprite.faceAction = frame.key
+            sprite.faceIndex = frame.frame
+            sprite.updateAnimation()
         })
 
         sprite.bodyAnima = this.actionSprite
         sprite.faceAnima = this.faceSprite
-        sprite.do_animation('walk1', {repeat: -1})
+        sprite.do_animation('stand1', {repeat: -1, yoyo: true})
     }
 
     update(t: number, ts: number)

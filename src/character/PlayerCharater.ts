@@ -28,6 +28,16 @@ export class PlayerCharater
 	longcoat = -1
 	weapon = 1302000
 
+	// face = -1
+	// hair = -1
+	// cap = -1
+	// shoes = -1
+	// coat = -1
+	// pants = -1
+	// longcoat = -1
+	// weapon = -1
+
+
 	// TODO 此处后期需要模块化眼睛的
 	faceAction = "default"
 	faceIndex = 0
@@ -41,7 +51,8 @@ export class PlayerCharater
 
 	// 对各个部位进行索引
 	private parts: Map<String, Phaser.GameObjects.Sprite> = new Map()
-	private mapCache = {}
+	mapCache = {}
+	destroyPartKey = new Set<String>()
 	private zmap = []
 
 	constructor(scene: Phaser.Scene) {
@@ -95,6 +106,7 @@ export class PlayerCharater
 	initMapCache() 
 	{
 		this.mapCache = {}
+		this.destroyPartKey.clear()
 		var vector = Vector.init()
 		this.mapCache["head/brow"] = vector
 		this.mapCache["head/neck"] = vector
@@ -103,7 +115,7 @@ export class PlayerCharater
 		this.mapCache["body/navel"] = vector
 		this.mapCache["arm/navel"] = vector
 		this.mapCache["arm/hand"] = vector
-		this.mapCache["lhandmove"] = vector
+		this.mapCache["lhandMove"] = vector
 	}
 
 	updateAnimation()
@@ -130,6 +142,11 @@ export class PlayerCharater
 	}
 
 	private addPart(texture, pos, z: string) {
+		if (this.destroyPartKey.has(z))
+		{
+			return
+		}
+
 		var depth = this.zmap.indexOf(z)
 		const flip_ = this.flipX ? -1 : 1
 		// 这是用来调整的3个像素点
@@ -150,6 +167,7 @@ export class PlayerCharater
 			let sprite = this.parts.get(z) as Phaser.GameObjects.GameObject
 			this.remove(sprite, true)
 		}
+		this.destroyPartKey.add(z)
 	}
 
 	loadHead()
@@ -160,6 +178,10 @@ export class PlayerCharater
 		DataLoader.listWzSprite(`Character/${headStr}.img/${motion}/${motionIndex}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
+			if (z == 'backHead') {
+				this.destroyPart('face')
+				// 后面也需要去除脸饰
+			}
 		})
 	}
 
@@ -198,10 +220,18 @@ export class PlayerCharater
 		const faceStr = padLeft(this.face, 8, '0')
 		var faceAction = this.faceAction
 
-		DataLoader.listWzSprite(`Character/Face/${faceStr}.img/${faceAction}`, (img, textureKey, z) => {
-			var pos = DataLoader.offset(this, img)
-			this.addPart(textureKey, pos, z)
-		})
+		if (faceAction === 'default') {
+			DataLoader.listWzSprite(`Character/Face/${faceStr}.img/${faceAction}`, (img, textureKey, z) => {
+				var pos = DataLoader.offset(this, img)
+				this.addPart(textureKey, pos, z)
+			})
+		} else {
+			var faceIndex = this.faceIndex
+			DataLoader.listWzSprite(`Character/Face/${faceStr}.img/${faceAction}/${faceIndex}`, (img, textureKey, z) => {
+				var pos = DataLoader.offset(this, img)
+				this.addPart(textureKey, pos, z)
+			})
+		}
 	}
 
 	loadBody()

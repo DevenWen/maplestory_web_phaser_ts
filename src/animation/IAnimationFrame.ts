@@ -1,13 +1,13 @@
 export interface IAnimationFrame
 {
-	bodyAction: string;
+	key: string;
 	frame: number;
-	isFirst: boolean;
-	isLast: boolean;
-	isKeyFrame: boolean;
-	nextFrame: IAnimationFrame;
-	prevFrame: IAnimationFrame;
+	isFirst?: boolean;
+	isLast?: boolean;
+	isKeyFrame?: boolean;
+	nextFrame?: IAnimationFrame;
+	prevFrame?: IAnimationFrame;
 	duration: number;
-	progress: number;
+	progress?: number;
 	config;
 }

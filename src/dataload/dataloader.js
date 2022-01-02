@@ -34,7 +34,9 @@ UOL.prototype.getPath = Node.prototype.getPath = function() {
 };
 
 UOL.prototype.node = function() {
-  return resolveUOL(this)
+  var next = resolveUOL(this)
+  // 有可能有嵌套应用
+  return next.node()
 }
 
 function isReservedDataObject(name) {

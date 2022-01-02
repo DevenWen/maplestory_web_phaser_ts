@@ -41,7 +41,8 @@ export class AnimatedSprite implements IAnimatedSprite
 			startFrame = 0,
 			delay = 0,
 			repeatDelay = 0,
-			forceRestart = false
+			forceRestart = false,
+			forward = true
 		} = config;
 
 		if (this.animationCache.has(key))
@@ -50,9 +51,11 @@ export class AnimatedSprite implements IAnimatedSprite
 			this.currentAnimation = ani
 			this.currentFrame = null
 
-			this.forward = this.animData.playingForward
+			this.forward = forward 
 			this.animData.currentAnim = key
+			this.animData.yoyo = yoyo
 			this.animData.repeat = repeat
+			this.animData.frameRate = speed
 
 			this.play()
 		} else {
@@ -422,6 +425,7 @@ export class AnimatedSprite implements IAnimatedSprite
 		play (): this
     {
         const data = this.animData;
+				this.hasStarted = false
 
         if (data.repeat === -1)
         {

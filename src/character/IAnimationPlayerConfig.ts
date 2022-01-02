@@ -8,4 +8,5 @@ export interface IAnimationPlayConfig
     delay?: number;
     repeatDelay?: number;
     forceRestart?: boolean;
+		forward?: boolean
 }

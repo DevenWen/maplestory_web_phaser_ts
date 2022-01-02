@@ -2,7 +2,10 @@ import axios from 'axios'
 import Phaser from 'phaser'
 import {getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node, getElementFromJSONAuto, UOL} from '../dataload/dataloader'
 import game from '~/main'
-import { Player } from '~/character/PlayerCharater'
+import { IAnimation } from '~/animation/IAnimation'
+import { Animation } from '~/animation/Animation'
+import { IAnimationFrame } from '~/animation/IAnimationFrame'
+import { PlayerCharater } from '~/character/PlayerCharater'
 export class Vector {
   x: number = 0
   y: number = 0
@@ -32,6 +35,71 @@ export class Vector {
 
 
 export class DataLoader extends Phaser.Events.EventEmitter {
+
+  static loadAnimation(imgJson)
+  {
+    if (imgJson == null)
+      return
+
+    var result = new Map<String, IAnimation>()
+    var keys = imgJson['_keys']
+    for (let i in keys) 
+    {
+      var frames = new Array<IAnimationFrame>()
+      const key = keys[i]
+      var action = imgJson[key]
+      for (let frameIndex in action['_keys'])
+      {
+        // console.log('load action index', action, frameIndex)
+        const frame = action[`${frameIndex}`]
+        if (frame) {
+          frames.push({
+            key: key,
+            frame: Number.parseInt(frameIndex),
+            duration: Math.abs(frame['delay']) || 180,
+            config: frame
+          })
+        } else {
+          // only one frame
+          frames.push({
+            key: key,
+            frame: 0,
+            duration: 1000,
+            config: frame
+          })
+          break
+        }
+      }
+
+      var animation = new Animation({
+        key: key,
+        frames: frames,
+        duration: 180
+      })
+      result.set(key, animation)
+    }
+    return result
+  }
+
+  static loadBodyAnimation()
+  {
+    // 加载body的 img 数据
+    // 解析数据成为 animation 
+    // 写到 game.cache.json 中
+    const actionJson = game.cache.json.get('body')
+    var result = this.loadAnimation(actionJson)
+    console.log('success load animation, ', result)
+    game.cache.obj.add("bodyAnimation", result)
+  }
+
+  static loadFaceAnimation()
+  {
+    const actionJson = game.cache.json.get('face')
+    var result = this.loadAnimation(actionJson)
+    console.log('success load face animation', result)
+    game.cache.obj.add("faceAnimation", result)
+  }
+
   /**
    * 获取路径上的节点，并执行回调
    * @param key 
@@ -94,6 +162,10 @@ export class DataLoader extends Phaser.Events.EventEmitter {
 
   static listWzSprite(key, callback) {
     this.getWzNode(key, (imgNode) => {
+      if (imgNode == null)
+      {
+        return
+      }
       imgNode.forEach(img => {
         if (img instanceof UOL) {
           img = img.node()
@@ -119,7 +191,7 @@ export class DataLoader extends Phaser.Events.EventEmitter {
   /**
    * 素材偏移计算函数
    */
-  static offset(player: Player, node) {
+  static offset(player: PlayerCharater, node) {
     // 算法来自：https://forum.ragezone.com/f923/looking-render-maplestory-gms-v83-1176964/
     let mapCache = player.mapCache
     let name = node.name
@@ -163,8 +235,8 @@ export class DataLoader extends Phaser.Events.EventEmitter {
 
 		if (node.map['handMove']) {
       let handMove = Vector.create(-node.map['handMove']["X"], -node.map['handMove']["Y"])
-			if (name == 'lhand') {
-        mapCache["lhandmove"] = Vector.clone(handMove)
+			if (name == 'lHand') {
+        mapCache["lhandMove"] = Vector.clone(handMove)
 			}
 
 			offset.x = origin.x + handMove.x - mapCache['lhandMove'].x
