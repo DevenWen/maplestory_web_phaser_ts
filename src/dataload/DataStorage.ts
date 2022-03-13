@@ -127,12 +127,21 @@ export class DataLoader extends Phaser.Events.EventEmitter {
     } else {
       game.cache.obj.add(path, "loading")
       // FIXME 后期需要改用动态配置的形式
-      axios.get("http://localhost/assert/wz/" + path + ".xml.json")
-        .then(data => {
-                console.log("load finish", path, data.status)
-                var db = reparseTreeAsNodes(data.data)
-                game.cache.obj.add(path, db)
-        })
+      let json = game.cache.json.get(path)
+      if (json) {
+        console.log("load from cache", path)
+        var db = reparseTreeAsNodes(json) 
+        game.cache.obj.add(path, db)
+        callback(getElementFromJSONAuto(db, subelements))
+      } else {
+        axios.get("http://localhost/assert/wz/" + path + ".xml.json")
+          .then(data => {
+                  console.log("load from remote", path, data.status)
+                  var db = reparseTreeAsNodes(data.data)
+                  game.cache.obj.add(path, db)
+                  callback(getElementFromJSONAuto(db, subelements))
+          })
+      }
     }
   }
 
@@ -145,7 +154,10 @@ export class DataLoader extends Phaser.Events.EventEmitter {
    */
   static getWzSprite(key, callback) {
     this.getWzNode(key, (imgNode) => {
-      if (!imgNode) return 
+      if (!imgNode) {
+        console.warn("load wz no found", key, imgNode)
+        return 
+      }
 
       if (imgNode["loaded"]) {
         callback(imgNode, imgNode["textureKey"], imgNode["z"])
@@ -153,7 +165,9 @@ export class DataLoader extends Phaser.Events.EventEmitter {
       }
       var uri = imgNode["_image"]["uri"]
       var textureKey = `textureKey_${imgNode.getPath()}`
+      console.debug("add base64 texture, ", textureKey)
       game.textures.addBase64(textureKey, 'data:image/png;base64,' + uri)
+
       imgNode["loaded"] = true
       imgNode["textureKey"] = textureKey
       callback(imgNode, textureKey, imgNode["z"])

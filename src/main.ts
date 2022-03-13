@@ -1,10 +1,9 @@
 import Phaser, { Scene } from 'phaser'
 
 import HelloWorldScene from './scenes/HelloWorldScene'
-import LoaderScene from './scenes/LoaderScene'
 import StepOneScene from './scenes/StepOneScene'
-import ECSWorldScene from './scenes/ECSWorldScene'
 import TestScene from './scenes/TestScene'
+import TestMobScene from './scenes/TestMobScene'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -27,7 +26,7 @@ const config: Phaser.Types.Core.GameConfig = {
 				},
 		}
 	},
-	scene: [TestScene],
+	scene: [TestMobScene],
 	render: {
 		antialias: false,
 		pixelArt: true,
