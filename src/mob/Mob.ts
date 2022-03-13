@@ -1,11 +1,63 @@
 import { Game, GameObjects } from "phaser"
 import { DataLoader, Vector } from "~/dataload/DataStorage"
 
+/**
+ * 
+ * @param json_key 加载的 key
+ * @param scene 场景数据
+ */
+export function loadMobAnimation(json_key : String, scene : Phaser.Scene) {
+	if (! json_key.startsWith("Mob")) return  
+
+	DataLoader.getWzNode(json_key, (node) => {
+		// 解析动作库
+		// 每一个动作有一个 n 个图片(每一个)
+		const name = node['name'] // 0100100.img
+		var keys = node['_keys']
+		for (let index in keys)
+		{
+				let action_key = keys[index]
+				if (action_key == 'info') continue
+				let action_node = node[`${action_key}`]
+
+				let action_name = `Mob/${name}/${action_key}`
+				var frames: Phaser.Types.Animations.AnimationFrame[] = []
+				for (let i in action_node['_keys'])
+				{   
+						var frame_index = action_node['_keys'][i]
+						if (frame_index == 'zigzag') continue
+						const frame = action_node[`${frame_index}`]
+						let delay = frame['delay']
+
+						scene.textures.addRenderTexture(
+								`Mob/${name}/${action_key}/${frame_index}`,
+								new Phaser.GameObjects.RenderTexture(scene)
+						)
+						DataLoader.getWzSprite(`Mob/${name}/${action_key}/${frame_index}`, ()=>{})
+						frames.push(
+								{
+										key: `Mob/${name}/${action_key}/${frame_index}`,
+										duration: delay
+								}
+						)
+				}
+				console.debug("add action_name", action_name)
+				scene.anims.create({
+						// https://blog.ourcade.co/posts/2020/phaser3-load-images-dynamically/
+						key: action_name,
+						frames: frames,
+						repeat: -1
+				})
+		}
+	})
+}
 
 export class Mob extends Phaser.GameObjects.Sprite
 {
 	private img_id: string
 	private container: Phaser.GameObjects.Container
+	public matter_body
+	private current_frame?
 
 	constructor(scene: Phaser.Scene, img_id: string, x?, y?)
 	{
@@ -17,12 +69,16 @@ export class Mob extends Phaser.GameObjects.Sprite
 			Phaser.Animations.Events.ANIMATION_UPDATE, 
 			this.animation_update_callback
 		)
+
+		// 增加物理body
+		this.matter_body = scene.matter.add.gameObject(this)
 	}
 
-	private addPart(texture, pos, z: string) 
+	private addPart(texture, pos, z: string, img_size) 
 	{
 		const flip_ = this.flipX ? 1 : -1
-		var sprite = this.scene.add.sprite(pos.x * flip_, pos.y, texture)
+		// +3 是根据观察效果调节出来的
+		var sprite = this.scene.add.sprite(pos.x * flip_, pos.y + img_size.h / 2 + 3, texture)
 			.setFlipX(this.flipX)
 			.setOrigin(this.flipX ? 1 : 0, 0)
 
@@ -32,12 +88,15 @@ export class Mob extends Phaser.GameObjects.Sprite
 	animation_update_callback(context, frame) 
 	{
 		this.container.removeAll(true)
-		this.container.setPosition(this.x, this.y)
+		this.current_frame = frame
 		DataLoader.getWzSprite(frame.textureKey, (img, textureKey, z) => {
 			// 将 textureKey 绘制成 sprite 到 container 中
+			// 在 container 的 Flip 已经变更时，此处的回调会延后
 			if (!this.scene.textures.get(textureKey)) return
 			var pos = Vector.create(img.origin.X, -img.origin.Y)
-			this.addPart(textureKey, pos, z)
+			var img_size = {h: img["_image"].height, w: img["_image"].width}
+			this.addPart(textureKey, pos, z, img_size)
+
 		})
 	}
 	
@@ -45,10 +104,20 @@ export class Mob extends Phaser.GameObjects.Sprite
 	play(anim)
 	{
 		let real_anim = `${this.img_id}/${anim}`
-		console.debug("play anim: ", real_anim)
 		super.play(real_anim)
 		return this
 	}
 
+	setFlipX(value: boolean): this {
+		super.setFlipX(value)
+		// 马上重放当前帧
+		this.animation_update_callback(null, this.current_frame)
+		return this
+	}
+	
+	update(...args: any[]): void {
+		this.container.setX(this.x)
+		this.container.setY(this.y)
+	}
 
 }

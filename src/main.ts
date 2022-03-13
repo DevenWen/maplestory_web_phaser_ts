@@ -10,7 +10,7 @@ const config: Phaser.Types.Core.GameConfig = {
 	width: 800,
 	height: 600,
 	fps: {
-		// target: 15,
+		// target: 30,
 		// forceSetTimeOut: true
 	},
 	physics: {

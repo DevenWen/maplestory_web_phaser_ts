@@ -4,15 +4,15 @@ import { PlayerCharater } from '~/character/PlayerCharater'
 import { AnimationComponent } from '~/components/AnimationComponent'
 import ComponentService from '~/components/ComponentService'
 import { DataLoader } from '~/dataload/DataStorage'
-import { Mob } from '~/mob/Mob'
+import { loadMobAnimation, Mob } from '~/mob/Mob'
+import { loadBodyAnimation, loadFaceAnimation, Player } from '~/player/Player'
 
 export default class TestMobScene extends Phaser.Scene
 {
 
-    sprite?: Phaser.GameObjects.Sprite
-
-    private components!: ComponentService
-
+    sprite?: Mob
+    cursors?
+    player?: Player
 
     constructor()
     {
@@ -22,83 +22,61 @@ export default class TestMobScene extends Phaser.Scene
     preload()
     {
 
-        this.components = new ComponentService()
-        this.events.on(Phaser.Scenes.Events.SHUTDOWN, () => {
-            this.components.destroy()
-        })
-
         this.load.setBaseURL('http://localhost/assert/wz')
         this.load.image("platform", "platform.png")
         this.load.image("mock", "mock.jpg")
         this.load.json("zmap", "zmap.img.xml.json")
-        this.load.json('body', "Character/00002000.img.xml.json")
-        this.load.json('face', 'Character/Face/00020000.img.xml.json')
+        this.load.json('Character/00002000.img', "Character/00002000.img.xml.json")
+        this.load.json('Character/Face/00020000.img', 'Character/Face/00020000.img.xml.json')
         this.load.json("Mob/0100100.img", "Mob/0100100.img.xml.json")
-        
+
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     create()
     {
-        const scene = this
-        DataLoader.getWzNode("Mob/0100100.img", (node) => {
-            console.log(node)
-            // 解析动作库
-            // 每一个动作有一个 n 个图片(每一个)
-            const name = node['name'] // 0100100.img
-            var keys = node['_keys']
-            for (let index in keys)
-            {
-                let action_key = keys[index]
-                if (action_key == 'info') continue
-                let action_node = node[`${action_key}`]
-
-                let action_name = `Mob/${name}/${action_key}`
-                var frames: Phaser.Types.Animations.AnimationFrame[] = []
-                for (let i in action_node['_keys'])
-                {   
-                    var frame_index = action_node['_keys'][i]
-                    if (frame_index == 'zigzag') continue
-                    const frame = action_node[`${frame_index}`]
-                    // console.log(frame)
-                    let delay = frame['delay']
-
-                    this.textures.addRenderTexture(
-                        `Mob/${name}/${action_key}/${frame_index}`,
-                        new Phaser.GameObjects.RenderTexture(this) 
-                    )
-                    frames.push(
-                        {
-                            key: `Mob/${name}/${action_key}/${frame_index}`,
-                            duration: delay
-                        }
-                    )
-                }
-                console.log("add action_name", action_name)
-                this.anims.create({
-                    // FIXME 创建 animation 时，texture 并没加载，useBase64，导致内部的 frame 没准备好
-                    // https://blog.ourcade.co/posts/2020/phaser3-load-images-dynamically/
-                    key: action_name,
-                    frames: frames,
-                    repeat: -1
-                })
-            }
-        })
-
-        this.sprite = new Mob(scene, "0100100.img", 100, 400)
-
+        loadMobAnimation("Mob/0100100.img", this)
+        loadBodyAnimation("Character/00002000.img", this)
+        loadFaceAnimation("Character/Face/00020000.img", this)
+        this.sprite = new Mob(this, "0100100.img", 100, 400)
         this.sprite.play("move")
-        this.sprite.setFlipX(true)
 
-        this.input.on("pointerup", (pointer) => {
-            this.sprite.setFlipX(!this.sprite.flipX)
-        })
-        var debugText = this.add.text(0, 0, 'x: 0, y: 0', {fontFamily: 'Arial', fontSize: 64, color: '#00ff00' })
-        var debug = this.add.graphics()
-        // 位置指针
+        this.player = new Player(this)
+        this.player.play("walk1").facePlay("default")
 
-        debug.clear().lineStyle(1, 0x00ff00);
-        debug.lineBetween(0, 400, 800, 400)
-        debug.lineBetween(100, 0, 100, 600)
+        // 设计一个物理的平台
+        this.matter.world.setBounds();
+        var platforms = this.matter.add.image(400, 600, 'platform', "platform", {isStatic: true, restitution: 0.8})
+        platforms.setScale(2, 0.5);
+        platforms.setFriction(0);
+        this.matter.add.mouseSpring({ length: 1, stiffness: 0.6 });
+    }
+
+    update(time: number, delta: number): void {
+        this.sprite.update()
+        this.player.update()
+        let sprite = this.player
+        let cursors = this.cursors
+        if (cursors.left.isDown)
+        {
+            sprite.physicalBody.setVelocityX(-1);
+            sprite.setFlipX(false)
+            // sprite.play("move")
+            sprite.anims.setCurrentFrame(sprite.anims.currentFrame)
+        }
+        else if (cursors.right.isDown)
+        {
+            // sprite.matter_body.setVelocityX(1);
+            sprite.physicalBody.setVelocityX(1)
+            sprite.setFlipX(true)
+            // sprite.play("move")
+            sprite.anims.setCurrentFrame(sprite.anims.currentFrame)
+        }
+        else
+        {
+            sprite.physicalBody.setVelocityX(0);
+            // sprite.play("stand1")
+        }
     }
 
 }

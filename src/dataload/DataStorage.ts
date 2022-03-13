@@ -129,7 +129,7 @@ export class DataLoader extends Phaser.Events.EventEmitter {
       // FIXME 后期需要改用动态配置的形式
       let json = game.cache.json.get(path)
       if (json) {
-        console.log("load from cache", path)
+        // console.log("load from cache", path)
         var db = reparseTreeAsNodes(json) 
         game.cache.obj.add(path, db)
         callback(getElementFromJSONAuto(db, subelements))
@@ -165,7 +165,6 @@ export class DataLoader extends Phaser.Events.EventEmitter {
       }
       var uri = imgNode["_image"]["uri"]
       var textureKey = `textureKey_${imgNode.getPath()}`
-      console.debug("add base64 texture, ", textureKey)
       game.textures.addBase64(textureKey, 'data:image/png;base64,' + uri)
 
       imgNode["loaded"] = true
@@ -205,7 +204,7 @@ export class DataLoader extends Phaser.Events.EventEmitter {
   /**
    * 素材偏移计算函数
    */
-  static offset(player: PlayerCharater, node) {
+  static offset(player, node) {
     // 算法来自：https://forum.ragezone.com/f923/looking-render-maplestory-gms-v83-1176964/
     let mapCache = player.mapCache
     let name = node.name
