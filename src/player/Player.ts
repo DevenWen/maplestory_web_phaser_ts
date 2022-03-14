@@ -38,7 +38,7 @@ export function loadFaceAnimation(json_key : String, scene: Phaser.Scene)
 				frames.push(
 					{
 						key: textureKey,
-						duration: frame['delay']
+						duration: frame['delay'] || 600
 					}
 				)
 			}
@@ -51,6 +51,8 @@ export function loadFaceAnimation(json_key : String, scene: Phaser.Scene)
 		}
 	})
 }
+
+
 
 export function loadBodyAnimation(json_key : String, scene: Phaser.Scene)
 {
@@ -90,14 +92,13 @@ export function loadBodyAnimation(json_key : String, scene: Phaser.Scene)
 class PlayerFace extends Sprite
 {
 	private parent: Player
-	public container: Container
 	private current_frame?: Frame 
+	private next: integer = 0
 
 	constructor(scene: Scene, parent: Player)
 	{
 		super(scene, 0, 0, "")
 		this.parent = parent
-		this.container = scene.add.container()
 		this.addedToScene()
 		this.addListener(
 			Phaser.Animations.Events.ANIMATION_UPDATE,
@@ -105,49 +106,15 @@ class PlayerFace extends Sprite
 		)
 	}
 
-	private addPart(texture, pos, z: string) {
-		const flip_ = this.parent.flipX ? -1 : 1
-		// 这是用来调整的3个像素点
-		const adjx = this.parent.flipX ? -3 : 0
-
-		var sprite = this.scene.add.sprite(pos.x * flip_ + adjx, pos.y+32, texture)
-			.setFlipX(this.parent.flipX)
-			.setOrigin(this.parent.flipX ? 1 : 0, 0)
-
-		this.container.add(sprite)
-
-	}
-
 	private animation_update_callback(context, frame)
 	{
 		if (!frame) return
-		// 更新 Container
-		// console.debug("face frame:", frame.textureKey)
-		// this.container.removeAll(true)
-		// this.parent.destroyPart('face')
-		// this.parent.destroyPart('face')
-		// 精准删除 face
-		// this.parent.cleanFace()
 		this.current_frame = frame
 
-		// DataLoader
-		// Flip 选择 parent 的
 		DataLoader.listWzSprite(`Character/Face/${frame.textureKey}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this.parent, img)
-			// console.debug("face at: ", textureKey, pos)
-			// this.addPart(textureKey, pos, z)
-			this.parent.addPart(textureKey, pos, z)
+			var sprite = this.parent.addPart(textureKey, pos, z)
 		})
-	}
-
-	hide()
-	{
-		this.container.each((sprite) => sprite.setVisible(false))
-	}
-
-	update(...args: any[]): void {
-		this.setPosition(this.parent.x, this.parent.y)
-		this.container.setPosition(this.parent.x, this.parent.y)
 	}
 
 	reload() {
@@ -157,17 +124,45 @@ class PlayerFace extends Sprite
 	play(anim): this
 	{
 		var imgStr = padLeft(this.getData("face_img") | 20000, 8, "0")
-		let realAnim = `${imgStr}.img/${anim}`
-		super.play(realAnim)
+		super.chain([
+			{key: `${imgStr}.img/${anim}`, repeat: 0},
+			{key: `${imgStr}.img/default`, repeat: -1}
+		]).stop()
 		return this
 	}
+	
+	update(time): void {
+		if (time > this.next && this.current_frame && this.current_frame.textureKey.endsWith("default"))
+		{
+			var imgStr = padLeft(this.getData("face_img") | 20000, 8, "0")
+			super.chain(
+				[
+					{key: `${imgStr}.img/blink`, repeat: 0, yoyo: true},
+					{key: `${imgStr}.img/default`, repeat: -1}
+				]
+			).stop()
+			this.next = time + Math.floor(Math.random()*7000)
+		}
+	}
 
+}
+
+export enum CharacterPart {
+	Head = 'Head',
+	Body = 'Body',
+	Hair = 'Hair',
+	Cap = 'Cap',
+	Longcoat = 'Longcoat',
+	Coat = 'Coat',
+	Pants = 'Pants',
+	Shoes = 'Shoes',
+	Weapon = 'Weapon'
 }
 
 export class Player extends Sprite
 {
 
-	private container: Container
+	public container: Container
 	private zmap = []
 	private current_frame?: Frame
 	public mapCache = {}
@@ -211,7 +206,7 @@ export class Player extends Sprite
 		this.mapCache["lhandMove"] = vector
 	}
 
-	private animation_update_callback(context, frame)
+	private animation_update_callback(context, frame): void
 	{
 		if (!frame) return
 		// 更新 Container
@@ -227,14 +222,29 @@ export class Player extends Sprite
 		this.loadBody(motion, index)
 				.loadHead(motion, index)
 				.loadFace()
+				.loadDefault(CharacterPart.Hair, motion, index)
+				.loadCap(motion, index)
+				.loadDefault(CharacterPart.Longcoat, motion, index)
+				.loadDefault(CharacterPart.Coat, motion, index)
+				.loadDefault(CharacterPart.Pants, motion, index)
+				.loadDefault(CharacterPart.Shoes, motion, index)
+				.loadDefault(CharacterPart.Weapon, motion, index)
 		// 绘制 head
 		// 重新绘制面部
 	}
 
-	public addPart(texture, pos, z: string) {
-		if (this.destroyPartKey.has(z))
-		{
-			return
+	public putOn(part: CharacterPart, value): this
+	{
+		this.setData(part, value)
+		return this
+	}
+
+	public addPart(texture, pos, z: string): Sprite {
+		if (this.destroyPartKey.has(z)) return
+
+		if (this.parts.has(z)) {
+			let sprite = this.parts.get(z) as Phaser.GameObjects.GameObject
+			this.container.remove(sprite, true)
 		}
 
 		var depth = this.zmap.indexOf(z)
@@ -249,6 +259,7 @@ export class Player extends Sprite
 
 		this.container.add(sprite)
 		this.parts.set(z, sprite)
+		return sprite
 	}
 
 	public destroyPart(z: string) 
@@ -262,30 +273,69 @@ export class Player extends Sprite
 
 	private loadBody(motion: String, index: integer): this
 	{
-		var bodyStr = padLeft(this.getData("body_img") | 2000, 8, "0")
+		var bodyStr = padLeft(this.getData("Body") | 2000, 8, "0")
 		DataLoader.listWzSprite(`Character/${bodyStr}.img/${motion}/${index}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 		})
-
 		return this
 	}
 
-	loadHead(motion: String, index: integer): this
+	private loadHead(motion: String, index: integer): this
 	{
-		const headStr = padLeft(this.getData("head_img") | 12000, 8, '0')
+		const headStr = padLeft(this.getData("Head") | 12000, 8, '0')
 		DataLoader.listWzSprite(`Character/${headStr}.img/${motion}/${index}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this, img)
 			this.addPart(textureKey, pos, z)
 			if (z == 'backHead') {
-				// this.destroyPart('face')
-				this.face.hide()
+				this.destroyPart('face')
 			}
 		})
 		return this
 	}
 
-	loadFace(): this
+	private loadCap(motion, index): this
+	{
+		if (!this.data.has(CharacterPart.Cap)) return this
+		// TODO 渲染帽子，同时需要隐藏头发
+		
+		var capStr = padLeft(this.data.get(CharacterPart.Cap), 8, '0');
+		DataLoader.getWzNode(`Character/Cap/${capStr}.img`, capRoot => {
+			let overType = capRoot["info"]["vslot"]
+			// TODO 整体的顺序可以参考 zmap
+			switch(overType)
+			{
+				case "CpH5":
+					// TODO 在头发最下面，不遮挡头发,层次调整最下面
+					break
+				case "CpH1H5":
+					// TODO 
+					break
+				default:
+					// 删除头发1
+					// 删除头发2
+					this.destroyPart("hair")
+					this.destroyPart("hairOverHead")
+					break
+			}
+		})
+		this.loadDefault(CharacterPart.Cap, motion, index)
+		return this
+	}
+
+	private loadDefault(part, motion, index): this {
+		if (!this.data.has(part)) return this
+
+		const imgStr = padLeft(this.getData(part), 8, '0')
+		DataLoader.listWzSprite(`Character/${part}/${imgStr}.img/${motion}/${index}`, (img, textureKey, z) => {
+			var pos = DataLoader.offset(this, img)
+			this.addPart(textureKey, pos, z)
+		})
+
+		return this
+	}
+
+	private loadFace(): this
 	{
 		this.face.reload()
 		return this
@@ -306,9 +356,17 @@ export class Player extends Sprite
 		return this
 	}
 
-	update(...args: any[]): void {
+	update(time): void {
 			this.container.setPosition(this.x, this.y)
-			this.face.update()
+			this.face.update(time)
 	}
+
+	setFlipX(value: boolean): this {
+		super.setFlipX(value)
+		// 重新绘制
+		this.anims.setCurrentFrame(this.anims.currentFrame)
+		return this
+	}
+
 
 }

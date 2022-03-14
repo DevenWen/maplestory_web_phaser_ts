@@ -2,10 +2,6 @@ import axios from 'axios'
 import Phaser from 'phaser'
 import {getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node, getElementFromJSONAuto, UOL} from '../dataload/dataloader'
 import game from '~/main'
-import { IAnimation } from '~/animation/IAnimation'
-import { Animation } from '~/animation/Animation'
-import { IAnimationFrame } from '~/animation/IAnimationFrame'
-import { PlayerCharater } from '~/character/PlayerCharater'
 export class Vector {
   x: number = 0
   y: number = 0
@@ -35,71 +31,7 @@ export class Vector {
 
 
 export class DataLoader extends Phaser.Events.EventEmitter {
-
-  static loadAnimation(imgJson)
-  {
-    if (imgJson == null)
-      return
-
-    var result = new Map<String, IAnimation>()
-    var keys = imgJson['_keys']
-    for (let i in keys) 
-    {
-      var frames = new Array<IAnimationFrame>()
-      const key = keys[i]
-      var action = imgJson[key]
-      for (let frameIndex in action['_keys'])
-      {
-        // console.log('load action index', action, frameIndex)
-        const frame = action[`${frameIndex}`]
-        if (frame) {
-          frames.push({
-            key: key,
-            frame: Number.parseInt(frameIndex),
-            duration: Math.abs(frame['delay']) || 180,
-            config: frame
-          })
-        } else {
-          // only one frame
-          frames.push({
-            key: key,
-            frame: 0,
-            duration: 1000,
-            config: frame
-          })
-          break
-        }
-      }
-
-      var animation = new Animation({
-        key: key,
-        frames: frames,
-        duration: 180
-      })
-      result.set(key, animation)
-    }
-    return result
-  }
-
-  static loadBodyAnimation()
-  {
-    // 加载body的 img 数据
-    // 解析数据成为 animation 
-    // 写到 game.cache.json 中
-    const actionJson = game.cache.json.get('body')
-    var result = this.loadAnimation(actionJson)
-    console.log('success load animation, ', result)
-    game.cache.obj.add("bodyAnimation", result)
-  }
-
-  static loadFaceAnimation()
-  {
-    const actionJson = game.cache.json.get('face')
-    var result = this.loadAnimation(actionJson)
-    console.log('success load face animation', result)
-    game.cache.obj.add("faceAnimation", result)
-  }
-
+ 
   /**
    * 获取路径上的节点，并执行回调
    * @param key 

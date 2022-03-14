@@ -37,7 +37,7 @@ export function loadMobAnimation(json_key : String, scene : Phaser.Scene) {
 						frames.push(
 								{
 										key: `Mob/${name}/${action_key}/${frame_index}`,
-										duration: delay
+										duration: delay || 600
 								}
 						)
 				}
@@ -55,6 +55,7 @@ export function loadMobAnimation(json_key : String, scene : Phaser.Scene) {
 export class Mob extends Phaser.GameObjects.Sprite
 {
 	private img_id: string
+	private mob_height: integer
 	private container: Phaser.GameObjects.Container
 	public matter_body
 	private current_frame?
@@ -69,8 +70,8 @@ export class Mob extends Phaser.GameObjects.Sprite
 			Phaser.Animations.Events.ANIMATION_UPDATE, 
 			this.animation_update_callback
 		)
-
 		// 增加物理body
+		this.mob_height = 13
 		this.matter_body = scene.matter.add.gameObject(this)
 	}
 
@@ -78,7 +79,7 @@ export class Mob extends Phaser.GameObjects.Sprite
 	{
 		const flip_ = this.flipX ? 1 : -1
 		// +3 是根据观察效果调节出来的
-		var sprite = this.scene.add.sprite(pos.x * flip_, pos.y + img_size.h / 2 + 3, texture)
+		var sprite = this.scene.add.sprite(pos.x * flip_, pos.y + 2, texture)
 			.setFlipX(this.flipX)
 			.setOrigin(this.flipX ? 1 : 0, 0)
 
@@ -91,19 +92,18 @@ export class Mob extends Phaser.GameObjects.Sprite
 		this.current_frame = frame
 		DataLoader.getWzSprite(frame.textureKey, (img, textureKey, z) => {
 			// 将 textureKey 绘制成 sprite 到 container 中
-			// 在 container 的 Flip 已经变更时，此处的回调会延后
 			if (!this.scene.textures.get(textureKey)) return
 			var pos = Vector.create(img.origin.X, -img.origin.Y)
 			var img_size = {h: img["_image"].height, w: img["_image"].width}
+			// 将 TODO head 数据保存起来
 			this.addPart(textureKey, pos, z, img_size)
-
 		})
 	}
-	
 
 	play(anim)
 	{
 		let real_anim = `${this.img_id}/${anim}`
+		console.debug("play: ", real_anim)
 		super.play(real_anim)
 		return this
 	}
@@ -111,13 +111,13 @@ export class Mob extends Phaser.GameObjects.Sprite
 	setFlipX(value: boolean): this {
 		super.setFlipX(value)
 		// 马上重放当前帧
-		this.animation_update_callback(null, this.current_frame)
+		this.anims.setCurrentFrame(this.anims.currentFrame)
 		return this
 	}
 	
 	update(...args: any[]): void {
 		this.container.setX(this.x)
-		this.container.setY(this.y)
+		this.container.setY(this.y + this.mob_height)
 	}
 
 }

@@ -1,8 +1,4 @@
 import Phaser, { Scene } from 'phaser'
-
-import HelloWorldScene from './scenes/HelloWorldScene'
-import StepOneScene from './scenes/StepOneScene'
-import TestScene from './scenes/TestScene'
 import TestMobScene from './scenes/TestMobScene'
 
 const config: Phaser.Types.Core.GameConfig = {

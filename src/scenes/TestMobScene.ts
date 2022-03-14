@@ -1,48 +1,39 @@
-import Phaser, { Game } from 'phaser'
-import { IAnimation } from '~/animation/IAnimation'
-import { PlayerCharater } from '~/character/PlayerCharater'
-import { AnimationComponent } from '~/components/AnimationComponent'
-import ComponentService from '~/components/ComponentService'
-import { DataLoader } from '~/dataload/DataStorage'
-import { loadMobAnimation, Mob } from '~/mob/Mob'
-import { loadBodyAnimation, loadFaceAnimation, Player } from '~/player/Player'
+import { Mob } from '~/mob/Mob'
+import { CharacterPart, Player } from '~/player/Player'
+import MapleScene from './MapleScene'
 
-export default class TestMobScene extends Phaser.Scene
+export default class TestMobScene extends MapleScene 
 {
-
-    sprite?: Mob
-    cursors?
-    player?: Player
 
     constructor()
     {
-        super("step-one")
+        super()
     }
 
     preload()
     {
+        super.preload()
 
-        this.load.setBaseURL('http://localhost/assert/wz')
-        this.load.image("platform", "platform.png")
-        this.load.image("mock", "mock.jpg")
-        this.load.json("zmap", "zmap.img.xml.json")
-        this.load.json('Character/00002000.img', "Character/00002000.img.xml.json")
-        this.load.json('Character/Face/00020000.img', 'Character/Face/00020000.img.xml.json')
-        this.load.json("Mob/0100100.img", "Mob/0100100.img.xml.json")
-
-        this.cursors = this.input.keyboard.createCursorKeys();
+        // 加载怪物
+        this.loadMobJson("0100100")
+            .loadMobJson("0100101")
+            .loadMobJson("0100120")
+        
     }
 
     create()
     {
-        loadMobAnimation("Mob/0100100.img", this)
-        loadBodyAnimation("Character/00002000.img", this)
-        loadFaceAnimation("Character/Face/00020000.img", this)
-        this.sprite = new Mob(this, "0100100.img", 100, 400)
-        this.sprite.play("move")
+        super.create()
 
+        // 构建一个人物
         this.player = new Player(this)
-        this.player.play("walk1").facePlay("default")
+            .putOn(CharacterPart.Hair, 30000)
+            .putOn(CharacterPart.Cap, 1000000)
+            .putOn(CharacterPart.Shoes, 1070003)
+            .putOn(CharacterPart.Coat, 1040000)
+            .putOn(CharacterPart.Pants, 1060000)
+            .putOn(CharacterPart.Weapon, 1302000)
+            .play("stand1").facePlay("default")
 
         // 设计一个物理的平台
         this.matter.world.setBounds();
@@ -50,32 +41,38 @@ export default class TestMobScene extends Phaser.Scene
         platforms.setScale(2, 0.5);
         platforms.setFriction(0);
         this.matter.add.mouseSpring({ length: 1, stiffness: 0.6 });
+
+        // 点击鼠标，随机生成1个 怪物
+        this.input.on("pointerup",function (pointer) {
+            let r = Math.random()
+            if (r > 0.3)
+                this.mobs.push(new Mob(this, "0100100.img", Math.random()*400, 100).play("stand"))
+            else if (r > 0.6)
+                this.mobs.push(new Mob(this, "0100101.img", Math.random()*400, 100).play("move"))
+            else 
+                this.mobs.push(new Mob(this, "0100120.img", Math.random()*400, 100).play("move"))
+        }, this)
+
     }
 
     update(time: number, delta: number): void {
-        this.sprite.update()
-        this.player.update()
+        super.update(time, delta)
+
         let sprite = this.player
         let cursors = this.cursors
         if (cursors.left.isDown)
         {
-            sprite.physicalBody.setVelocityX(-1);
+            sprite.physicalBody.setVelocityX(-5);
             sprite.setFlipX(false)
-            // sprite.play("move")
-            sprite.anims.setCurrentFrame(sprite.anims.currentFrame)
         }
-        else if (cursors.right.isDown)
+        if (cursors.right.isDown)
         {
-            // sprite.matter_body.setVelocityX(1);
-            sprite.physicalBody.setVelocityX(1)
+            sprite.physicalBody.setVelocityX(5)
             sprite.setFlipX(true)
-            // sprite.play("move")
-            sprite.anims.setCurrentFrame(sprite.anims.currentFrame)
         }
-        else
+        if (cursors.up.isDown)
         {
-            sprite.physicalBody.setVelocityX(0);
-            // sprite.play("stand1")
+            sprite.physicalBody.setVelocityY(-5)
         }
     }
 
