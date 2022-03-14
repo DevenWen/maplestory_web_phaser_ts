@@ -1,13 +1,15 @@
 # Todo list
 
-- [ ] 理解角色素材的拼接算法进度 80%
+- [ ] 理解角色素材的拼接算法进度 90%
 	- [x] zmap 的素材层次
 	- [x] 素材渲染解耦
 	- [x] 角色动作解析器（输入一个动作序列，角色能够进行动作自由播放）
-		- [ ] 优化眼睛的动作变化
-		- [ ] 进一步优化动作解析的性能
+		- [x] 优化眼睛的动作变化
+		- [x] 进一步优化动作解析的性能
+	- [ ] 技能动画编写
 	- [ ] 角色状态及封装，使用状态机或者 ECS
-- [ ] 敌人解析与封装
+- [x] 敌人解析与封装 60%
+	- [ ] 完成了动画封装
 - [ ] 地图解析与封装
 - [ ] UI解析
 - [x] 寻找 wz 文件转 json 文件的办法，现在的资源都比较有限，需要规模地完成转化，并通过后端服务器进行资源服务。
@@ -19,6 +21,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.1] - 2022-03-15
+使用 Phaser 原生的 Sprite 动画，及其回调来绘制冒险岛的动画，这是一个更加有效的动画绘制方案。
+### Added
+- 增加了怪物的动画封装，已经可以通过 API 播放怪物的动画；
+![image](https://user-images.githubusercontent.com/11524318/158236245-f7d1199c-fb37-4944-9e02-f8055aeb9d70.png)
+
+
+### Refactor
+- 人物的动作解析库重新编写，优化了 api，进度达到 90%
+### Removed
+- 删除之前编写的动画逻辑
+
 
 ## [0.1.0] - 2022-01-02
 ### Added
