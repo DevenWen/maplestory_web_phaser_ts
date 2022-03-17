@@ -1,5 +1,6 @@
 import { Mob } from '~/mob/Mob'
 import { CharacterPart, Player } from '~/player/Player'
+import { PlayerSkill } from '~/player/PlayerSkill'
 import MapleScene from './MapleScene'
 
 export default class TestMobScene extends MapleScene 
@@ -18,6 +19,7 @@ export default class TestMobScene extends MapleScene
         this.loadMobJson("0100100")
             .loadMobJson("0100101")
             .loadMobJson("0100120")
+            .loadSkillJson(200)
         
     }
 
@@ -34,6 +36,15 @@ export default class TestMobScene extends MapleScene
             .putOn(CharacterPart.Pants, 1060000)
             .putOn(CharacterPart.Weapon, 1302000)
             .play("stand1").facePlay("default")
+            .skillPlay({key: "skill_2001002_0_effect", repeat: -1})
+
+        // 定义一个 PlayerSkill 的 animation
+        // var playerSkill = new PlayerSkill(this.add.sprite(300, 300, ""))
+        // playerSkill.playEffect({key: "skill_2001002_0_effect", repeat: -1})
+        // playerSkill.play({
+        //     key: "skill_2001005_effect",
+        //     repeat: -1
+        // })
 
         // 设计一个物理的平台
         this.matter.world.setBounds();
@@ -45,9 +56,9 @@ export default class TestMobScene extends MapleScene
         // 点击鼠标，随机生成1个 怪物
         this.input.on("pointerup",function (pointer) {
             let r = Math.random()
-            if (r > 0.3)
+            if (r < 0.3)
                 this.mobs.push(new Mob(this, "0100100.img", Math.random()*400, 100).play("stand"))
-            else if (r > 0.6)
+            else if (r < 0.6)
                 this.mobs.push(new Mob(this, "0100101.img", Math.random()*400, 100).play("move"))
             else 
                 this.mobs.push(new Mob(this, "0100120.img", Math.random()*400, 100).play("move"))

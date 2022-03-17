@@ -135,4 +135,6 @@ files.forEach(file => {
 })
 
 // npm install libxmljs
+// CXXFLAGS="--std=c++17" npm install libxmljs 
+// Mac 有异常 https://github.com/libxmljs/libxmljs/issues/592
 // 将所有的资源转为 json： find . -name "*.img.xml" | xargs node xmlchanger.js

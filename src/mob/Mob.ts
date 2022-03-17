@@ -68,7 +68,7 @@ export class Mob extends Phaser.GameObjects.Sprite
 		this.addedToScene()
 		this.addListener(
 			Phaser.Animations.Events.ANIMATION_UPDATE, 
-			this.animation_update_callback
+			this.animationUpdateCallback
 		)
 		// 增加物理body
 		this.mob_height = 13
@@ -86,7 +86,7 @@ export class Mob extends Phaser.GameObjects.Sprite
 		this.container.add(sprite)
 	}
 
-	animation_update_callback(context, frame) 
+	animationUpdateCallback(context, frame) 
 	{
 		this.container.removeAll(true)
 		this.current_frame = frame

@@ -1,5 +1,6 @@
 import { loadMobAnimation, Mob } from "~/mob/Mob";
 import { loadBodyAnimation, loadFaceAnimation, Player } from "~/player/Player";
+import { loadSkillAnimation } from "~/player/PlayerSkill";
 
 
 /**
@@ -38,6 +39,12 @@ export default class MapleScene extends Phaser.Scene
 				console.debug("load face animation")
 				loadFaceAnimation(key, this)
 			}
+
+			if (key.startsWith("Skill"))
+			{
+				console.debug("load skill animtion")
+				loadSkillAnimation(key, this)
+			}
 		})
 
 		this.load.setBaseURL('http://localhost/assert/wz')
@@ -51,6 +58,12 @@ export default class MapleScene extends Phaser.Scene
 	protected loadMobJson(mobStr): this
 	{
 		this.load.json(`Mob/${mobStr}.img`, `Mob/${mobStr}.img.xml.json`)
+		return this
+	}
+
+	protected loadSkillJson(skillStr): this
+	{
+		this.load.json(`Skill/${skillStr}.img`, `Skill/${skillStr}.img.xml.json`)
 		return this
 	}
 

@@ -1,10 +1,12 @@
 
 import { padLeft } from "~/dataload/dataloader"
 import { DataLoader, Vector } from "~/dataload/DataStorage"
+import { PlayerSkill } from "./PlayerSkill"
 import Container = Phaser.GameObjects.Container
 import Sprite = Phaser.GameObjects.Sprite
 import Scene = Phaser.Scene
 import Frame = Phaser.Animations.AnimationFrame
+import Image = Phaser.GameObjects.Image
 
 function isNumber(value: string | number): boolean
 {
@@ -102,23 +104,23 @@ class PlayerFace extends Sprite
 		this.addedToScene()
 		this.addListener(
 			Phaser.Animations.Events.ANIMATION_UPDATE,
-			this.animation_update_callback
+			this.animationUpdateCallback
 		)
 	}
 
-	private animation_update_callback(context, frame)
+	private animationUpdateCallback(context, frame)
 	{
 		if (!frame) return
 		this.current_frame = frame
 
 		DataLoader.listWzSprite(`Character/Face/${frame.textureKey}`, (img, textureKey, z) => {
 			var pos = DataLoader.offset(this.parent, img)
-			var sprite = this.parent.addPart(textureKey, pos, z)
+			this.parent.addPart(textureKey, pos, z)
 		})
 	}
 
 	reload() {
-		this.animation_update_callback(null, this.current_frame)
+		this.animationUpdateCallback(null, this.current_frame)
 	}
 
 	play(anim): this
@@ -167,10 +169,11 @@ export class Player extends Sprite
 	private current_frame?: Frame
 	public mapCache = {}
 	private destroyPartKey = new Set<String>()
-	private parts: Map<String, Sprite> = new Map()
+	private parts: Map<String, Image> = new Map()
 	public physicalBody
 
 	public face: PlayerFace
+	public skill: PlayerSkill
 
 	constructor(scene: Scene, x?, y?)
 	{
@@ -185,9 +188,11 @@ export class Player extends Sprite
 		this.physicalBody = scene.matter.add.gameObject(this)
 		this.addedToScene()
 
+		this.skill = new PlayerSkill(this)
+
 		this.addListener(
 			Phaser.Animations.Events.ANIMATION_UPDATE,
-			this.animation_update_callback
+			this.animationUpdateCallback
 		)
 	}
 
@@ -206,7 +211,7 @@ export class Player extends Sprite
 		this.mapCache["lhandMove"] = vector
 	}
 
-	private animation_update_callback(context, frame): void
+	private animationUpdateCallback(context, frame): void
 	{
 		if (!frame) return
 		// 更新 Container
@@ -239,12 +244,12 @@ export class Player extends Sprite
 		return this
 	}
 
-	public addPart(texture, pos, z: string): Sprite {
+	public addPart(texture, pos, z: string): Image {
 		if (this.destroyPartKey.has(z)) return
 
 		if (this.parts.has(z)) {
-			let sprite = this.parts.get(z) as Phaser.GameObjects.GameObject
-			this.container.remove(sprite, true)
+			let image = this.parts.get(z) as Phaser.GameObjects.Image
+			this.container.remove(image, true)
 		}
 
 		var depth = this.zmap.indexOf(z)
@@ -252,14 +257,14 @@ export class Player extends Sprite
 		// 这是用来调整的3个像素点
 		const adjx = this.flipX ? -3 : 0
 
-		var sprite = this.scene.add.sprite(pos.x * flip_ + adjx, pos.y+32, texture)
+		var image = this.scene.add.image(pos.x * flip_ + adjx, pos.y+32, texture)
 			.setFlipX(this.flipX)
 			.setOrigin(this.flipX ? 1 : 0, 0)
 			.setDepth(depth)
 
-		this.container.add(sprite)
-		this.parts.set(z, sprite)
-		return sprite
+		this.container.add(image)
+		this.parts.set(z, image)
+		return image
 	}
 
 	public destroyPart(z: string) 
@@ -356,9 +361,16 @@ export class Player extends Sprite
 		return this
 	}
 
+	skillPlay(anim): this
+	{
+		this.skill.play(anim)
+		return this
+	}
+
 	update(time): void {
 			this.container.setPosition(this.x, this.y)
 			this.face.update(time)
+			this.skill.update(time)
 	}
 
 	setFlipX(value: boolean): this {
