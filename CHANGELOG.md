@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 使用 Phaser 原生的 Sprite 动画，及其回调来绘制冒险岛的动画，这是一个更加有效的动画绘制方案。
 ### Added
 - 增加了怪物的动画封装，已经可以通过 API 播放怪物的动画；
+- 增加眨眼的随机特效。(这让角色活了过来！OHoooo!)
 ![image](https://user-images.githubusercontent.com/11524318/158236245-f7d1199c-fb37-4944-9e02-f8055aeb9d70.png)
 
 
