@@ -6,7 +6,7 @@
 	- [x] 角色动作解析器（输入一个动作序列，角色能够进行动作自由播放）
 		- [x] 优化眼睛的动作变化
 		- [x] 进一步优化动作解析的性能
-	- [ ] 技能动画编写
+	- [x] 技能动画编写
 	- [ ] 角色状态及封装，使用状态机或者 ECS
 - [x] 敌人解析与封装 60%
 	- [ ] 完成了动画封装
@@ -21,6 +21,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.2] - 2022-03-18
+### Added
+- 增加技能特效的动画封装；
 
 ## [0.1.1] - 2022-03-15
 使用 Phaser 原生的 Sprite 动画，及其回调来绘制冒险岛的动画，这是一个更加有效的动画绘制方案。
