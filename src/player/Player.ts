@@ -45,7 +45,7 @@ export function loadFaceAnimation(json_key : String, scene: Phaser.Scene)
 					}
 				)
 			}
-			console.log("add face_expresion_anim", expresion_name, frames.length)
+			// console.log("add face_expresion_anim", expresion_name, frames.length)
 			scene.anims.create({
 				key: expresion_name,
 				frames: frames,

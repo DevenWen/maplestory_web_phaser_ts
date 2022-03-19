@@ -42,7 +42,7 @@ function loadSkillSubAnimation(scene: Phaser.Scene, skill_id, effect_node, prefi
 			duration: frame['delay'] || 80
 		})
 	}
-	console.debug("load skill animation: ", animationName)
+	// console.debug("load skill animation: ", animationName)
 	scene.anims.create({
 		key: animationName,
 		frames: frames,

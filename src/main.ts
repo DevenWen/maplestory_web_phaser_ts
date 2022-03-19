@@ -1,8 +1,10 @@
 import Phaser, { Scene } from 'phaser'
+import HelloWorldScene from './scenes/HelloWorldScene'
 import TestMobScene from './scenes/TestMobScene'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
+	backgroundColor: '#4488aa',
 	width: 800,
 	height: 600,
 	fps: {

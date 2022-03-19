@@ -42,7 +42,7 @@ export function loadMobAnimation(json_key : String, scene : Phaser.Scene) {
 								}
 						)
 				}
-				console.debug("add action_name", action_name)
+				// console.debug("add action_name", action_name)
 				scene.anims.create({
 						// https://blog.ourcade.co/posts/2020/phaser3-load-images-dynamically/
 						key: action_name,

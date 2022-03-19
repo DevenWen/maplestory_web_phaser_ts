@@ -1,3 +1,4 @@
+import { MapleMap } from "~/map/Map";
 import { loadMobAnimation, Mob } from "~/mob/Mob";
 import { loadBodyAnimation, loadFaceAnimation, Player } from "~/player/Player";
 import { loadSkillAnimation } from "~/player/PlayerSkill";
@@ -13,13 +14,20 @@ export default class MapleScene extends Phaser.Scene
 	cursors?
 	player?: Player
 
-	constructor()
+	map: MapleMap
+	map_id: string
+	map_path: string
+
+	constructor(map_id, path)
 	{
 		super("maple base")
+		this.map_id = map_id
+		this.map_path = path
 	}
 
 	preload()
 	{
+		this.map = new MapleMap(this, this.map_id, this.map_path)
 		this.cursors = this.input.keyboard.createCursorKeys()
 		this.load.on(Phaser.Loader.Events.ADD, (key: string) => {
 			if (key.startsWith("Mob"))
@@ -52,6 +60,7 @@ export default class MapleScene extends Phaser.Scene
 		this.load.json("zmap", "zmap.img.xml.json")
 		this.load.json('Character/00002000.img', "Character/00002000.img.xml.json")
 		this.load.json('Character/Face/00020000.img', 'Character/Face/00020000.img.xml.json')
+		this.map.load()
 
 	}
 

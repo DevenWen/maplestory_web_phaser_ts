@@ -8,7 +8,7 @@ export default class TestMobScene extends MapleScene
 
     constructor()
     {
-        super()
+        super("000010000", "Map/Map/Map0/000010000.img")
     }
 
     preload()
@@ -21,6 +21,13 @@ export default class TestMobScene extends MapleScene
             .loadMobJson("0100120")
             .loadSkillJson(200)
         
+        // this.textures.once(Phaser.Textures.Events.ADD, (key: string) => {
+        //     if (key.startsWith("textureKey_grassySoil.img")) {
+        //         console.log("load Map/Tile: ", key)
+        //         this.add.tileSprite(0, 0, 100, 100, key)
+        //     }
+
+        // })
     }
 
     create()
@@ -64,6 +71,7 @@ export default class TestMobScene extends MapleScene
                 this.mobs.push(new Mob(this, "0100120.img", Math.random()*400, 100).play("move"))
         }, this)
 
+        this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
     }
 
     update(time: number, delta: number): void {

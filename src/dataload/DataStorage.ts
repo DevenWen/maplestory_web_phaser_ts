@@ -11,7 +11,7 @@ export class DataLoader extends Phaser.Events.EventEmitter {
    * @param key 
    * @param callback 
    */
-  static getWzNode(key, callback)
+  static getWzNode(key, callback, sync?)
   {
     var imgpos = key.indexOf('.img')
     if (imgpos == -1) {
@@ -23,32 +23,50 @@ export class DataLoader extends Phaser.Events.EventEmitter {
     var subelements = key.substr(imgpos + 5);
 
     // 保证 cache 中含有这个 cache，此处有可能是失败的
-    var img_db = game.cache.obj.get(path)
-    // 假如没有缓存，则发起一次远程资源请求；
-    if (img_db == "loading") {
+    // info = {state: loading/loaded, callbacks: []}
+    var info = game.cache.obj.get(path)
+    if (info && info.state == "loaded") {
+      callback(getElementFromJSONAuto(info.img_db, subelements))
       return
     }
-    if (img_db) {
-      callback(getElementFromJSONAuto(img_db, subelements))
-    } else {
-      game.cache.obj.add(path, "loading")
-      // FIXME 后期需要改用动态配置的形式
-      let json = game.cache.json.get(path)
-      if (json) {
-        // console.log("load from cache", path)
-        var db = reparseTreeAsNodes(json) 
-        game.cache.obj.add(path, db)
-        callback(getElementFromJSONAuto(db, subelements))
-      } else {
-        axios.get("http://localhost/assert/wz/" + path + ".xml.json")
-          .then(data => {
-                  console.log("load from remote", path, data.status)
-                  var db = reparseTreeAsNodes(data.data)
-                  game.cache.obj.add(path, db)
-                  callback(getElementFromJSONAuto(db, subelements))
-          })
+    // 假如没有缓存，则发起一次远程资源请求；
+    if (info && info.state == "loading") {
+      info.callbacks.push([callback, subelements])
+      return
+    }
+
+    info = {state: "loading", callbacks: [ [callback, subelements] ], img_db: {}}
+    game.cache.obj.add(path, info)
+    // FIXME 后期需要改用动态配置的形式
+    let json = game.cache.json.get(path)
+    if (json) {
+      this.do_callback(path, json, info)
+      return
+    }
+    var xhttp = new XMLHttpRequest()
+    var url = "http://localhost/assert/wz/" + path + ".xml.json"
+    xhttp.open("GET", url, sync !== true)
+    xhttp.onreadystatechange = () => {
+      if (xhttp.readyState == 4) {
+        console.log(`remote get ${path} success`)
+        let resp = JSON.parse(xhttp.response)
+        this.do_callback(path, resp, info)
       }
     }
+    xhttp.send()
+  }
+
+  static do_callback(path, json, info) 
+  {
+    let db = reparseTreeAsNodes(json)
+    for (var i = 0; i < info.callbacks.length; i++) {
+      var callback = info.callbacks[i][0]
+      var subelements = info.callbacks[i][1]
+      callback(getElementFromJSONAuto(db, subelements))
+    }
+    game.cache.obj.add(path, 
+      {state: "loaded", callback: [], img_db: db}
+    )
   }
 
 
