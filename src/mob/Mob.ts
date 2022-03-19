@@ -1,5 +1,6 @@
 import { Game, GameObjects } from "phaser"
-import { DataLoader, Vector } from "~/dataload/DataStorage"
+import { DataLoader } from "~/dataload/DataStorage"
+import Vector = Phaser.Math.Vector2
 
 /**
  * 
@@ -93,7 +94,7 @@ export class Mob extends Phaser.GameObjects.Sprite
 		DataLoader.getWzSprite(frame.textureKey, (img, textureKey, z) => {
 			// 将 textureKey 绘制成 sprite 到 container 中
 			if (!this.scene.textures.get(textureKey)) return
-			var pos = Vector.create(img.origin.X, -img.origin.Y)
+			var pos = new Vector(img.origin.X, -img.origin.Y)
 			var img_size = {h: img["_image"].height, w: img["_image"].width}
 			// 将 TODO head 数据保存起来
 			this.addPart(textureKey, pos, z, img_size)

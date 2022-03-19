@@ -1,10 +1,11 @@
 import { padLeft } from "~/dataload/dataloader"
-import { DataLoader, Vector } from "~/dataload/DataStorage"
+import { DataLoader } from "~/dataload/DataStorage"
 import Container = Phaser.GameObjects.Container
 import Sprite = Phaser.GameObjects.Sprite
 import Scene = Phaser.Scene
 import Frame = Phaser.Animations.AnimationFrame
 import Image = Phaser.GameObjects.Image
+import Vector = Phaser.Math.Vector2
 
 enum SkillAnimationType
 {
@@ -141,7 +142,7 @@ export class PlayerSkill extends Sprite
 		this.container.removeAll(true)
 		// TODO 根据 frame 的 textrue，渲染
 		DataLoader.getWzSprite(frame.textureKey, (img, textureKey, z) => {
-			var pos = Vector.create(-img.origin.X, - img.origin.Y)
+			var pos = new Vector(-img.origin.X, - img.origin.Y)
 			this.addPart(textureKey, pos, z)
 		})
 

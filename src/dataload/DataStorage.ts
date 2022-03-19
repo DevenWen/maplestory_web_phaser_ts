@@ -2,33 +2,7 @@ import axios from 'axios'
 import Phaser from 'phaser'
 import {getElementFromJSON, reparseTreeAsNodes, getItemDataLocation, Node, getElementFromJSONAuto, UOL} from '../dataload/dataloader'
 import game from '~/main'
-export class Vector {
-  x: number = 0
-  y: number = 0
-
-  constructor(x: number, y: number) {
-    this.x = x
-    this.y = y
-  }
-
-  static init(): Vector {
-    return new Vector(0, 0)
-  }
-
-  static create1(src): Vector {
-    return new Vector(src["X"], src["Y"])
-  }
-
-  static create(x, y): Vector {
-    return new Vector(x, y)
-  }
-
-  static clone(src: Vector): Vector {
-    return new Vector(src.x, src.y)
-  }
-}
-
-
+import Vector = Phaser.Math. Vector2
 
 export class DataLoader extends Phaser.Events.EventEmitter {
  
@@ -140,14 +114,15 @@ export class DataLoader extends Phaser.Events.EventEmitter {
     // 算法来自：https://forum.ragezone.com/f923/looking-render-maplestory-gms-v83-1176964/
     let mapCache = player.mapCache
     let name = node.name
-		let origin = Vector.create(- node.origin.X, - node.origin.Y)
+		// let origin = Vector.create(- node.origin.X, - node.origin.Y)
+		let origin = new Vector(- node.origin.X, - node.origin.Y)
 		let offset = new Vector(0, 0)
 
 		if (node.map['brow']) {
-			let brow = Vector.create(-node.map['brow']["X"], -node.map['brow']["Y"])
+			let brow = new Vector(-node.map['brow']["X"], -node.map['brow']["Y"])
 
 			if (name == 'head') {
-				mapCache["head/brow"] = Vector.clone(brow)
+				mapCache["head/brow"] = brow.clone()
 			}
 
 			offset.x = origin.x + mapCache["head/neck"].x - mapCache["body/neck"].x - mapCache["head/brow"].x + brow.x
@@ -155,33 +130,33 @@ export class DataLoader extends Phaser.Events.EventEmitter {
 		}
 
 		if (node.map['neck']) {
-      let neck = Vector.create(-node.map['neck']["X"], -node.map['neck']["Y"])
+      let neck = new Vector(-node.map['neck']["X"], -node.map['neck']["Y"])
 			if (name == 'body') {
-				mapCache["body/neck"] = Vector.clone(neck)
+				mapCache["body/neck"] =  neck.clone()
 			}
 			if (name == 'head') {
-				mapCache["head/neck"] = Vector.clone(neck)
+				mapCache["head/neck"] = neck.clone()
 			}
       offset.x = origin.x + mapCache["head/neck"].x - mapCache["body/neck"].x
 			offset.y = origin.y + mapCache["head/neck"].y - mapCache["body/neck"].y
 		}
 
 		if (node.map['hand']) {
-      let hand = Vector.create(-node.map['hand']["X"], -node.map['hand']["Y"])
+      let hand = new Vector(-node.map['hand']["X"], -node.map['hand']["Y"])
 			if (name == 'arm') {
-        mapCache["arm/hand"] = Vector.clone(hand)
+        mapCache["arm/hand"] = hand.clone()
 			}
 			if (name == 'body') {
-        mapCache["body/hand"] = Vector.clone(hand)
+        mapCache["body/hand"] = hand.clone()
 			}
 			offset.x = origin.x + hand.x + mapCache["arm/navel"].x - mapCache["arm/hand"].x - mapCache["body/navel"].x
 			offset.y = origin.y + hand.y + mapCache["arm/navel"].y - mapCache["arm/hand"].y - mapCache["body/navel"].y
 		}
 
 		if (node.map['handMove']) {
-      let handMove = Vector.create(-node.map['handMove']["X"], -node.map['handMove']["Y"])
+      let handMove = new Vector(-node.map['handMove']["X"], -node.map['handMove']["Y"])
 			if (name == 'lHand') {
-        mapCache["lhandMove"] = Vector.clone(handMove)
+        mapCache["lhandMove"] = handMove.clone()
 			}
 
 			offset.x = origin.x + handMove.x - mapCache['lhandMove'].x
@@ -189,12 +164,12 @@ export class DataLoader extends Phaser.Events.EventEmitter {
 		}
 
 		if (node.map['navel']) {
-      let navel = Vector.create(-node.map['navel']["X"], -node.map['navel']["Y"])
+      let navel = new Vector(-node.map['navel']["X"], -node.map['navel']["Y"])
 			if (name == 'arm') {
-        mapCache["arm/navel"] = Vector.clone(navel)
+        mapCache["arm/navel"] = navel.clone()
 			}
 			if (name == 'body') {
-        mapCache["body/navel"] = Vector.clone(navel)
+        mapCache["body/navel"] = navel.clone()
 			}
 
 			offset.x = origin.x + navel.x - mapCache["body/navel"].x

@@ -1,12 +1,13 @@
 
 import { padLeft } from "~/dataload/dataloader"
-import { DataLoader, Vector } from "~/dataload/DataStorage"
+import { DataLoader } from "~/dataload/DataStorage"
 import { PlayerSkill } from "./PlayerSkill"
 import Container = Phaser.GameObjects.Container
 import Sprite = Phaser.GameObjects.Sprite
 import Scene = Phaser.Scene
 import Frame = Phaser.Animations.AnimationFrame
 import Image = Phaser.GameObjects.Image
+import Vector = Phaser.Math.Vector2
 
 function isNumber(value: string | number): boolean
 {
@@ -200,7 +201,7 @@ export class Player extends Sprite
 	{
 		this.mapCache = {}
 		this.destroyPartKey.clear()
-		var vector = Vector.init()
+		var vector = new Vector()
 		this.mapCache["head/brow"] = vector
 		this.mapCache["head/neck"] = vector
 		this.mapCache["body/neck"] = vector

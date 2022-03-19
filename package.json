@@ -37,6 +37,7 @@
 		"crypto-js": "^4.0.0",
 		"deasync": "^0.1.24",
 		"fast-xml-parser": "^3.19.0",
+		"matter": "^0.2.0",
 		"parcel-bundler": "^1.12.5",
 		"phaser": "^3.50.1",
 		"short-uuid": "^4.2.0",
