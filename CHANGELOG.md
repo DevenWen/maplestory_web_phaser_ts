@@ -11,6 +11,10 @@
 - [x] 敌人解析与封装 60%
 	- [ ] 完成了动画封装
 - [ ] 地图解析与封装
+	- [x] Tile 解析
+	- [ ] Obj 解析（Obj 的 img 文件过大，需要处理）
+	- [ ] Background 背景图的接入
+	- [ ] 地图的物理引擎接入
 - [ ] UI解析
 - [x] 寻找 wz 文件转 json 文件的办法，现在的资源都比较有限，需要规模地完成转化，并通过后端服务器进行资源服务。
 - [ ] 网络同步方案
@@ -21,6 +25,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.3] - 2022-03-19
+### Added
+- 地图解析，Tile 部分已经可以渲染
+### Refactor
+- 去除自己写的 Vertor 类，改用 Phaser 原生的 Vertor
+
 
 ## [0.1.2] - 2022-03-18
 ### Added
