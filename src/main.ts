@@ -1,4 +1,5 @@
 import Phaser, { Scene } from 'phaser'
+import DemoMap from './scenes/DemoMap'
 import HelloWorldScene from './scenes/HelloWorldScene'
 import TestMobScene from './scenes/TestMobScene'
 
