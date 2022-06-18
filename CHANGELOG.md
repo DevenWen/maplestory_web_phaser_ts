@@ -33,7 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.1.4] - 2022-06-19
 ## Added
-- 地图解析，Background 部分局部已经渲染。可以跟随 camera 移动景深。非常感谢 #2 @BillDong2021 的协助。
+- 地图解析，Background 部分局部已经渲染。可以跟随 camera 移动景深。非常感谢 [#2]([./issues/2](https://github.com/DevenWen/maplestory_web_phaser_ts/issues/2)) @BillDong2021 的协助。
+
+![image](https://user-images.githubusercontent.com/11524318/174450931-6b873d86-7b24-4c94-ae4b-3c9968da974e.png)
+
 
 ## [0.1.3] - 2022-03-19
 ### Added
