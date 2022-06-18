@@ -1,7 +1,15 @@
 import { Tilemaps } from "phaser";
 import { DataLoader } from "~/dataload/DataStorage"
 import Sprite = Phaser.GameObjects.Sprite
+import Camera = Phaser.Cameras.Scene2D.Camera
 
+enum BackGroundType {
+	TILED = 3, // 全摄像机
+	HMOVEA = 4, // x 轴 滑动
+	VMOVEA = 5,
+	HMOVEB = 6,
+	VMOVEB = 6,
+}
 
 class Obj
 {
@@ -43,14 +51,50 @@ class Obj
 
 class Tile
 {
-	x;y;texture;depth;draw;
-	constructor(x, y, texture, depth)
+	x;y;texture;depth;draw;sprite
+	node
+	constructor(node, x, y, texture, depth)
 	{
+		this.node = node
 		this.x = x
 		this.y = y
 		this.texture = texture
 		this.depth = depth
 		this.draw = false
+	}
+
+	flip(): boolean
+	{
+		return this.node["f"] == 1
+	}
+}
+
+class Back
+{
+	x;y;rx;ry;cx;cy;type;texture;depth;draw;
+	gameobject;
+	img;
+	node;
+
+	constructor(node, img, x, y, texture, depth)
+	{
+		this.node = node
+		this.img = img
+		this.x = x
+		this.y = y
+		this.rx = node['rx']
+		this.ry = node['ry']
+		this.cx = node['cx']
+		this.cy = node['cy']
+		this.type = node['type']
+		this.texture = texture
+		this.depth = depth
+		this.draw = false
+	}
+
+	flip(): boolean 
+	{
+		return this.node["f"] == 1
 	}
 }
 
@@ -58,7 +102,7 @@ class Tile
 /**
  * 冒险岛地图类
  */
-export class MapleMap 
+export class MapleMap
 {
 	private path
 	private map_id
@@ -66,17 +110,33 @@ export class MapleMap
 	private layers = new Array(8)
 	private scene: Phaser.Scene
 	private tiles: Tile[] = []
+	private backs: Back[] = []
+
+	private WOFFSET: number
+	private HOFFSET: number
 
 	constructor(scene: Phaser.Scene, map_id, path) 
 	{
+		const {width, height} = scene.scale
+		this.WOFFSET = width / 2
+		this.HOFFSET = height / 2
+
 		this.map_id = map_id
 		this.path = path
 		this.scene = scene
 		this.scene.textures.on(Phaser.Textures.Events.ADD, texture => {
 			// texture 加载完成后，进行渲染
 			this.tiles.filter(tile => !tile.draw && tile.texture == texture).forEach(tile => {
+				tile.sprite = this.scene.add.image(tile.x, tile.y, tile.texture)
+					.setOrigin(0, 0)
+					.setFlipX(tile.flip())
+					.setDepth(tile.depth)
 				tile.draw = true
-				this.scene.add.image(tile.x, tile.y, tile.texture).setOrigin(0, 0).setDepth(tile.depth)
+			})
+
+			this.backs.filter(back => !back.draw && back.texture == texture).forEach(back => {
+				this.renderback(back)
+				back.draw = true
 			})
 		})
 	}
@@ -86,23 +146,108 @@ export class MapleMap
 		DataLoader.getWzNode(this.path, (node) => {
 			console.log("MapleMap load callback: ", this.map_id, this.path)
 			this.imgNode = node
-			this.loadSprites()
-			this.loadFoothold()
+			this.loadTiles()
+			this.loadObjects()
+			// this.loadFoothold()
 			this.loadBack()
+		})
+	}
+
+	public update(time: number, delta: number): void {
+		this.backs.forEach(back => {
+
+			switch (back.type) {
+				case BackGroundType.HMOVEA:
+				case BackGroundType.HMOVEB:
+					if (back.draw) {
+						var tilesprit = back.gameobject as Phaser.GameObjects.TileSprite
+						tilesprit.tilePositionX += back.node["rx"] / 16
+					}
+					break
+				case BackGroundType.VMOVEA:
+				case BackGroundType.VMOVEB:
+					if (back.draw) {
+						var tilesprit = back.gameobject as Phaser.GameObjects.TileSprite
+						tilesprit.tilePositionX += back.node["ry"] / 16
+					}
+					break
+			}
 		})
 	}
 
 	private loadBack()
 	{
 		// 加载背景
+		var backinfo = this.imgNode['back']
+		backinfo.forEach((node, index) => {
+			console.log("backnode:", node, index)
+			// TODO 还有动画类型的资源
+			let path = `Map/Back/${node.bS}.img/back/${node.no}`
+			DataLoader.getWzSprite(path, (img, textureKey) => {
+				console.log(path, textureKey, img)
+				let origin = img["origin"]
+				this.backs.push(
+					new Back(
+						node,
+						img,
+						(node.x - origin.X) + this.WOFFSET, 
+						(node.y - origin.Y) + this.HOFFSET,
+						textureKey, 
+						index - 100)
+				)
+			})
+		})
+	}
 
+	private renderback(back: Back) {
+		// 渲染背景图, 将层次设置进去
+		const {width, height} = this.scene.scale
+		console.log("renderback: ", back)
+
+		let scrollX = 0
+		let scrollY = 0
+		
+		scrollX = - back.rx / 100
+		scrollY = - back.ry / 100
+		
+		if (back.type == BackGroundType.TILED) {
+			back.gameobject = this.scene.add.tileSprite(0, 0, width, height, back.texture)
+				.setOrigin(0,0)
+				.setScrollFactor(0, 0)
+				.setFlipX(back.flip())
+				.setDepth(back.depth)
+			return
+		}
+
+		if (back.type == BackGroundType.HMOVEA) {
+			// 横向移动
+			back.gameobject = this.scene.add.tileSprite(0, back.y, width, 0, back.texture)
+				.setOrigin(0,0)
+				.setScrollFactor(0, scrollY)
+				.setFlipX(back.flip())
+				.setDepth(back.depth)
+			return
+		}
+
+		if (back.type == BackGroundType.VMOVEA) {
+			back.gameobject = this.scene.add.tileSprite(back.x, 0, 0, height, back.texture)
+				.setOrigin(0,0)
+				.setScrollFactor(scrollX, 0)
+				.setFlipX(back.flip())
+				.setDepth(back.depth)
+			return
+		}
+
+		this.scene.add.image(back.x, back.y, back.texture)
+		.setOrigin(0, 0)			
+		.setScrollFactor(scrollX, scrollY)
+		.setFlipX(back.flip())
+		.setDepth(back.depth)
 	}
 
 	private loadFoothold()
 	{
-		// 加载落脚地，建立物理平台
-		// console.log("load Foothold", this.imgNode)
-
+		// TODO 落脚地，建立物理平台
 		this.imgNode['foothold'].forEach((layerNode) => {
 			console.log("laynode", layerNode)
 			layerNode.forEach(groupNode => {
@@ -115,69 +260,20 @@ export class MapleMap
 					
 					dl.moveTo(holdNode.x1, holdNode.y1)
 					dl.lineTo(holdNode.x2, holdNode.y2)
-
-					// cube.fillStyle(0xffffff, 1);
-    			// cube.fillRect(0, 0, 200, 200);
-					// this.scene.matter.add.gameObject(dl)
-					// var dl = this.scene.add.graphics()
-					// this.scene.matter.add.rectangle(0, 0, 0, 0, {})
-					// forbidFallDown: 1
-					// name: "82"
-					// next: 83
-					// prev: 81
-					// x1: 546
-					// x2: 624
-					// y1: 425
-					// y2: 425
 				})
 				dl.closePath()
 				dl.strokePath()
-				// this.scene.matter.add.gameObject(dl)
-				// this.scene.matter(dl)
 			})
-
-
 		})
-		// this.scene.matter.add.rectangle()
-
 	}
 
-	private loadSprites() 
+	private loadTiles() 
 	{
 		// 8 层的绘制
 		for (var i = 0; i < 8; i++) 
 		{
-			var output = this.layers[i] = {}
 			var input = this.imgNode[i]
 			var tileSet = input["info"]["tS"]
-
-			// output["objects"] = []
-			// input['obj'].forEach(obj => {
-			// 	output["objects"].push(new Obj(obj, this.scene))
-			// })
-
-			// output["objects"].sort((a, b) => {
-			// 	if (a.z == b.z) {
-			// 		return a.zid - b.zid
-			// 	} else {
-			// 		return a.z - b.z
-			// 	}
-			// })
-
-			// output["objects"].forEach((elem) => {
-			// 	console.log("绘制 objects: ", elem)
-			// 	// var image = this.scene.add.image(
-			// 	// 	elem.x - elem.sprite.originX,
-			// 	// 	elem.y - elem.sprite.originY,
-			// 	// 	elem.sprite.textureKey
-			// 	// )
-
-			// 	if (elem.flip)
-			// 	{
-			// 		// TODO 反转
-			// 		console.log("TODO flip elem")
-			// 	}
-			// })
 
 			if (tileSet) {
 				input["tile"].forEach(node => {
@@ -185,7 +281,7 @@ export class MapleMap
 					DataLoader.getWzSprite(tilepath, (img, textureKey) => {
 						let origin = img["origin"]
 						this.tiles.push(
-							new Tile(node.x - origin.X, node.y - origin.Y, textureKey, img.z)
+							new Tile(node, node.x - origin.X + this.WOFFSET, node.y - origin.Y + this.HOFFSET, textureKey, i - 80)
 						)
 					})
 				})
@@ -193,9 +289,8 @@ export class MapleMap
 		}
 	}
 
-
-
-
-
+	private loadObjects() {
+		// TODO 加载地图的 object
+	}
 
 }

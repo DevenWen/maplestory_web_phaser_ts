@@ -5,23 +5,19 @@ import TestMobScene from './scenes/TestMobScene'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
-	backgroundColor: '#4488aa',
-	width: 800,
-	height: 600,
+	// backgroundColor: '#4488aa',
+	width: 1024,
+	height: 768,
 	fps: {
 		// target: 30,
 		// forceSetTimeOut: true
 	},
 	physics: {
 		default: 'matter',
-		arcade: {
-			gravity: { y: 200 },
-			fps: 1
-		},
 		matter: {
 				debug: true,
 				gravity: {
-						y: 1
+						y: 0
 				},
 		}
 	},

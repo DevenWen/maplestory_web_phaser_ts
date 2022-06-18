@@ -5,6 +5,10 @@ export default class HelloWorldScene extends Phaser.Scene
 
     starGraphics;lineRectangle;
 
+    cursors?
+    player?: Phaser.GameObjects.Sprite
+    background: Phaser.GameObjects.TileSprite
+
 	constructor()
 	{
 		super('hello-world')
@@ -20,15 +24,26 @@ export default class HelloWorldScene extends Phaser.Scene
     }
 
     create() {
-        // this.add.image(400, 300, 'sky')
+        this.cursors = this.input.keyboard.createCursorKeys()
+        // this.add.image(0, 0, 'sky')
+        const {width, height} = this.scale
+        this.background = this.add.tileSprite(0, 0, width, height, 'sky').setOrigin(0, 0).setScrollFactor(0, 0)
 
-        var graphics = this.add.graphics()
-        graphics.lineStyle(5, 0xFF00FF, 1.0);
-        graphics.beginPath();
-        graphics.moveTo(100, 100);
-        graphics.lineTo(200, 200);
-        graphics.closePath();
-        graphics.strokePath();
+        this.add.sprite(0, 0, 'logo').setOrigin(0, 0).setScrollFactor(0.1, 0.5)
+        this.add.sprite(100, 100, 'logo').setOrigin(0, 0).setScrollFactor(0, 0.5)
+        this.add.sprite(0, 0, 'logo').setOrigin(0, 0).setScrollFactor(0, 0)
+
+
+        this.player = this.add.sprite(0, 0, 'red')
+        this.cameras.main.startFollow(this.player, true, 0.05, 0.05)
+
+        // var graphics = this.add.graphics()
+        // graphics.lineStyle(5, 0xFF00FF, 1.0);
+        // graphics.beginPath();
+        // graphics.moveTo(100, 100);
+        // graphics.lineTo(200, 200);
+        // graphics.closePath();
+        // graphics.strokePath();
 
         // this.matter.add.gameObject(graphics)
         
@@ -51,12 +66,26 @@ export default class HelloWorldScene extends Phaser.Scene
         // this.matter.add.gameObject(this.lineRectangle)
     }
     
-    // function update() {
-    //     lineRectangle.rotation += 0.01;
-    //     starGraphics.rotation -= 0.01;
-    //     starGraphics.scaleX = 0.8 + Math.abs(Math.sin(starGraphics.rotation));
-    //     starGraphics.scaleY = 0.8 + Math.abs(Math.sin(starGraphics.rotation));
-    // }
+    update(time: number, delta: number): void {
+        let cursors = this.cursors
+        this.background.tilePositionX += 0.5
+        if (cursors.left.isDown)
+        {
+            this.player.setX(this.player.x - 5)
+        }
+        if (cursors.right.isDown)
+        {
+            this.player.setX(this.player.x + 5)
+        }
+        if (cursors.up.isDown)
+        {
+            this.player.setY(this.player.y - 5)
+        }
+        if (cursors.down.isDown)
+        {
+            this.player.setY(this.player.y + 5)
+        }
+    }
     
     drawStar(graphics, cx, cy, spikes, outerRadius, innerRadius, color, lineColor) {
         var rot = Math.PI / 2 * 3;

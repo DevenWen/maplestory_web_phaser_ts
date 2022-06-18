@@ -1,3 +1,4 @@
+import { Events } from 'matter'
 import { Mob } from '~/mob/Mob'
 import { CharacterPart, Player } from '~/player/Player'
 import { PlayerSkill } from '~/player/PlayerSkill'
@@ -54,24 +55,24 @@ export default class TestMobScene extends MapleScene
         // })
 
         // 设计一个物理的平台
-        this.matter.world.setBounds();
-        var platforms = this.matter.add.image(400, 600, 'platform', "platform", {isStatic: true, restitution: 0.8})
-        platforms.setScale(2, 0.5);
-        platforms.setFriction(0);
-        this.matter.add.mouseSpring({ length: 1, stiffness: 0.6 });
+        // this.matter.world.setBounds();
+        // var platforms = this.matter.add.image(400, 600, 'platform', "platform", {isStatic: true, restitution: 0.8})
+        // platforms.setScale(2, 0.5);
+        // platforms.setFriction(0);
+        // this.matter.add.mouseSpring({ length: 1, stiffness: 0.6 });
 
         // 点击鼠标，随机生成1个 怪物
-        this.input.on("pointerup",function (pointer) {
-            let r = Math.random()
-            if (r < 0.3)
-                this.mobs.push(new Mob(this, "0100100.img", Math.random()*400, 100).play("stand"))
-            else if (r < 0.6)
-                this.mobs.push(new Mob(this, "0100101.img", Math.random()*400, 100).play("move"))
-            else 
-                this.mobs.push(new Mob(this, "0100120.img", Math.random()*400, 100).play("move"))
-        }, this)
+        // this.input.on("pointerup",function (pointer) {
+        //     let r = Math.random()
+        //     if (r < 0.3)
+        //         this.mobs.push(new Mob(this, "0100100.img", Math.random()*400, 100).play("stand"))
+        //     else if (r < 0.6)
+        //         this.mobs.push(new Mob(this, "0100101.img", Math.random()*400, 100).play("move"))
+        //     else 
+        //         this.mobs.push(new Mob(this, "0100120.img", Math.random()*400, 100).play("move"))
+        // }, this)
 
-        this.cameras.main.startFollow(this.player, true, 0.05, 0.05);
+        this.cameras.main.startFollow(this.player, true, 0.1, 0.1);
     }
 
     update(time: number, delta: number): void {
@@ -81,18 +82,32 @@ export default class TestMobScene extends MapleScene
         let cursors = this.cursors
         if (cursors.left.isDown)
         {
-            sprite.physicalBody.setVelocityX(-5);
+            // sprite.physicalBody.setVelocityX(-5);
+            sprite.x += -5
             sprite.setFlipX(false)
         }
         if (cursors.right.isDown)
         {
-            sprite.physicalBody.setVelocityX(5)
+            // sprite.physicalBody.setVelocityX(5)
+            sprite.x += 5
             sprite.setFlipX(true)
         }
         if (cursors.up.isDown)
         {
-            sprite.physicalBody.setVelocityY(-5)
+            sprite.y += -5
+            // sprite.physicalBody.setVelocityY(-5)
         }
+        if (cursors.down.isDown) 
+        {
+            sprite.y += 5
+        }
+    }
+
+    debug(open) {
+        if (open) {
+            
+        }
+
     }
 
 }

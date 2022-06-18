@@ -3,7 +3,6 @@ import { loadMobAnimation, Mob } from "~/mob/Mob";
 import { loadBodyAnimation, loadFaceAnimation, Player } from "~/player/Player";
 import { loadSkillAnimation } from "~/player/PlayerSkill";
 
-
 /**
  * 冒险岛底层场景
  */
@@ -82,6 +81,7 @@ export default class MapleScene extends Phaser.Scene
 	}
 
 	update(time: number, delta: number): void {
+		this.map.update(time, delta)
 		this.mobs.forEach(mob => mob.update())
 		if (this.player)
 			this.player.update(time)
