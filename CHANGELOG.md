@@ -13,10 +13,10 @@
 - [ ] 地图解析与封装
 	- [x] Tile 解析
 	- [ ] Obj 解析（Obj 的 img 文件过大，需要处理）
-	- [ ] Background 背景图的接入
-		- [ ] 背景图的分类实现
+	- [x] Background 背景图的接入
+		- [x] 背景图的分类实现
 		- [ ] 背景图的动画实现
-		- [ ] 背景图跟随 carmera
+		- [x] 背景图跟随 carmera
 	- [ ] 地图的物理引擎接入
 - [ ] UI解析
 - [x] 寻找 wz 文件转 json 文件的办法，现在的资源都比较有限，需要规模地完成转化，并通过后端服务器进行资源服务。
@@ -30,6 +30,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.1.4] - 2022-06-19
+## Added
+- 地图解析，Background 部分局部已经渲染。可以跟随 camera 移动景深。非常感谢 #2 @BillDong2021 的协助。
 
 ## [0.1.3] - 2022-03-19
 ### Added
