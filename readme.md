@@ -6,6 +6,10 @@
 4. 根据资源的设定，编写资源库；
 
 ## 截图
+
+![image](https://user-images.githubusercontent.com/11524318/174450492-188bd592-f96c-4718-a8a8-7dfe2389c72d.png)
+
+
 ![image](https://user-images.githubusercontent.com/11524318/159130137-c0afdca4-2871-4060-9244-de783b693814.png)
 
 
