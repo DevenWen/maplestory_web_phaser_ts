@@ -1,6 +1,7 @@
 import Phaser, { Scene } from 'phaser'
 import DemoMap from './scenes/DemoMap'
 import HelloWorldScene from './scenes/HelloWorldScene'
+import LoadTPDemo from './scenes/LoadTPScene'
 import TestMobScene from './scenes/TestMobScene'
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -21,7 +22,7 @@ const config: Phaser.Types.Core.GameConfig = {
 				},
 		}
 	},
-	scene: [TestMobScene],
+	scene: [LoadTPDemo],
 	render: {
 		antialias: false,
 		pixelArt: true,
