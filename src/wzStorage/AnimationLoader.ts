@@ -2,6 +2,7 @@ import { Scene } from "phaser";
 
 // 开放的动作
 var animaitions = [
+	"stand1",
 	"walk1",
 	"heal", // 测试 UOL
 	"homing", // 测试 action
@@ -41,7 +42,7 @@ function loadBodyAnimation(node, scene: Scene)
 				frames: frames,
 				repeat: -1
 		})
-		console.log("loaded animation: " + motion_name)
+		scene.anims.emit("motionadd", [motion_name])
 	}
 }
 
@@ -65,6 +66,7 @@ function loadModAnimation(json_key: String, scene: Scene)
 
 function registerAnimationCallback(scene: Scene) {
 	scene.load.json("Character/00002000.img.xml.json", "Character/00002000.img.xml.json")
+	scene.load.json("Character/00012000.img.xml.json", "Character/00012000.img.xml.json")
 	scene.load.on(Phaser.Loader.Events.FILE_COMPLETE, (key: string, type, data) => {
 		if (key == 'Character/00002000.img.xml.json') {
 			loadBodyAnimation(data, scene)

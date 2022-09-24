@@ -136,6 +136,7 @@ export class DataLoader extends Phaser.Events.EventEmitter {
 		let origin = new Vector(- node.origin.X, - node.origin.Y)
 		let offset = new Vector(0, 0)
 
+    // 眉头
 		if (node.map['brow']) {
 			let brow = new Vector(-node.map['brow']["X"], -node.map['brow']["Y"])
 
@@ -190,6 +191,7 @@ export class DataLoader extends Phaser.Events.EventEmitter {
         mapCache["body/navel"] = navel.clone()
 			}
 
+      // body 使用原来的 origin
 			offset.x = origin.x + navel.x - mapCache["body/navel"].x
 			offset.y = origin.y + navel.y - mapCache["body/navel"].y
 		}

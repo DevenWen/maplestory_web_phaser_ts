@@ -7,7 +7,9 @@ import RPCWzStorage from '~/wzStorage/RPCWzStorge'
 
 export default class LoadTPDemo extends Phaser.Scene
 {
+	avatar: Avatar
 	wzStorage: IWzStorage;
+	motion_list = []
 
 	constructor()
 	{
@@ -16,47 +18,52 @@ export default class LoadTPDemo extends Phaser.Scene
 
 	preload()
 	{
-			this.wzStorage = new RPCWzStorage(this)
-			this.load.setBaseURL('http://localhost/assert/wz/')
-			// this.load.json("Character/00002000.img", "Character/00002000.img.xml.json")
-			// this.load.atlas("Character/00002000.img", "Character/00002000.img.tp.png", "Character/00002000.img.tp.json")
+		this.wzStorage = new RPCWzStorage(this)
+		this.load.setBaseURL('http://localhost/assert/wz/')
+
+		// 打印所有的动作
+		this.anims.addListener("motionadd", (motion_name) => {
+			console.log("loaded animation: " + motion_name)
+			this.motion_list.push(motion_name)
+			this.add.text(400, this.motion_list.length * 15, motion_name)
+				.setInteractive()
+				.on("pointerdown", () => {
+					this.avatar.play({
+						key: motion_name,
+						repeat: -1,
+					})
+				})
+		})
 	}
 
 	create() {
-		// var bodynode = this.cache.json.get("Character/00002000.img")
-		// 加载动作
-		// loadBodyAnimation(bodynode, this)
-		// console.log("create")
-		// this.load.atlas("Character/00002000.img", "Character/00002000.img.tp.png", "Character/00002000.img.tp.json")
-		// this.load.json("Character/00002000.img", "Character/00002000.img.xml.json")
-		// this.load.start()
-
-		// this.input.on('pointerup', () => {
-		// 	this.wzStorage.getWzNode("Character/00002000.img/alert/0/arm", (data) => {
-		// 		// console.debug("callback: data")
-		// 		var img = new Phaser.GameObjects.Sprite(this, Phaser.Math.Between(0, 800), Phaser.Math.Between(0, 600), "Character/00002000", "-alert-0-arm.jpg")
-		// 		img.addedToScene()
-		// 	})
-		// })
-
-
-		// this.add.sprite(100, 100, "Character/00002000", "-alert-0-arm.jpg")
+		// 坐标
+		this.setIcon()
 		
-
-		var avatar = new Avatar(this, 100, 100)
-		this.input.on("pointerup", () => {
-			avatar.anims.play({
-				key: "motion/walk1",
-				repeat: 5,
-			})
-			// let imt = new Phaser.GameObjects.Image(this, 200, 200, "Character/00002000.img.texutre", "-alert-0-arm.jpg")
-			// this.add.existing(imt)
-			// imt.addedToScene()
-			// this.add.sprite(Phaser.Math.Between(0, 800), Phaser.Math.Between(0, 600), "Character/00002000.img.texutre", "-alert-0-arm.jpg")
-			// this.add.image(Phaser.Math.Between(0, 800), Phaser.Math.Between(0, 600), "Character/00002000.img.texutre", "-alert-0-arm.jpg")
+		
+		// 人物测试
+		this.avatar = new Avatar(this, 200, 200)
+		this.avatar.anims.play({
+			key: "motion/walk1",
+			repeat: -1,
+			yoyo: false
 		})
-		
 
+	}
+
+	setIcon() {
+		this.add.text(10, 200, "FLIP")
+			.setInteractive()
+			.on("pointerdown", (pointer) => {
+				console.log("set flip")
+				this.avatar.setFlipX(!this.avatar.flipX)
+			})
+
+
+		var text1 = this.add.text(10, 10, '');
+		this.input.on("pointermove", (pointer) => {
+			text1.setText(`x: ${pointer.x} y: ${pointer.y}`)
+		})
 	}
 	
 	update(time: number, delta: number): void {
