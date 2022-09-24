@@ -4,7 +4,7 @@
  * WzStorage 资源库接口
  * 
  */
-interface IWzStorage {
+export interface IWzStorage {
 
 
 	/**
@@ -19,3 +19,4 @@ interface IWzStorage {
 
 
 }
+

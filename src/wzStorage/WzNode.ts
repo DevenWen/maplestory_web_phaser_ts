@@ -1,15 +1,19 @@
-
+import axios from 'axios'
+import { Scene } from 'phaser'
 import { Queue } from 'queue-typescript'
 
-function createWzNode(curnode, parent: WzNode | null): WzNode 
+function createWzNode(curnode, parent: WzNode | null, scene: Scene = null): WzNode 
 {
+	if (parent == null)
+		parent = createRootWzNode(scene)
+
 	if (typeof curnode !== 'object') return null
 	if (curnode === null) return null
 	if (curnode['type'] === 'uol') {
-		return new UOL(parent, curnode, curnode["path"])
+		return new UOL(scene, parent, curnode, curnode["path"])
 	}
 
-	const result = new WzNode(parent, curnode)
+	const result = new WzNode(scene, parent, curnode)
 	for (let i in curnode["_keys"])
 	{
 		let key = curnode["_keys"][i]
@@ -18,10 +22,17 @@ function createWzNode(curnode, parent: WzNode | null): WzNode
 	return result
 }
 
+function createRootWzNode(scene: Scene | null): WzNode
+{
+	var wznode = new WzNode(scene, null, {})
+	return wznode
+}
+
 /**
  * Wz 节点数据
  */
 class WzNode {
+	scene: Scene | null
 	name: string
 	parent: WzNode | null
 	children: Map<string, WzNode> = new Map<string, WzNode>()
@@ -33,10 +44,32 @@ class WzNode {
 	 * @param parent 
 	 * @param data 
 	 */
-	constructor(parent, json_data) {
-		this.name = json_data["name"]
+	constructor(scene: Scene | null, parent: WzNode | null, json_data) {
+		this.scene = scene
+		this.name = json_data["name"] || ""
 		this.parent = parent
 		this.data = json_data
+	}
+
+	/**
+	 * 合并一个 WzNode 节点
+	 */
+	merge(path: Queue<string>, wznode: WzNode) {
+		// 假如路径存在，则合并到下一个，否则创建一个节点；
+		// 到最后一个，则将 WzNode 节点写到 chilren 里去
+		var nodeName = path.removeHead()
+		if (nodeName == null || nodeName == wznode['name'])
+		{
+			wznode.parent = this
+			this.children.set(wznode.name, wznode)
+			return
+		}
+		let children = this.children.get(nodeName)
+		if (children == null) {
+			children = new WzNode(this.scene, this, {name: nodeName})
+			this.children.set(nodeName, children)
+		}
+		children.merge(path, wznode)
 	}
 
 	/**
@@ -59,7 +92,7 @@ class WzNode {
 		return this.data
 	}
 
-	find(path: Queue<string> | string, cb: Function): WzNode {
+	find(path: Queue<string> | string, cb: Function = (node) => {}): WzNode {
 		if (typeof path === "string")
 			path = new Queue<string>(...path.split("/"))
 
@@ -68,15 +101,16 @@ class WzNode {
 		if (next == '.') return this.find(path, cb)
 		if (next == '') return this.find(path, cb)
 		if (next == null) {
-			cb(this.data)
+			cb(this.data, this)
 			return this
 		}
 		
 		if (this.children.has(next)) {
 			return this.children.get(next).find(path, cb)
 		} else {
-			console.warn("children no found: ", this.name, next)
-			// 假如找不到，应该执行 RPC 获取数据
+			console.warn(
+				"children no found, current node:", 
+				this.getPath(), ", miss: ", next)
 			return null
 		}
 	}
@@ -88,13 +122,13 @@ class WzNode {
 class UOL extends WzNode {
 	// 引用路径
 	path: string
-	constructor(parent, json_data, path: string) 
+	constructor(scene: Scene, parent, json_data, path: string) 
 	{
-		super(parent, json_data)
+		super(scene, parent, json_data)
 		this.path = path // 算法上会比数据多一个向上遍历
 	}
 
-	find(path: Queue<string>, cb: Function): WzNode
+	find(path: Queue<string>, cb: Function = (node) => {}): WzNode
 	{
 		// 引用类节点，先根据自身的 path 查找到源节点，再进行
 		let next = path.removeHead()
@@ -113,4 +147,4 @@ class UOL extends WzNode {
 }
 
 
-export {WzNode, createWzNode}
+export {WzNode, createWzNode, createRootWzNode}
