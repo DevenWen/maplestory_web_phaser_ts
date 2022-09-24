@@ -2,7 +2,7 @@ import axios from 'axios'
 import { Scene } from 'phaser'
 import { Queue } from 'queue-typescript'
 
-function createWzNode(curnode, parent: WzNode | null, scene: Scene = null): WzNode 
+function createWzNode(curnode, parent: WzNode | null, scene: Scene = null, texture: string | null = null): WzNode 
 {
 	if (parent == null)
 		parent = createRootWzNode(scene)
@@ -10,14 +10,14 @@ function createWzNode(curnode, parent: WzNode | null, scene: Scene = null): WzNo
 	if (typeof curnode !== 'object') return null
 	if (curnode === null) return null
 	if (curnode['type'] === 'uol') {
-		return new UOL(scene, parent, curnode, curnode["path"])
+		return new UOLWzNode(scene, parent, curnode, curnode["path"])
 	}
 
-	const result = new WzNode(scene, parent, curnode)
+	const result = new WzNode(scene, parent, curnode, texture)
 	for (let i in curnode["_keys"])
 	{
 		let key = curnode["_keys"][i]
-		result.children.set(key, createWzNode(curnode[key], result))
+		result.children.set(key, createWzNode(curnode[key], result, scene, texture))
 	}
 	return result
 }
@@ -29,7 +29,7 @@ function createRootWzNode(scene: Scene | null): WzNode
 }
 
 /**
- * Wz 节点数据
+ * Wz 节点数据结构
  */
 class WzNode {
 	scene: Scene | null
@@ -38,17 +38,20 @@ class WzNode {
 	children: Map<string, WzNode> = new Map<string, WzNode>()
 	data: object
 
+	texture: string | null
+
 	/**
 	 * 构建 WzNode
 	 * 
 	 * @param parent 
 	 * @param data 
 	 */
-	constructor(scene: Scene | null, parent: WzNode | null, json_data) {
+	constructor(scene: Scene | null, parent: WzNode | null, json_data, texture: string | null = null) {
 		this.scene = scene
 		this.name = json_data["name"] || ""
 		this.parent = parent
 		this.data = json_data
+		this.texture = texture
 	}
 
 	/**
@@ -119,7 +122,7 @@ class WzNode {
 /**
  * 引用类节点
  */
-class UOL extends WzNode {
+class UOLWzNode extends WzNode {
 	// 引用路径
 	path: string
 	constructor(scene: Scene, parent, json_data, path: string) 
@@ -144,7 +147,14 @@ class UOL extends WzNode {
 		console.error("wznode find error: ", next, path, this)
 		return this
 	}
+
+	getRef(): WzNode
+	{
+		let path = new Queue<string>(...this.path.split("/"))
+		return this.parent.find(path)
+	}
+	
 }
 
 
-export {WzNode, createWzNode, createRootWzNode}
+export {WzNode, UOLWzNode, createWzNode, createRootWzNode}
