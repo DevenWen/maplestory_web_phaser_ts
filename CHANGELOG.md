@@ -31,6 +31,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.0] - 2022-09-224
+## Added
+- 新开了一个分支：refactor_player_info 
+- 重现编写了 WZ 资源的加载器，加载过程深度结合 Phaser 的原有框架，能够复用其加载上的性能优化
+
 ## [0.1.4] - 2022-06-19
 ## Added
 - 地图解析，Background 部分局部已经渲染。可以跟随 camera 移动景深。非常感谢 [#2]([./issues/2](https://github.com/DevenWen/maplestory_web_phaser_ts/issues/2)) @BillDong2021 的协助。
