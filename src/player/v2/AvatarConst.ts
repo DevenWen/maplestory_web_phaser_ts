@@ -162,6 +162,7 @@ export function depthOf_Z(z: string)
 export enum AvatarPart {
 	Head = 'head',
 	Body = 'body',
+	Face = 'face',
 	Hair = 'hair',
 	Cap = 'cap',
 	Longcoat = 'longcoat',

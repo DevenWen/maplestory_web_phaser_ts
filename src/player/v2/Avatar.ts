@@ -4,9 +4,83 @@ import Sprite = Phaser.GameObjects.Sprite
 import { AvatarPart, depthOf_Z } from './AvatarConst'
 import RPCWzStorage from "~/wzStorage/RPCWzStorge"
 import Vector = Phaser.Math.Vector2
-import { WzNode } from "~/wzStorage/WzNode"
 
 const OO = new Vector()
+
+enum AvatarEvent {
+	TIMER_ONE_SECOND = "timer",
+	POSITION_CHANGE = "position_change",
+	FLIP_CHANGE = "flip_change",
+	ANIMATION_UPDATE_COMPLETE = "animation_update_complete"
+
+}
+
+class Face extends Sprite
+{
+	private parent: Avatar
+	private container: Container
+	private currentFrame: Phaser.Animations.AnimationFrame
+	private nextBlink: integer = 0
+
+	constructor(scene: Scene, parent: Avatar)
+	{
+		super(scene, 0, 0, "")
+		this.parent = parent
+		this.container = scene.add.container(parent.x, parent.y)
+		this.addListener(
+			Phaser.Animations.Events.ANIMATION_UPDATE,
+			this.animationUpdateCallback
+		)
+		
+		this.parent.addListener(
+			AvatarEvent.POSITION_CHANGE,
+			(self) => {
+				this.container.setX(self.x) 
+				this.container.setY(self.y)
+			}
+		)
+
+		// 监听动作变更，变更完成后，需要重新绘制表情
+		this.parent.addListener(
+			AvatarEvent.ANIMATION_UPDATE_COMPLETE,	
+			(self) => {this.animationUpdateCallback(null, this.currentFrame)}
+		)
+
+		// auto blink
+		this.parent.addListener(
+			AvatarEvent.ANIMATION_UPDATE_COMPLETE,
+			(self) => {
+				if (scene.time.now > this.nextBlink &&
+					this.currentFrame &&
+					this.currentFrame.textureKey.endsWith("default"))
+				{
+					this.parent.facePlay("blink")
+					this.nextBlink = scene.time.now + Math.floor(Math.random()*7000)
+				}
+			}
+		)
+		this.addedToScene()
+	}
+
+	private animationUpdateCallback(
+		animation: Phaser.Animations.Animation, 
+		frame: Phaser.Animations.AnimationFrame)
+	{
+		this.container.removeAll(true)
+		if (!frame) return
+		this.currentFrame = frame
+
+		RPCWzStorage.getInstance().listCanvasNode(
+			`Character/Face/${this.currentFrame.textureKey}`,
+			(wznode, img) => {
+				let position = this.parent.calOrigin(wznode)
+				img = this.parent.calfinallyPosition(wznode, position, img)
+				this.container.add(img)
+			}
+		)
+	}
+
+}
 
 /**
  * 纸娃娃对象
@@ -17,6 +91,7 @@ class Avatar extends Sprite
 	 * 纸娃娃粘贴容器
 	 */
 	public container: Container
+	public face: Face
 
 	/**
 	 * 动作
@@ -27,10 +102,16 @@ class Avatar extends Sprite
 	 */
 	public motionIndex: string
 
+	/**
+	 * 上一次坐标
+	 */
+	private lastPosition: Vector = new Vector()
+
 	constructor(scene: Scene, x?, y?)
 	{
 		super(scene, x, y, "")
 		this.container = scene.add.container(x, y)
+		this.face = new Face(scene, this)
 
 		this.setSize(64, 64)
 
@@ -39,10 +120,18 @@ class Avatar extends Sprite
 			this.animationUpdateCallback
 		)
 
+		this.addListener(
+			AvatarEvent.POSITION_CHANGE,
+			(self) => {this.container.setX(self.x), this.container.setY(self.y)}
+		)
+
 		this.setData(AvatarPart.Body, "00002000")
 		this.setData(AvatarPart.Head, "00012000")
+		this.setData(AvatarPart.Face, "00020000")
+
 
 		this.addedToScene()
+		this.facePlay("default")
 	}
 
 	private animationUpdateCallback(
@@ -56,12 +145,21 @@ class Avatar extends Sprite
 		this.drawAvatar()
 	}
 
+	public facePlay(anim): this
+	{
+		this.face.chain([
+			{key: `${this.data.values.face}.img/${anim}`, repeat: 0, yoyo: true},
+			{key: `${this.data.values.face}.img/default`, repeat: -1}
+		]).stop()
+		return this
+	}
+
 	public drawAvatar()
 	{
-		// console.log(`1 draw: motion ${this.motion}, frame: ${this.motionIndex}`)
 		// 绘制前清空前面的数据
 		this.resetAction()
 		this.container.removeAll(true)
+		if (this.container.data) {this.container.data.reset()}
 		this.data.values.avatarMap = {}
 		
 		// 1. 收集所有的偏移量
@@ -71,6 +169,9 @@ class Avatar extends Sprite
 		this.drawBody()
 		this.drawHead()
 		// 显示
+
+
+		this.emit(AvatarEvent.ANIMATION_UPDATE_COMPLETE, this)
 	}
 
 	/**
@@ -97,7 +198,7 @@ class Avatar extends Sprite
 	 * 计算数据的偏移量
 	 * @param node
 	 */
-	private calOrigin(node): Vector {
+	public calOrigin(node): Vector {
 		// 算法来自：https://forum.ragezone.com/f923/looking-render-maplestory-gms-v83-1176964/
 		// 素材的粘贴顺序和 map 的计算顺序是相关的，不能先算好 map 的数据，再考虑统一粘贴
 		let name = node.name
@@ -179,14 +280,8 @@ class Avatar extends Sprite
 		return result
 	}
 
-	/**
-	 * 将贴图贴到 container 里
-	 * 
-	 * @param wznodeData 源数据
-	 * @param position 计算出的坐标
-	 * @param image
-	 */
-	private addToContainer(wznodeData, position, image: Phaser.GameObjects.Image) {
+	public calfinallyPosition(wznodeData, position, image: Phaser.GameObjects.Image): Phaser.GameObjects.Image
+	{
 		let depth = depthOf_Z(wznodeData.z)
 		let flip_ = this.flipX ? -1 : 1
 		let adjx = this.flipX ? -3 : 0
@@ -195,6 +290,19 @@ class Avatar extends Sprite
 				 .setFlipX(this.flipX)
 				 .setOrigin(this.flipX ? 1 : 0, 0)
 				 .setDepth(depth)
+		return image
+	}
+
+	/**
+	 * 将贴图贴到 container 里
+	 * 
+	 * @param wznodeData 源数据
+	 * @param position 计算出的坐标
+	 * @param image
+	 */
+	public addToContainer(wznodeData, position, image: Phaser.GameObjects.Image) {
+		image = this.calfinallyPosition(wznodeData, position, image)
+		this.container.setData(wznodeData.z, true)
 		this.container.add(image)
 	}
 
@@ -229,7 +337,7 @@ class Avatar extends Sprite
 	 */
 	private drawFace()
 	{
-
+		// this.face.reload()
 	}
 
 
@@ -248,7 +356,29 @@ class Avatar extends Sprite
 	 */
 	private drawHair()
 	{
+		
+	}
 
+	private emitPosition() {
+		if (this.lastPosition && (this.lastPosition.x != this.x || this.lastPosition.y != this.y)) {
+			// 坐标不变
+			this.emit(AvatarEvent.POSITION_CHANGE, this)
+		}
+
+		this.lastPosition.x = this.x			
+		this.lastPosition.y = this.y	
+	}
+
+	setFlipX(value: boolean): this {
+		super.setFlipX(value)
+		this.drawAvatar()
+		this.emit(AvatarEvent.FLIP_CHANGE, [this])
+		return this
+	}
+
+
+	update(...args: any[]): void {
+		this.emitPosition()
 	}
 
 }
