@@ -50,8 +50,8 @@ class Face extends Sprite
 		this.parent.addListener(
 			AvatarEvent.ANIMATION_UPDATE_COMPLETE,
 			(self) => {
-				if (scene.time.now > this.nextBlink &&
-					this.currentFrame &&
+				if (scene.time.now > this.nextBlink && 
+					this.currentFrame && 
 					this.currentFrame.textureKey.endsWith("default"))
 				{
 					this.parent.facePlay("blink")
@@ -147,10 +147,12 @@ class Avatar extends Sprite
 
 	public facePlay(anim): this
 	{
+		this.face.anims.nextAnimsQueue = []
 		this.face.chain([
 			{key: `${this.data.values.face}.img/${anim}`, repeat: 0, yoyo: true},
 			{key: `${this.data.values.face}.img/default`, repeat: -1}
 		]).stop()
+		// this.face.play({key: `${this.data.values.face}.img/${anim}`, repeat: 0, yoyo: true})
 		return this
 	}
 
