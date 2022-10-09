@@ -20,7 +20,7 @@
 	- [ ] 地图的物理引擎接入
 - [ ] UI解析
 - [x] 寻找 wz 文件转 json 文件的办法，现在的资源都比较有限，需要规模地完成转化，并通过后端服务器进行资源服务。
-	- [ ] 考虑资源的压缩发布
+	- [x] 考虑资源的压缩发布
 	- [ ] 考虑资源的按需发布
 - [ ] 网络同步方案
 	- [ ] 了解 Elixir Phoenix 
@@ -31,7 +31,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.0] - 2022-09-224
+## [0.2.1] - 2022-10-09
+## Added
+- 合并 refactor_player_info
+- 新增 wz 资源加载器
+- 重写 avatar 纸娃娃系统
+
+## [0.2.0] - 2022-09-24
 ## Added
 - 新开了一个分支：refactor_player_info 
 - 重现编写了 WZ 资源的加载器，加载过程深度结合 Phaser 的原有框架，能够复用其加载上的性能优化
