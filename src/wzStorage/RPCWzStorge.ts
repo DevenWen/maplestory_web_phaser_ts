@@ -7,7 +7,13 @@ import { createRootWzNode, createWzNode, WzNode, UOLWzNode } from "./WzNode";
 const RES_PATHS = [
 	"Character/00002000.img",
 	"Character/00012000.img",
-	"Character/Face/00020000.img"
+	"Character/Face/00020000.img",
+	"Character/Hair/00030020.img",
+	"Character/Hair/00030000.img",
+	"Character/Cap/01000001.img",
+	"Character/Cap/01000003.img",
+	"Character/Coat/01040002.img",
+	"Character/Pants/01060003.img",
 ]
 
 

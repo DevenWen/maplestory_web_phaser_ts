@@ -4,6 +4,7 @@ import Sprite = Phaser.GameObjects.Sprite
 import { AvatarPart, depthOf_Z } from './AvatarConst'
 import RPCWzStorage from "~/wzStorage/RPCWzStorge"
 import Vector = Phaser.Math.Vector2
+import { CharacterPart } from "../Player"
 
 const OO = new Vector()
 
@@ -21,6 +22,7 @@ class Face extends Sprite
 	private container: Container
 	private currentFrame: Phaser.Animations.AnimationFrame
 	private nextBlink: integer = 0
+	private hide: boolean = false
 
 	constructor(scene: Scene, parent: Avatar)
 	{
@@ -67,7 +69,7 @@ class Face extends Sprite
 		frame: Phaser.Animations.AnimationFrame)
 	{
 		this.container.removeAll(true)
-		if (!frame) return
+		if (!frame || this.hide) return
 		this.currentFrame = frame
 
 		RPCWzStorage.getInstance().listCanvasNode(
@@ -76,9 +78,12 @@ class Face extends Sprite
 				let position = this.parent.calOrigin(wznode)
 				img = this.parent.calfinallyPosition(wznode, position, img)
 				this.container.add(img)
+				// TODO 暂时无法处理头发遮挡逻辑
 			}
 		)
 	}
+
+	public setHide(value: boolean) {this.hide = value}
 
 }
 
@@ -128,6 +133,12 @@ class Avatar extends Sprite
 		this.setData(AvatarPart.Body, "00002000")
 		this.setData(AvatarPart.Head, "00012000")
 		this.setData(AvatarPart.Face, "00020000")
+		this.setData(AvatarPart.Hair, "00030020")
+		this.setData(AvatarPart.Cap, "01000001") // 普通帽子
+		// this.setData(AvatarPart.Cap, "01000003") // 全覆盖帽子
+
+		this.setData(AvatarPart.Coat, "01040002")
+		this.setData(AvatarPart.Pants, "01060003")
 
 
 		this.addedToScene()
@@ -152,7 +163,6 @@ class Avatar extends Sprite
 			{key: `${this.data.values.face}.img/${anim}`, repeat: 0, yoyo: true},
 			{key: `${this.data.values.face}.img/default`, repeat: -1}
 		]).stop()
-		// this.face.play({key: `${this.data.values.face}.img/${anim}`, repeat: 0, yoyo: true})
 		return this
 	}
 
@@ -170,6 +180,10 @@ class Avatar extends Sprite
 		// 逐步绘制
 		this.drawBody()
 		this.drawHead()
+		this.drawHair()
+		this.drawCap()
+		this.drawCoat()
+		this.drawPants()
 		// 显示
 
 
@@ -288,7 +302,7 @@ class Avatar extends Sprite
 		let flip_ = this.flipX ? -1 : 1
 		let adjx = this.flipX ? -3 : 0
 		image.setX(position.x * flip_ + adjx)
-				 .setY(position.y)
+				 .setY(position.y + 32)
 				 .setFlipX(this.flipX)
 				 .setOrigin(this.flipX ? 1 : 0, 0)
 				 .setDepth(depth)
@@ -303,9 +317,27 @@ class Avatar extends Sprite
 	 * @param image
 	 */
 	public addToContainer(wznodeData, position, image: Phaser.GameObjects.Image) {
+		if (this.container.getData(wznodeData.z) === "rm") return
+
 		image = this.calfinallyPosition(wznodeData, position, image)
-		this.container.setData(wznodeData.z, true)
+		this.container.setData(wznodeData.z, "add")
+		image.setName(wznodeData.z)
 		this.container.add(image)
+		this.container.list.sort(
+			(a: Phaser.GameObjects.Image, b: Phaser.GameObjects.Image) => b.depth - a.depth
+		)
+	}
+
+	/**
+	 * 移除某一个 z 的 image 数据
+	 * @param z 
+	 */
+	public removeFromContainer(z: string) {
+		let image = this.container.getByName(z)
+		if (image) {
+			this.container.remove(image, true)
+		}
+		this.container.setData(z, "rm")
 	}
 
 	private drawBody()
@@ -329,17 +361,64 @@ class Avatar extends Sprite
 			(wznode, img) => {
 				let position = this.calOrigin(wznode)
 				this.addToContainer(wznode, position, img)
+				if (wznode["z"] == 'backHead') {
+					this.face.setHide(true)
+				} else {
+					this.face.setHide(false)
+				}
 			}
 		)
 
 	}
 
-	/**
-	 * 脸部
+		/**
+	 * 头发
+	 * 
+	 * 注意：发型需要根据帽子的类型进行绘制
 	 */
-	private drawFace()
+	private drawHair()
 	{
-		// this.face.reload()
+		this.doDraw("Hair", this.data.values.hair)
+	}
+
+	private drawCoat()
+	{
+		this.doDraw("Coat", this.data.values.coat)
+	}
+
+	private drawPants()
+	{
+		this.doDraw("Pants", this.data.values.pants)
+	}
+
+	
+	private drawCap() 
+	{
+		if (!this.data.values.cap) return
+
+		RPCWzStorage.getInstance().getWzNode(
+			`Character/Cap/${this.data.values.cap}.img`,
+			(wznode) => {
+				let overType = wznode["info"]["vslot"]
+				switch(overType)
+				{
+					case "CpH5":
+						break
+					case "CpH1H5":
+						this.removeFromContainer("hairOverHead")
+						this.removeFromContainer("backHair")
+						break
+					default:
+						this.removeFromContainer("hair")
+						this.removeFromContainer("hairOverHead")
+						this.removeFromContainer("backHair")
+						this.face.setHide(true)
+						break
+				}
+			}
+		)
+
+		this.doDraw("Cap", this.data.values.cap)
 	}
 
 
@@ -351,15 +430,25 @@ class Avatar extends Sprite
  
 	 }
 
-	/**
-	 * 头发
-	 * 
-	 * 注意：发型需要根据帽子的类型进行绘制
-	 */
-	private drawHair()
-	{
-		
-	}
+	 private doDraw(part: string, path, cb: Function | null = null): this 
+	 {
+		if (!path) return this
+
+		RPCWzStorage.getInstance().listCanvasNode(
+			`Character/${part}/${path}.img/${this.motion}/${this.motionIndex}`,
+			(wznode, img) => {
+				if (cb) {
+					cb(wznode, img)
+				} else {
+					let position = this.calOrigin(wznode)
+					this.addToContainer(wznode, position, img)
+				}
+			}
+		)
+		return this
+	 }
+
+
 
 	private emitPosition() {
 		if (this.lastPosition && (this.lastPosition.x != this.x || this.lastPosition.y != this.y)) {

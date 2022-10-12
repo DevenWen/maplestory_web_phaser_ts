@@ -7,7 +7,9 @@ var animaitions = [
 	"heal", // 测试 UOL
 	"homing", // 测试 action
 	"savage",
-	"alert2"
+	"alert2",
+	"rope",
+	"rush"
 ]
 
 var faceAnimations = [
