@@ -31,19 +31,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.2] - 2022-10-12
+### Refactor
+- 新增了 avatar hair、coat、plant 部位的贴图
+### TODO
+- Face 的 Container 已经单独提取出来，Face 的 img 目前是高于头发的。
+
 ## [0.2.1] - 2022-10-09
-## Added
+### Added
 - 合并 refactor_player_info
 - 新增 wz 资源加载器
 - 重写 avatar 纸娃娃系统
 
 ## [0.2.0] - 2022-09-24
-## Added
+### Added
 - 新开了一个分支：refactor_player_info 
 - 重现编写了 WZ 资源的加载器，加载过程深度结合 Phaser 的原有框架，能够复用其加载上的性能优化
 
 ## [0.1.4] - 2022-06-19
-## Added
+### Added
 - 地图解析，Background 部分局部已经渲染。可以跟随 camera 移动景深。非常感谢 [#2]([./issues/2](https://github.com/DevenWen/maplestory_web_phaser_ts/issues/2)) @BillDong2021 的协助。
 
 ![image](https://user-images.githubusercontent.com/11524318/174450931-6b873d86-7b24-4c94-ae4b-3c9968da974e.png)
