@@ -31,6 +31,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 调研日志
+1. 过去一周在尝试使用 Tiled 编辑地图，但是效果并不好。因为 wz 资源里面的 Tiled 是异构的，而 Tiled 期望编辑的数据是同 size 的，因此一只没找到合适的办法。现在要想继续实现 Tiled 编辑地图。有两种办法：
+* 将 wz 的资源调整，以至于可以让 Tiled 软件进行编辑；问题是，暂时没想到什么有用的自动化编辑方法，只能使用图片软件进行一些变换；好处是，能够比较充分地利用 Tiled 和 Phaser；
+* 通过 Phaser 的一些 callback 机制，手工绘制地图。优劣暂时没分析。
+
+
 ## [0.2.2] - 2022-10-12
 ### Refactor
 - 新增了 avatar hair、coat、plant 部位的贴图
