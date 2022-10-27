@@ -31,7 +31,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2022-10-28 调用日志
+## 2022-10-28 调研日志
 1. TODO List 中有一项关于 wz 文件过大的问题研究。最后考虑使用资源按需发布的方法进行处理。demo 编写还比较成功，可以做到资源按需发布。
 2. 要完成达成这个功能，还需要：
 * 脚本自动化拆分 img 文件，输出 png 资源，并打包。这个需要给脚本定义一个拆分深度，拆分的节点需要用 img 结尾；（有一些 image 资源过大的，可能深度拆分要更加细）
