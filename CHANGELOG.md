@@ -31,15 +31,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 调研日志
+## 2022-10-28 调用日志
+1. TODO List 中有一项关于 wz 文件过大的问题研究。最后考虑使用资源按需发布的方法进行处理。demo 编写还比较成功，可以做到资源按需发布。
+2. 要完成达成这个功能，还需要：
+* 脚本自动化拆分 img 文件，输出 png 资源，并打包。这个需要给脚本定义一个拆分深度，拆分的节点需要用 img 结尾；（有一些 image 资源过大的，可能深度拆分要更加细）
+* WzLoader 对于未加在完成的图片也会回调。考虑是否能够做到检查加载完成后再作回调；
+* Tiled Map 通过 Object 元素定义 WzLoader 文件的路径。需要考虑如何编辑，以及如何发布。做到编辑即所得；
+* wz 资源中某些 object 是动态图的。考虑构建一个 GameObject 可以兼容播放动图；
+
+![image](https://user-images.githubusercontent.com/11524318/198352766-799bb106-c029-47f1-b8e9-230a8feebae2.png)
+
+
+## 2022-10-26 调研日志
 1. 过去一周在尝试使用 Tiled 编辑地图，但是效果并不好。因为 wz 资源里面的 Tiled 是异构的，而 Tiled 期望编辑的数据是同 size 的，因此一只没找到合适的办法。现在要想继续实现 Tiled 编辑地图。有两种办法：
 * 将 wz 的资源调整，以至于可以让 Tiled 软件进行编辑；问题是，暂时没想到什么有用的自动化编辑方法，只能使用图片软件进行一些变换；好处是，能够比较充分地利用 Tiled 和 Phaser；
 * 通过 Phaser 的一些 callback 机制，手工绘制地图。优劣暂时没分析。
 结论：通过 Pixel 软件调整 wz 素材整体还是比较方便的。使用 32x32 的 Tiled 编辑，效果非常不错。
 
 ![image](https://user-images.githubusercontent.com/11524318/197843380-34aeac91-2c98-45d7-8b02-a95ec702e62b.png)
-
-
 
 
 ## [0.2.2] - 2022-10-12
