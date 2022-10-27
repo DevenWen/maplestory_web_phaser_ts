@@ -3,6 +3,7 @@ import DemoMap from './scenes/DemoMap'
 import HelloWorldScene from './scenes/HelloWorldScene'
 import LoadTPDemo from './scenes/LoadTPScene'
 import TestMobScene from './scenes/TestMobScene'
+import TiledMap from './scenes/TiledMap1'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -22,7 +23,7 @@ const config: Phaser.Types.Core.GameConfig = {
 				},
 		}
 	},
-	scene: [LoadTPDemo],
+	scene: [DemoMap],
 	render: {
 		antialias: false,
 		pixelArt: true,

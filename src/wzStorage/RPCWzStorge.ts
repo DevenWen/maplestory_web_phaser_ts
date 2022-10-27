@@ -14,6 +14,7 @@ const RES_PATHS = [
 	"Character/Cap/01000003.img",
 	"Character/Coat/01040002.img",
 	"Character/Pants/01060003.img",
+	"Map/Obj/acc1/grassySoil/nature.img"
 ]
 
 

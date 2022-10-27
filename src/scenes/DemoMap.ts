@@ -1,32 +1,38 @@
 import Phaser from 'phaser'
+import { IWzStorage } from '~/wzStorage/IWzStorage';
+import RPCWzStorage from '~/wzStorage/RPCWzStorge';
 
 export default class DemoMap extends Phaser.Scene
 {
+		wzStorage: IWzStorage;
 
 		constructor()
 		{
-			super('hello-world')
+			super('hello-map')
 		}
 
 		preload()
     {
-			this.load.setBaseURL('http://localhost/assert/wz')
-			this.load.atlas("grassySoil", 'tilemap/grassySoil.png', 'tilemap/grassySoil.json')
-			this.load.tilemapTiledJSON("demomap", "tilemap/demo.tmj")
+			this.wzStorage = new RPCWzStorage(this)
+			this.load.setBaseURL('http://localhost/assert/wz/')
     }
 
     create() 
 		{
-			const map = this.make.tilemap({key: "demomap"})
-			const tileset = map.addTilesetImage("grassySoild", )
-			// const tileset = map.addTilesetImage("grassySoil", "grassySoil")
+			this.input.on("pointerdown", (pointer) => {
+				console.log(`x: ${pointer.x} y: ${pointer.y}`)
+				const scene = this
 
-			// const ground = map.createLayer('ground', tileset)
+				this.wzStorage.listCanvasNode("Map/Obj/acc1/grassySoil/nature.img/26", (wzNode, img) => {
+					console.log("wzNode", wzNode)
+					console.log("img", img)
+					img.x = pointer.x
+					img.y = pointer.y
+					scene.add.existing(img)
 
-			// this.add.image(100, 100, "grassySoil", "-bsc-0-w=90-h=60.jpg")
-
-
-        
+				})
+			})
+			
     }
    
 }
