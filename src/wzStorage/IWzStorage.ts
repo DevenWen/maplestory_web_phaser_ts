@@ -37,5 +37,17 @@ export interface IWzStorage {
 	 */
 	listCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): void
 
+
+	/**
+	 * 根据路径，讲获取到的 wzNode 数据，转化为一个 MapObject 信息
+	 * 1. 静态 MapObject，只有一个图片;
+	 * 2. 动态 MapObject，生成 animation 数据，并通过动画帧回调来进行绘制
+	 * 
+	 * 获取到的 MapObject 需要假如场景才会被可见
+	 * 
+	 * @param path 
+	 * @param cb 
+	 */
+	getMapObjectNode(path: string, cb: (wzNode, mapobject: MapObject) => void): void
 }
 

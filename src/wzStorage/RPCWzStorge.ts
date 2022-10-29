@@ -45,24 +45,25 @@ class RPCWzStorage implements IWzStorage {
 			key = key.replace(".xml.json", "")
 			if (!RES_PATHS.includes(key)) return
 
-			let textureKey = `${key}`
+			const textureKey = `${key}`
 			this.scene.load.atlas(textureKey, `${key}.tp.png`, `${key}.tp.json`)
 
 			this.aleardyLoaded.push(key)
 			let wznode = createWzNode(data, null, this.scene, textureKey)
 			this.rootWzNode.merge(new Queue<string>(...key.split("/")), wznode)
-			
-			this.scene.textures.once(Phaser.Textures.Events.ADD, (loaded_texture) => {
-				console.log("loaded texture: ", loaded_texture)
-				if (loaded_texture == textureKey) {
-					var callbackList = this.callbackQueue.get(key)
-					this.callbackQueue.delete(key)
-					this.execCallbackQueue(callbackList)
-				}
-				console.log("loading img data success: ", key)
-			})
 		})
+
+		this.scene.textures.on(Phaser.Textures.Events.ADD, (loaded_texture) => {
+			console.log("loaded texture: ", loaded_texture)
+			var callbackList = this.callbackQueue.get(loaded_texture)
+			this.callbackQueue.delete(loaded_texture)
+			this.execCallbackQueue(callbackList)
+		})
+
 		registerAnimationCallback(this.scene)
+	}
+	getMapObjectNode(path: string, cb: (wzNode: any, mapobject: MapObject) => void): void {
+		throw new Error("Method not implemented.");
 	}
 
 	public static getInstance(): IWzStorage {
@@ -92,7 +93,7 @@ class RPCWzStorage implements IWzStorage {
 				}
 			})
 
-		}, true)
+		})
 	}
 
 	getWzCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): WzNode {
@@ -136,7 +137,7 @@ class RPCWzStorage implements IWzStorage {
 	}
 
 	
-	getWzNode(path: string, cb: (data, wznode: WzNode) => void, is_canvas = false): WzNode {
+	getWzNode(path: string, cb: (data, wznode: WzNode) => void): WzNode {
 		// TODO 
 		// 好处：可以拆分 img 甚至更细的路径
 		// 1. 先尝试查找
