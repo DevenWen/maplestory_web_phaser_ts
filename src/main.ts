@@ -1,9 +1,9 @@
 import Phaser, { Scene } from 'phaser'
 import DemoMap from './scenes/DemoMap'
+import DemoTileMap from './scenes/DemoTileMap'
 import HelloWorldScene from './scenes/HelloWorldScene'
 import LoadTPDemo from './scenes/LoadTPScene'
 import TestMobScene from './scenes/TestMobScene'
-import TiledMap from './scenes/TiledMap1'
 
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
@@ -17,20 +17,17 @@ const config: Phaser.Types.Core.GameConfig = {
 	physics: {
 		default: 'matter',
 		matter: {
-				debug: true,
-				gravity: {
-						y: 0
-				},
+				debug: true
 		}
 	},
-	scene: [DemoMap],
+	scene: [DemoTileMap],
 	render: {
 		antialias: false,
 		pixelArt: true,
 		roundPixels: true
 	},
 	scale: {
-		zoom: 2
+		zoom: 1
 	}
 }
 
