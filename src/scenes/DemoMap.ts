@@ -23,7 +23,7 @@ export default class DemoMap extends Phaser.Scene
 				console.log(`x: ${pointer.x} y: ${pointer.y}`)
 				const scene = this
 
-				this.wzStorage.listCanvasNode("Map/Obj/acc1/grassySoil/nature.img/26", (wzNode, img) => {
+				this.wzStorage.listCanvasNode("Map/Obj/acc1/grassySoil/nature.img/0", (wzNode, img) => {
 					console.log("wzNode", wzNode)
 					console.log("img", img)
 					img.x = pointer.x

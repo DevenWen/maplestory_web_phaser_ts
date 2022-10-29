@@ -15,7 +15,7 @@ export interface IWzStorage {
 	 * @param cb: 获取节点后的回调;
 	 * 
 	 */
-	getWzNode(path: string, cb: (wznode) => void): WzNode | null 
+	getWzNode(path: string, cb: (wznode) => void, is_canvas: true): WzNode | null 
 	
 	/**
 	 * 根据 path，获取 WzStorage 的图片资源

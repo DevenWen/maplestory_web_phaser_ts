@@ -14,7 +14,9 @@ const RES_PATHS = [
 	"Character/Cap/01000003.img",
 	"Character/Coat/01040002.img",
 	"Character/Pants/01060003.img",
-	"Map/Obj/acc1/grassySoil/nature.img"
+	"Map/Obj/acc1/grassySoil/nature.img",
+	"Map/Obj/acc1/grassySoil/market.img",
+	"Map/Obj/acc1/lv200/archer.img"
 ]
 
 
@@ -49,10 +51,16 @@ class RPCWzStorage implements IWzStorage {
 			this.aleardyLoaded.push(key)
 			let wznode = createWzNode(data, null, this.scene, textureKey)
 			this.rootWzNode.merge(new Queue<string>(...key.split("/")), wznode)
-			var callbackList = this.callbackQueue.get(key)
-			this.callbackQueue.delete(key)
-			this.execCallbackQueue(callbackList)
-			console.log("loading img data success: ", key)
+			
+			this.scene.textures.once(Phaser.Textures.Events.ADD, (loaded_texture) => {
+				console.log("loaded texture: ", loaded_texture)
+				if (loaded_texture == textureKey) {
+					var callbackList = this.callbackQueue.get(key)
+					this.callbackQueue.delete(key)
+					this.execCallbackQueue(callbackList)
+				}
+				console.log("loading img data success: ", key)
+			})
 		})
 		registerAnimationCallback(this.scene)
 	}
@@ -84,7 +92,7 @@ class RPCWzStorage implements IWzStorage {
 				}
 			})
 
-		})
+		}, true)
 	}
 
 	getWzCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): WzNode {
@@ -128,7 +136,7 @@ class RPCWzStorage implements IWzStorage {
 	}
 
 	
-	getWzNode(path: string, cb: (data, wznode: WzNode) => void): WzNode {
+	getWzNode(path: string, cb: (data, wznode: WzNode) => void, is_canvas = false): WzNode {
 		// TODO 
 		// 好处：可以拆分 img 甚至更细的路径
 		// 1. 先尝试查找
