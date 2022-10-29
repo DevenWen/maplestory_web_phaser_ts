@@ -1,23 +1,11 @@
 import { Scene } from "phaser";
 import { Queue } from "queue-typescript";
 import {IWzStorage} from "wzStorage/IWzStorage"
+import MapObject from "~/map/MapObject";
 import { registerAnimationCallback } from "./AnimationLoader";
+import { RES_PATHS, textureKeyChanger} from "./Utils";
 import { createRootWzNode, createWzNode, WzNode, UOLWzNode } from "./WzNode";
 
-const RES_PATHS = [
-	"Character/00002000.img",
-	"Character/00012000.img",
-	"Character/Face/00020000.img",
-	"Character/Hair/00030020.img",
-	"Character/Hair/00030000.img",
-	"Character/Cap/01000001.img",
-	"Character/Cap/01000003.img",
-	"Character/Coat/01040002.img",
-	"Character/Pants/01060003.img",
-	"Map/Obj/acc1/grassySoil/nature.img",
-	"Map/Obj/acc1/grassySoil/market.img",
-	"Map/Obj/acc1/lv200/archer.img"
-]
 
 
 /**
@@ -54,7 +42,6 @@ class RPCWzStorage implements IWzStorage {
 		})
 
 		this.scene.textures.on(Phaser.Textures.Events.ADD, (loaded_texture) => {
-			console.log("loaded texture: ", loaded_texture)
 			var callbackList = this.callbackQueue.get(loaded_texture)
 			this.callbackQueue.delete(loaded_texture)
 			this.execCallbackQueue(callbackList)
@@ -63,7 +50,12 @@ class RPCWzStorage implements IWzStorage {
 		registerAnimationCallback(this.scene)
 	}
 	getMapObjectNode(path: string, cb: (wzNode: any, mapobject: MapObject) => void): void {
-		throw new Error("Method not implemented.");
+		this.getWzNode(path, (data, wznode) => {
+			console.log("get map object node: ", data, wznode)
+			// 构建一个 MapObject
+			let mapobject = new MapObject(this.scene, wznode)
+			cb(wznode, mapobject)
+		})
 	}
 
 	public static getInstance(): IWzStorage {
@@ -87,7 +79,7 @@ class RPCWzStorage implements IWzStorage {
 				// 假如不是 canvas 的 wznode, 就不显示了
 				let data = wznode.getData()
 				if (data["type"] == "canvas") {
-					let imgobject = new Phaser.GameObjects.Image(this.scene, 0, 0, wznode.texture, this.textureKeyChanger(wznode.getPath()))
+					let imgobject = new Phaser.GameObjects.Image(this.scene, 0, 0, wznode.texture, textureKeyChanger(wznode.getPath()))
 					cb(data, imgobject, data)
 					return
 				}
@@ -98,15 +90,6 @@ class RPCWzStorage implements IWzStorage {
 
 	getWzCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): WzNode {
 		throw new Error("Method not implemented.");
-	}
-
-	private textureKeyChanger(path) {
-		// 根据加载路径，拆分大的 texture 和 sub frame 的数据，并返回 sub frame
-		let res = RES_PATHS.find(res => path.startsWith(`/${res}`))
-		if(res) {
-			return path.replace(`/${res}`, "").replaceAll("/", "-") + ".jpg"
-		}
-		throw new Error("can not find the resouces path for " + path)
 	}
 
 	private execCallbackQueue(list: Array<object>) {
