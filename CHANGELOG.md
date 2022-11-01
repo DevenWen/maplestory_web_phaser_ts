@@ -31,6 +31,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.3] - 2022-11-1
+### ADD
+1. 2022-10-28 的调研基本已经实现。
+![image](https://user-images.githubusercontent.com/11524318/199286015-fa5a2c71-2939-46ef-80f6-5286b934ea07.png)
+
+
 ## 2022-10-28 调研日志
 1. TODO List 中有一项关于 wz 文件过大的问题研究。最后考虑使用资源按需发布的方法进行处理。demo 编写还比较成功，可以做到资源按需发布。
 2. 要完成达成这个功能，还需要：
