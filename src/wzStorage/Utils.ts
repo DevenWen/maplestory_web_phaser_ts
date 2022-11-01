@@ -25,5 +25,12 @@ function textureKeyChanger(path) {
 	throw new Error("can not find the resouces path for " + path)
 }
 
+function getFromTiledProperties(properties, key) {
+	return properties
+					.filter((item) => item.name == key)
+					.map((item) => item.value)
+					.pop()
+}
 
-export {RES_PATHS, textureKeyChanger}
+
+export {RES_PATHS, textureKeyChanger, getFromTiledProperties}

@@ -63,7 +63,7 @@ class MapObject extends Phaser.GameObjects.Sprite
 	private buildStaticObject() {
 		let wznode_0 = this.wznode.find("0")
 		let data = wznode_0.data
-		this.setOrigin(0.5, 1)
+		this.setOrigin(0.5, 0.5)
 		if (data["type"] == "canvas") {
 			this.setTexture(this.wznode.texture, textureKeyChanger(wznode_0.getPath()))
 		}
