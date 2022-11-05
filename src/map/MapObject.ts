@@ -54,6 +54,7 @@ class MapObject extends Phaser.GameObjects.Sprite
 			let frame_node = this.wznode.find(`${frame.textureKey}`)
 			// console.log("frame_node: ", frame_node)
 			let img = new Phaser.GameObjects.Image(this.scene, 0, 0, this.wznode.texture, textureKeyChanger(frame_node.getPath()))
+			// FIXME 可能需要扩大
 			img.setX(-frame_node.data["origin"]["X"])
 			img.setY(-frame_node.data["origin"]["Y"])
 			img.setOrigin(0, 0)

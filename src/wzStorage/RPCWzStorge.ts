@@ -77,10 +77,14 @@ class RPCWzStorage implements IWzStorage {
 					wznode = wznode.getRef()
 				}
 				// 假如不是 canvas 的 wznode, 就不显示了
-				let data = wznode.getData()
-				if (data["type"] == "canvas") {
+				let wzdata = wznode.getData()
+				if (wzdata["type"] == "canvas") {
 					let imgobject = new Phaser.GameObjects.Image(this.scene, 0, 0, wznode.texture, textureKeyChanger(wznode.getPath()))
-					cb(data, imgobject, data)
+					let o_w =  wznode.getData()["_image"]["width"]
+					let cur_w = imgobject.width
+					let scalr = Math.floor(o_w / cur_w)
+					imgobject.setScale(scalr)
+					cb(data, imgobject, wzdata)
 					return
 				}
 			})
@@ -88,8 +92,31 @@ class RPCWzStorage implements IWzStorage {
 		})
 	}
 
-	getWzCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): WzNode {
-		throw new Error("Method not implemented.");
+	getWzCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): void {
+		this.getWzNode(path, (data, wznode) =>{
+			if (!wznode) {
+				console.warn("canvas wznode no found, path: " + path)
+				return
+			}
+
+			if (wznode instanceof UOLWzNode) {
+				wznode = wznode.getRef()
+			}
+
+			let wzdata = wznode.getData()
+			if (data["type"] != "canvas") {
+				console.warn("canvas wznode type error, expect canvas, but get:  " + wzdata["type"])
+				return 
+			}
+			let imgobject = new Phaser.GameObjects.Image(this.scene, 0, 0, wznode.texture, textureKeyChanger(wznode.getPath()))
+			// set scale
+			let o_w =  wznode.getData()["_image"]["width"]
+			let cur_w = imgobject.width
+			let scalr = Math.floor(o_w / cur_w)
+			imgobject.setScale(scalr)
+			cb(wznode, imgobject)
+			return
+		})
 	}
 
 	private execCallbackQueue(list: Array<object>) {

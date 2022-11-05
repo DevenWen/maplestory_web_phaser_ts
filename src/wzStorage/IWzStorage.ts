@@ -25,7 +25,7 @@ export interface IWzStorage {
 	 * @param path 
 	 * @param cb 
 	 */
-	getWzCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): WzNode | null
+	getWzCanvasNode(path: string, cb: (wzNode: WzNode, img: Phaser.GameObjects.Image) => void): void
 
 	/**
 	 * 列举 path 下所有的 Canvas 节点；

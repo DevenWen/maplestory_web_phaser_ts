@@ -8,14 +8,15 @@ import TestMobScene from './scenes/TestMobScene'
 const config: Phaser.Types.Core.GameConfig = {
 	type: Phaser.AUTO,
 	// backgroundColor: '#4488aa',
-	width: 600,
-	height: 400,
+	width: 1024,
+	height: 800,
 	fps: {
 		// target: 30,
 		// forceSetTimeOut: true
 	},
 	physics: {
 		default: 'matter',
+		// default: 'arcade',
 		matter: {
 				debug: true
 		}

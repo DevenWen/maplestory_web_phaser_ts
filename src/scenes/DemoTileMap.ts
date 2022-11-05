@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { Background } from '~/map/Background';
 import MapObject from '~/map/MapObject';
 import { IWzStorage } from '~/wzStorage/IWzStorage';
 import RPCWzStorage from '~/wzStorage/RPCWzStorge';
@@ -7,6 +8,10 @@ import { getFromTiledProperties } from '~/wzStorage/Utils';
 export default class DemoTileMap extends Phaser.Scene
 {
 		wzStorage: IWzStorage;
+		background: Background
+		spirter; 
+		cursors: Phaser.Types.Input.Keyboard.CursorKeys
+
 
 		constructor()
 		{
@@ -17,15 +22,16 @@ export default class DemoTileMap extends Phaser.Scene
     {
 			this.wzStorage = new RPCWzStorage(this)
 			this.load.setBaseURL('http://localhost/assert/wz/')
-			this.load.tilemapTiledJSON("map001", "Map/Map0/map001.json")
+			this.load.tilemapTiledJSON("map001", "Map/MapSetting/map001.json")
 			this.load.image("grassSoilTileSet", "Map/TileSet/grassSoilTileSet.png")
+			this.background = new Background(this, "Map/Map/000010000.img.xml.json")
+			this.background.preload()
     }
 
     create() 
 		{
-
-			
-
+			this.background.create()
+			this.background.layer.setDepth(-1)
 			const map = this.make.tilemap({key: "map001"})
 			const tileset = map.addTilesetImage("grassSoilTileSet", "grassSoilTileSet")
 
@@ -56,33 +62,40 @@ export default class DemoTileMap extends Phaser.Scene
 				}
 			})
 
-			const mapobject = mapobjects[0]
+			this.cursors = this.input.keyboard.createCursorKeys();
+			this.wzStorage.getMapObjectNode(`Map/Obj/acc1/grassySoil/nature.img/0`, (wznode, obj) =>{
+				console.log("load: ", obj)
+				const {width, height} = this.scale
+				obj.setX(width/2)
+				obj.setY(height/2)
+				this.add.existing(obj)
+				// this.spirter = this.physics.add.image(obj.x, obj.y, obj.texture.key, obj.frame.name)
+				this.spirter = obj
 
-			console.log("mapobject layer: ", mapobjectLayer)
-			console.log("mapobject layer properties: ", getFromTiledProperties(mapobjectLayer.properties, "basePath"))
-
-
-			this.input.on("pointerdown", (pointer) => {
-				console.log(`x: ${pointer.x} y: ${pointer.y}`)
-				// this.cameras.main.scrollX = pointer.x
-				// this.cameras.main.scrollY = pointer.y
-
-				this.wzStorage.getMapObjectNode("Map/Obj/acc1/grassySoil/market.img/53", (wz, mapobject) => {
-					mapobject.setX(pointer.x)
-					mapobject.setY(pointer.y)
-					this.add.existing(mapobject)
-					// this.matter.add.gameObject(mapobject)
-				})
-
-				var tileX = map.worldToTileX(pointer.x)
-				var tileY = map.worldToTileX(pointer.y)
-
-				var tile = map.getTileAt(tileX, tileY)
-				if (tile) {
-					console.log("got tile:", tile)
-				}
-
+				this.cameras.main.startFollow(this.spirter, true)
 			})
-    }
+
+		}
+
+		update(time: number, delta: number): void {
+			
+			if (this.cursors.left.isDown)
+        {
+            this.spirter.setAngle(-90).x -= 1
+        }
+        else if (this.cursors.right.isDown)
+        {
+            this.spirter.setAngle(90).x += 1
+        }
+
+        if (this.cursors.up.isDown)
+        {
+            this.spirter.setAngle(0).y -= 3
+        }
+        else if (this.cursors.down.isDown)
+        {
+            this.spirter.setAngle(-180).y += 3
+        }
+		}
    
 }

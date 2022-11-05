@@ -11,7 +11,8 @@ const RES_PATHS = [
 	"Map/Obj/acc1/grassySoil/nature.img",
 	"Map/Obj/acc1/grassySoil/market.img",
 	"Map/Obj/acc1/grassySoil/artificiality.img",
-	"Map/Obj/acc1/lv200/archer.img"
+	"Map/Obj/acc1/lv200/archer.img",
+	"Map/Back/grassySoil.img"
 
 ]
 
