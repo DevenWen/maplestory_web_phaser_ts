@@ -31,6 +31,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## 2022-11-13 调研日志
+1. 最近发现一个 Godot 的游戏研发引擎，其使用 Node Tree 的写法让写游戏变得简单。因此花了一点时间研究 Godot 这个引擎，及思考一下 MapleStory 的资源迁移到 Godot 的可能性。
+2. 我编写这个项目的最终目的是一个资源库，假如要迁移到 Godot 上，则首先需要捋清楚 Godot 的资源加载方式，探索是否有可能迁移 avatar 系统。
+3. 这个系统本质上是一个模版，我需要编写这个模版以适配所有同格式同协议的资源。资源的协议，基本上可以从 Phaser 的项目中直接拷贝过去。	
+4. 所以更加关键需要考虑的是 Godot 的资源动态加载方式，节点构建方式。目前我对节点的构建还不是很清楚，这部分需要深入了解 Godot 这个引擎。
+
 ## [0.2.3] - 2022-11-1
 ### ADD
 1. 2022-10-28 的调研基本已经实现。
